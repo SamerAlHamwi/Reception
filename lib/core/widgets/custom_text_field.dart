@@ -16,6 +16,7 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final bool? autofocus;
   final bool? general;
+  final bool? withOutPadding;
   final bool? required;
   final bool? enabled;
   final bool? withTitle;
@@ -46,6 +47,7 @@ class CustomTextField extends StatefulWidget {
       this.maxLines = 1,
       this.minLines,
       this.onTap,
+      this.withOutPadding=false,
       this.inputDecoration})
       : super(key: key);
 
@@ -98,7 +100,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding:  EdgeInsets.symmetric(horizontal:widget.withOutPadding==true?0:16 ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -118,7 +120,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 hintText: !widget.required!
                     ? widget.hintText
                     : widget.hintText + ' *',
-                hintStyle: AppTheme.subtitle2.copyWith(fontSize: 14,
+                hintStyle: AppTheme.subtitle2.copyWith(
+                  fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: AppColors.darkGrey,
                 ),
@@ -136,7 +139,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                             size: 15),
                       )
                     : null),
-            validator: widget.validator,style: TextStyle(fontSize: 14),
+            validator: widget.validator,
+            style: TextStyle(fontSize: 14),
             obscureText: !isSeen ? widget.obscureText! : false,
             onChanged: (value) {
               if (widget.onChanged != null) {
@@ -146,7 +150,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             keyboardType: widget.keyboardType,
             textInputAction: widget.textInputAction,
             autofocus: widget.autofocus!,
-             maxLength: widget.maxLength,
+            maxLength: widget.maxLength,
             minLines: widget.minLines,
             maxLines: widget.maxLines,
           ),

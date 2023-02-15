@@ -5,7 +5,7 @@ class ImagePlaceHolder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Image.asset(
-        'assets/images/placeholders/placeholder.jpg',
+        'assets/images/placeholder.jpg',
         fit: BoxFit.cover,
       ),
     );

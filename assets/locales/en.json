@@ -28,5 +28,13 @@
   "time": "Time",
   "user_name": "User Name",
   "password": "Password",
-  "login": "Login"
+  "login": "Login",
+  "start_here": "Start here",
+  "welcome_quote": "Integrated services for people with special needs for people with motor disabilities, deaf, mute and blind",
+  "select_desired": "Please select the desired entity",
+  "enter_national_number": "Please enter your Civil ID or Disability Number",
+  "national_number": "Civil ID",
+  "next": "next"
+
+
 }

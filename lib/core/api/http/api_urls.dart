@@ -9,7 +9,10 @@ class ApiURLs {
  // static const String baseUrl = '';
 
   static const String loginURL = baseUrl + 'TokenAuth/Authenticate';
-  static const String getClientsRequestsURL = baseUrl + 'services/app/ClientRequest/GetAll';
+  static const String getMyMinistriesURL = baseUrl + 'services/app/Ministry/GetMyMinistry';
+  static const String getMinistriesByIdURL = baseUrl + 'services/app/Ministry/Get';
+  static const String getDisabilityCategoryURL = baseUrl + 'services/app/DisabilityCategory/GetAll';
+  static const String createClientRequestUrl = baseUrl + 'services/app/ClientRequest/Create';
 
 
 }

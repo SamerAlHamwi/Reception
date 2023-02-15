@@ -1,8 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
+/*import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../core/constants/constant.dart';
-import '../../../core/widgets/buttons/main_elevated_button.dart';
 import '../../../core/widgets/custom_image.dart';
 
 class CustomCardDetails extends StatelessWidget {
@@ -258,7 +257,7 @@ class CustomProgress extends StatelessWidget {
                 ],
               ),
             ),*/
-            withButton == true
+            /*withButton == true
                 ? MainElevatedButton(
                     height: 30,
                     buttonColor: AppColors.lightBlueColor,
@@ -266,7 +265,7 @@ class CustomProgress extends StatelessWidget {
                     onPressed: onPressed,
                     text: 'view_rounds'.tr(),
                   )
-                : Container(),
+                : */Container(),
           ].expand((element) => [
                 element,
                 const SizedBox(
@@ -277,4 +276,4 @@ class CustomProgress extends StatelessWidget {
       ),
     );
   }
-}
+}*/
