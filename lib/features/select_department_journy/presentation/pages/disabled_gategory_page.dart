@@ -6,13 +6,15 @@ import '../../../../core/constants/app_assets.dart';
 import '../../../../core/utils/navigation.dart';
 import '../../../../features/select_department_journy/presentation/pages/sections_page.dart';
 import '../../data/disability_category_model.dart';
+import '../../data/my_ministriy_model.dart';
 import '../../repository/ministriey_repo.dart';
 import '../widgets/logo_image.dart';
 import '../widgets/main_elevated_button.dart';
 
-class DisabledGategoryPage extends StatelessWidget {
-  final int? ministryId;
-  const DisabledGategoryPage({Key? key,this.ministryId}) : super(key: key);
+class DisabledCategoryPage extends StatelessWidget {
+  final MyMinistryModel? myMinistryModel;
+
+  const DisabledCategoryPage({Key? key,this.myMinistryModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +27,25 @@ class DisabledGategoryPage extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.symmetric(
                 horizontal: AppDimension.screenWidth(context) / 4),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(AppAssets.background), fit: BoxFit.fill)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(height: AppDimension.screenHeight(context) * 1 / 10),
-                Container(
-                  child: LogoImage(),
+                SizedBox(
                   height: AppDimension.screenHeight(context) * 3 / 10,
+                  child: LogoImage(imageUrl:myMinistryModel!.attachment!.url!),
+
                 ),
-                SizedBox(height: AppDimension.screenHeight(context) * 1 / 10),
-                Container(
+               const SizedBox(height: 8),
+               // SizedBox(height: AppDimension.screenHeight(context) * 1 / 10),
+                SizedBox(
                   height: AppDimension.screenHeight(context) * 5 / 10,
                   child: ListView.separated(
                       separatorBuilder: (context, index) {
-                        return SizedBox(
+                        return const SizedBox(
                           height: 8,
                         );
                       },
@@ -55,7 +59,7 @@ class DisabledGategoryPage extends StatelessWidget {
                             onTap: () {
                               Navigation.push(
                                   context,
-                                  SectionsPage(ministryId:ministryId,
+                                  SectionsPage(myMinistryModel:myMinistryModel,
                                       disabilityCategoryId:
                                           disabilityCategoryModel
                                               .disabilityList!.reversed

@@ -6,6 +6,7 @@ import '../../../../core/boilerplate/create_model/cubits/create_model_cubit.dart
 import '../../../../core/boilerplate/create_model/widgets/CreateModel.dart';
 import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/constants/app_dimension.dart';
 import '../../../../core/constants/app_theme.dart';
 import '../../../../core/utils/navigation.dart';
 import '../../../../core/utils/shared_storage.dart';
@@ -25,116 +26,107 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController? password ;
-  TextEditingController? userName ;
-
-  LoginRequestModel _loginRequestModel =
-      LoginRequestModel(rememberClient: true,password: "",userNameOrEmailAddress: "");
-
+  LoginRequestModel _loginRequestModel = LoginRequestModel(
+      rememberClient: true, password: "", userNameOrEmailAddress: "");
   final _formKey = GlobalKey<FormState>();
-@override
+  TextEditingController? password;
+  TextEditingController? userName;
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    password = TextEditingController(text: _loginRequestModel.password);
-    userName = TextEditingController(text: _loginRequestModel.userNameOrEmailAddress);
+    password = TextEditingController(text: _loginRequestModel!.password);
+    userName = TextEditingController(text: _loginRequestModel!.password);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
         body: Container(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.only(top:AppDimension.screenHeight(context)/10),
             width: double.infinity,
             height: double.infinity,
-            decoration: const BoxDecoration(
+            decoration:const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(AppAssets.background), fit: BoxFit.fill)),
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: LayoutBuilder(builder: (context, sizes) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: sizes.maxWidth / 5),
-                  child: Form(
-                      key: _formKey,
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              alignment: Alignment.center,
-                              height: sizes.maxHeight * 3 / 10,
-                              child: CustomImage.circular(
-                                image: AppAssets.disabledLogo,
-                                radius: 200,
-                                isNetworkImage: false,
-                                svg: false,
-                              ),
-                            ),
-                            Container(
-                              height: sizes.maxHeight * 7 / 10,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: sizes.maxWidth / 10),
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ...[
-                                      CustomTextField(
-                                        controller: userName,
-                                        hintText: 'user_name'.tr(),
-                                        validator: (value) {
-                                          Validator.nameValidate(
-                                              value!, context);
-                                        },
-                                        onChanged: (userName) {
-                                          _loginRequestModel
-                                                  .userNameOrEmailAddress =
-                                              userName;
-                                        },
-                                        textInputAction: TextInputAction.next,
-                                        inputDecoration:
-                                            AppTheme.inputDecoration.copyWith(
-                                                prefixIcon: Icon(Icons.person,
-                                                    color: AppColors.grey)),
-                                        keyboardType: TextInputType.text,
-                                        required: true,
-                                        general: false,
-                                      ),
-                                      CustomTextField(
-                                        controller: password,
-                                        hintText: 'password'.tr(),
-                                        required: true,
-                                        obscureText: true,
-                                        validator: (value) {
-                                          Validator.passwordValidate(
-                                              value!, context);
-                                        },
-                                        inputDecoration:
-                                            AppTheme.inputDecoration.copyWith(
-                                                prefixIcon: Icon(
-                                                    Icons.key_rounded,
-                                                    color: AppColors.grey)),
-                                        onChanged: (email) {
-                                          _loginRequestModel.password = email;
-                                        },
-                                        textInputAction: TextInputAction.next,
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        general: false,
-                                      ),
-                                      // ElevatedButton(onPressed: (){}, child:Text("تسجيل الدخول")),
-                                      _buildLoginButton(context)
-                                    ].expand((element) => [
-                                          element,
-                                          SizedBox(
-                                            height: 24,
-                                          )
-                                        ]),
+            child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                      children: [
+                        ...[
+                          CustomImage.rectangle(
+                            image: AppAssets.disabledLogo,
+                            isNetworkImage: false,
+                            fit: BoxFit.fill,
+                            height: AppDimension.screenHeight(context) / 3,
+                            width: AppDimension.screenWidth(context) / 5,
+                            svg: false,
+                          ),
+                          Container(
+                            height: AppDimension.screenHeight(context) / 2,
+                            width: AppDimension.screenWidth(context) / 2.5,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  ...[
+                                    CustomTextField(
+                                      controller: userName,
+                                      hintText: 'user_name'.tr(),
+                                      validator: (value) {
+                                        Validator.nameValidate(value!, context);
+                                      },
+                                      onChanged: (userName) {
+                                        _loginRequestModel
+                                            .userNameOrEmailAddress = userName;
+                                      },
+                                      textInputAction: TextInputAction.next,
+                                      inputDecoration: AppTheme.inputDecoration
+                                          .copyWith(
+                                          prefixIcon: Icon(Icons.person,
+                                              color: AppColors.grey)),
+                                      keyboardType: TextInputType.text,
+                                      required: true,
+                                      general: false,
+                                    ),
+                                    CustomTextField(
+                                      controller: password,
+                                      hintText: 'password'.tr(),
+                                      required: true,
+                                      obscureText: true,
+                                      validator: (value) {
+                                        Validator.passwordValidate(
+                                            value!, context);
+                                      },
+                                      inputDecoration: AppTheme.inputDecoration
+                                          .copyWith(
+                                          prefixIcon: Icon(Icons.key_rounded,
+                                              color: AppColors.grey)),
+                                      onChanged: (email) {
+                                        _loginRequestModel.password = email;
+                                      },
+                                      textInputAction: TextInputAction.next,
+                                      keyboardType: TextInputType.emailAddress,
+                                      general: false,
+                                    ),
+                                    _buildLoginButton(context)
+                                  ].expand((element) => [
+                                    element,
+                                    SizedBox(
+                                      height: 16,
+                                    )
                                   ]),
-                            )
-                          ])),
-                );
-              }),
-            )));
+                                ]),
+                          )
+                        ].expand((element) => [
+                          element,
+                          SizedBox(
+                            height: 16,
+                          )
+                        ])
+                      ]),
+                ))));
   }
 
   CreateModelCubit? loginCubit;
@@ -150,9 +142,7 @@ class _LoginPageState extends State<LoginPage> {
         onCubitCreated: (CreateModelCubit cubit) {
           loginCubit = cubit;
         },
-        child: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: MainElevatedButton(
+        child: InkWell(
             onTap: () {
               var valid = _formKey.currentState!.validate();
               if (valid && loginCubit != null) {
@@ -162,8 +152,22 @@ class _LoginPageState extends State<LoginPage> {
                 return;
               }
             },
-            text: "login".tr(),
-          ),
-        ));
+            child: Container(
+                height: 50,
+                width: AppDimension.screenWidth(context) / 5,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: const LinearGradient(
+                        colors: [
+                          AppColors.lightBlueColor,
+                          AppColors.blueColor,
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight)),
+                child: Center(
+                    child: Text(
+                      "login".tr(),
+                      style: AppTheme.bodyText1.copyWith(color: AppColors.white),
+                    )))));
   }
 }

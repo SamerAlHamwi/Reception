@@ -13,6 +13,7 @@ class ApiURLs {
   static const String getMinistriesByIdURL = baseUrl + 'services/app/Ministry/Get';
   static const String getDisabilityCategoryURL = baseUrl + 'services/app/DisabilityCategory/GetAll';
   static const String createClientRequestUrl = baseUrl + 'services/app/ClientRequest/Create';
+  static const String getClientsRequestsURL = baseUrl + 'services/app/ClientRequest/GetAll';
 
 
 }

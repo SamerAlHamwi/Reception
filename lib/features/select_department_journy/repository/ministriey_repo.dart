@@ -10,15 +10,15 @@ import '../data/my_ministriy_model.dart';
 class MinistrieyRepo
 {
   static Future<BaseResultModel> getMyMinistries() async {
-    return await RemoteDataSource.request<MyMinistriyModel>(
-      converter: (json) => MyMinistriyModel.fromJson(json),
+    return await RemoteDataSource.request<MyMinistryModel>(
+      converter: (json) => MyMinistryModel.fromJson(json),
       method: HttpMethod.get,
       withAuthentication: true,
       url: ApiURLs.getMyMinistriesURL,
     );
   } static Future<BaseResultModel> getMinistriesById(int id) async {
-    return await RemoteDataSource.request<MyMinistriyModel>(
-      converter: (json) => MyMinistriyModel.fromJson(json),
+    return await RemoteDataSource.request<MyMinistryModel>(
+      converter: (json) => MyMinistryModel.fromJson(json),
       method: HttpMethod.get,
       withAuthentication: true,
       queryParameters: {"Id":id.toString()},

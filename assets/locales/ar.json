@@ -33,7 +33,19 @@
   "select_desired": "يرجى اختيار الجهة المطلوبة",
  "enter_national_number": "يرجى إدخال الرقم المدني أو رقم الإعاقة",
   "national_number": "الرقم المدني",
-  "next": "التالي"
+  "next": "التالي",
+  "create_new_client_request": "حجز دور جديد",
+ "waiting_list": "قائمة الانتظار",
+  "finish_process": "إنهاء العملية",
+  "booking_is_finished": "تمت عملية الحجز بنجاح!",
+  "enter_job_id": "إدخال الرقم الوظيفي",
+  "job_id": "الرقم الوظيفي",
+  "back_to_the_beginning": "عودة إلى البداية",
+  "minutes": "دقيقة",
+  "second": "ثانية",
+  "hour": "ساعة",
+  "unit_name": "اسم الوحدة"
+
 
 
 }

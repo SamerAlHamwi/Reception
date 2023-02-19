@@ -34,7 +34,16 @@
   "select_desired": "Please select the desired entity",
   "enter_national_number": "Please enter your Civil ID or Disability Number",
   "national_number": "Civil ID",
-  "next": "next"
-
-
+  "next": "Next",
+  "create_new_client_request": "Create new client request",
+  "finish_process": "Finish Process",
+  "waiting_list": "waiting_list",
+  "booking_is_finished": "Booking completed successfully!",
+  "enter_job_id": "Enter Job ID",
+  "job_id": "Job ID",
+  "back_to_the_beginning": "Back to the beginning",
+  "minutes": "Minutes",
+  "second": "Second",
+  "hour": "Hour",
+  "unit_name": "Unit name"
 }

@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
           locale: context.locale,
           title: AppSettings.appName,
           home://LoginPage(),
-           _getNextPage(),
+          _getNextPage(),
           material: (_, __) => MaterialAppData(
               scrollBehavior: AppScrollBehavior(),
               theme: AppTheme.appTheme,

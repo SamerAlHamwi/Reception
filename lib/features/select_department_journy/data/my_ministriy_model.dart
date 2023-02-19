@@ -2,7 +2,7 @@
 
 import '../../../core/api/core_models/base_result_model.dart';
 
-class MyMinistriyModel extends BaseResultModel {
+class MyMinistryModel extends BaseResultModel {
   int? id;
   String? name;
   String? description;
@@ -11,7 +11,7 @@ class MyMinistriyModel extends BaseResultModel {
   List<Translations>? translations;
   Attachment? attachment;
 
-  MyMinistriyModel(
+  MyMinistryModel(
       {this.id,
         this.name,
         this.description,
@@ -20,7 +20,7 @@ class MyMinistriyModel extends BaseResultModel {
         this.translations,
         this.attachment});
 
-  MyMinistriyModel.fromJson(Map<String, dynamic> json) {
+  MyMinistryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
@@ -30,7 +30,6 @@ class MyMinistriyModel extends BaseResultModel {
         departments!.add(new Departments.fromJson(v));
       });
     }
-    print("222222222222222222222222222222222");
 
     // if (json['receptions'] != null) {
     //
