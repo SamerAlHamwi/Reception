@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../features/select_department_journy/presentation/widgets/logo_image.dart';
+import '../../features/select_unit_journy/presentation/widgets/logo_image.dart';
 import '../constants/app_assets.dart';
 
 class DefaultScaffold extends StatelessWidget {

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ministries_reception_app">
+    package="com.itland.ministries_system">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="ministries_reception_app"

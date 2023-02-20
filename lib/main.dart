@@ -8,13 +8,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:window_manager/window_manager.dart';
+
 import 'core/constants/constant.dart';
 import 'core/utils/custom_easy_loading.dart';
 import 'core/utils/shared_storage.dart';
 import 'core/widgets/easy_loading.dart';
 import 'features/auth/presentation/pages/login_page.dart';
-import 'features/select_department_journy/presentation/pages/welcome_page.dart';
+import 'features/select_unit_journy/presentation/pages/welcome_page.dart';
+import 'features/unit_screen/presentation/pages/unit_screen_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,6 +64,8 @@ class _MyAppState extends State<MyApp> {
     // // to hide only bottom bar:
     // SystemChrome.setEnabledSystemUIOverlays ([SystemUiOverlay.top]);
     // SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIOverlays([]);
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
@@ -79,8 +82,8 @@ class _MyAppState extends State<MyApp> {
           builder: EasyLoading.init(),
           locale: context.locale,
           title: AppSettings.appName,
-          home://LoginPage(),
-          _getNextPage(),
+          home:// LoginPage(),
+              _getNextPage(),
           material: (_, __) => MaterialAppData(
               scrollBehavior: AppScrollBehavior(),
               theme: AppTheme.appTheme,
@@ -97,7 +100,12 @@ class _MyAppState extends State<MyApp> {
 
   _getNextPage() {
     if (SharedStorage.hasToken()) {
-      return WelcomePage();
+      if (SharedStorage.getUserType() == 1) {
+        return WelcomePage();
+      }
+      if (SharedStorage.getUserType() == 3) {
+        return UnitScreenPage();
+      }
     } else {
       return LoginPage();
     }

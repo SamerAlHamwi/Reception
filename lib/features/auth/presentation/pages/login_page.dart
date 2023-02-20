@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:ministries_reception_app/features/select_department_journy/presentation/widgets/main_elevated_button.dart';
 
 import '../../../../core/boilerplate/create_model/cubits/create_model_cubit.dart';
 import '../../../../core/boilerplate/create_model/widgets/CreateModel.dart';
@@ -13,7 +12,8 @@ import '../../../../core/utils/shared_storage.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../core/widgets/custom_image.dart';
 import '../../../../core/widgets/custom_text_field.dart';
-import '../../../select_department_journy/presentation/pages/welcome_page.dart';
+import '../../../select_unit_journy/presentation/pages/welcome_page.dart';
+import '../../../unit_screen/presentation/pages/unit_screen_page.dart';
 import '../../data/login_request_model.dart';
 import '../../data/login_response_model.dart';
 import '../../repository/authentication_repository.dart';
@@ -135,7 +135,12 @@ class _LoginPageState extends State<LoginPage> {
     return CreateModel<LoginResponseModel>(
         onSuccess: (LoginResponseModel model) {
           SharedStorage.writeToken(model.accessToken);
-          Navigation.pushAndRemoveUntil(context, WelcomePage());
+          SharedStorage.writeUserType(model.userType);
+         if( model.userType==1)
+          {Navigation.pushAndRemoveUntil(context, WelcomePage());}
+         if( model.userType==3)
+          {Navigation.pushAndRemoveUntil(context, UnitScreenPage());}
+
         },
         repositoryCallBack: (data) =>
             AuthenticationRepository.authenticateLogIn(data),

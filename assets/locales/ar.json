@@ -44,7 +44,15 @@
   "minutes": "دقيقة",
   "second": "ثانية",
   "hour": "ساعة",
-  "unit_name": "اسم الوحدة"
+  "unit_name": "اسم الوحدة",
+  "waiting_time": "زمن الانتظار للطلب",
+  "request_processing": "معالجة الطلب",
+  "copyright": "جميع الحقوق محفوظة 2022@ الخدمات المتكاملة لذوي الاحتياجات الخاصة",
+  "logout_confirmation": "تأكيد الخروج",
+  "are_you_sure_you_want_to_logout": "هل أنت متأكد من رغبتك في تسجيل الخروج؟",
+  "yes": "نعم",
+  "no": "لا",
+  "treated": "تمت المعالجة"
 
 
 

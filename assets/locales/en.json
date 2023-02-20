@@ -45,5 +45,15 @@
   "minutes": "Minutes",
   "second": "Second",
   "hour": "Hour",
-  "unit_name": "Unit name"
+  "unit_name": "Unit name",
+  "waiting_time": "Waiting Time",
+  "request_processing": "Request Processing",
+  "copyright": "Copyright 2022 @ Integrated Services for People with Special Needs",
+  "logout_confirmation": "Logout confirmation",
+  "are_you_sure_you_want_to_logout": "Are you sure you want to logout?",
+  "yes": "Yes",
+  "no": "No",
+  "treated": "Treated"
+
+
 }

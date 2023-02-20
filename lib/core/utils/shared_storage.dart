@@ -8,12 +8,8 @@ class SharedStorage {
   static GetStorage box = GetStorage(storageName);
   static String tokenKey = 'token';
   static String languageKey = 'language';
-  static String idGameKey = 'idGame';
-  static String nameGameKey = 'nameGame';
-  static String statusGameKey = 'statusGame';
-  static String firstTimeKey = 'firstTime';
-  static String isNewUser = "isNewUser";
-  static String isSeeIntroCard = "false";
+  static String userType = 'userType';
+
 
 
 
@@ -28,12 +24,11 @@ class SharedStorage {
       return false;
     }
   }
-  static hasId() {
-    if (box.hasData(idGameKey)) {
-      return true;
-    } else {
-      return false;
-    }
+  static writeUserType(value) {
+   box.write(userType, value);
+  }
+  static getUserType() {
+    return box.read(userType)??1;
   }
   static getToken() {
     return box.read(tokenKey);
@@ -54,64 +49,6 @@ class SharedStorage {
   static writeLanguage(value) {
     box.write(languageKey, value);
   }
-  static getNameGame() {
-    return box.read(nameGameKey) ??"";
-  }
-
-  static writeNameGame(value) {
-    box.write(nameGameKey, value);
-  }
-  static getIdGame() {
-    return box.read(idGameKey);
-  }
-
-  static writeIdGame(value) {
-    box.write(idGameKey, value);
-  }
-
-  static removeGameId() {
-    box.remove(idGameKey);
-  }
-  static getStatusGame() {
-    return box.read(statusGameKey)??0 ;
-  }
-
-  static writeStatusGame(value) {
-    box.write(statusGameKey, value);
-  }
-
-
-  static getFirstTime() {
-    return box.read(firstTimeKey);
-  }
-
-  static writeFirstTime(value) {
-    box.write(firstTimeKey, value);
-  }
-
-  static writeIsNewUser(isNew) {
-    box.write(isNewUser, isNew);
-  }
-
-  static getIsNewUser() {
-    if (box.hasData(isNewUser)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-  static writeisSawIntoCard(saw) {
-    box.write(isSeeIntroCard, saw);
-  }
-
-  static getisSeeIntroCard() {
-    if (box.hasData(isSeeIntroCard)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
 
 
 

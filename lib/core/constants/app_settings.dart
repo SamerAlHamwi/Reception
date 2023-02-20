@@ -7,7 +7,7 @@ class AppSettings {
   static const appVersionCode = '1';
   static bool isDebug = false;
   static String appFont = 'Cairo';
-  static const playLink="https://play.google.com/store/apps/details?id=com.example.ministries_management_app";
+  static const playLink="https://play.google.com/store/apps/details?id=com.itland.ministries_system";
  //Apple App Store  http://apps.apple.com/<country>/app/<app–name>/id<store-ID>
 
 

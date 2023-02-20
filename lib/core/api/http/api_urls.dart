@@ -14,6 +14,12 @@ class ApiURLs {
   static const String getDisabilityCategoryURL = baseUrl + 'services/app/DisabilityCategory/GetAll';
   static const String createClientRequestUrl = baseUrl + 'services/app/ClientRequest/Create';
   static const String getClientsRequestsURL = baseUrl + 'services/app/ClientRequest/GetAll';
+  static const String updateClientRequestUrl = baseUrl + 'services/app/ClientRequest/Update';
+  static const String getAllNotification =
+      baseUrl + 'services/app/Notification/GetUserNotifications';
+  static const String setTokenNotification =
+      baseUrl + 'services/app/User/SetCurrentFcmToken';
+
 
 
 }
