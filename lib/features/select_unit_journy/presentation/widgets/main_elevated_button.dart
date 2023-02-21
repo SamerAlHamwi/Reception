@@ -11,14 +11,13 @@ class MainElevatedButton extends StatelessWidget {
   final bool? isDark;
   final bool? withPadding;
 
-  const MainElevatedButton(
-      {Key? key,
-      this.onTap,
-      this.text,
-      this.height,
-      this.width,
-        this.isDark=false,
-      this.withPadding})
+  const MainElevatedButton({Key? key,
+    this.onTap,
+    this.text,
+    this.height,
+    this.width,
+    this.isDark = false,
+    this.withPadding})
       : super(key: key);
 
   @override
@@ -26,21 +25,22 @@ class MainElevatedButton extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-            height: 55,
-            width: double.infinity,
+            height: height == null ? 55 : height,
+
+            width:width==null? double.infinity:width,
             padding: withPadding == true ? EdgeInsets.all(16) : null,
             child: Center(
                 child: Text(
-              text!,
-              style: AppTheme.headline3.copyWith(color: AppColors.white),
-              textAlign: TextAlign.center,
-            )),
+                  text!,
+                  style: AppTheme.headline3.copyWith(color: AppColors.white),
+                  textAlign: TextAlign.center,
+                )),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(colors:isDark!?[
+                gradient: LinearGradient(colors: isDark! ? [
                   AppColors.primaryColor,
                   AppColors.blueColor
-                ]: [
+                ] : [
                   Colors.cyan,
                   Colors.blue]))));
   }

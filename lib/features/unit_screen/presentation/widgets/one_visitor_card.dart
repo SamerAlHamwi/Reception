@@ -26,7 +26,7 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
     // TODO: implement initState
     super.initState();
     waitingTime =
-        _convertMinutesToDuration(widget.oneClientRequest!.waitingMinute);
+        _convertSecondsToDuration(widget.oneClientRequest!.waitingSeconds);
     _timer = Timer.periodic(const Duration(minutes: 1), (timer) => _update());
   }
 
@@ -68,7 +68,7 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
               style:
                   AppTheme.bodyText1.copyWith(color: AppColors.lightBlueColor)),
           Text(
-              widget.oneClientRequest!.waitingMinute != null
+              widget.oneClientRequest!.waitingSeconds != null
                   ? waitingTime!.toString().split(":")[0]
                   +":"
                   +waitingTime!.toString().split(":")[1]
@@ -79,9 +79,10 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
     );
   }
 
-  Duration _convertMinutesToDuration(dynamic timeInMinutes) {
-    int minutes = (timeInMinutes % 60).toInt();
-    int hours = ((timeInMinutes / 60) % 60).toInt();
-    return Duration(hours: hours, minutes: minutes, seconds: 0.toInt());
+  Duration _convertSecondsToDuration(dynamic timeInSeconds) {
+    int seconds = (timeInSeconds % 60).toInt();
+    int minutes = ((timeInSeconds / 60) % 60).toInt();
+    int hours = ((timeInSeconds / 3600) % 60).toInt();
+    return Duration(hours: hours, minutes: minutes, seconds: seconds);
   }
 }

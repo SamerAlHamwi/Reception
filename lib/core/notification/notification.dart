@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../../features/notification/repository/notification_repository.dart';
+import '../../features/unit_screen/presentation/pages/unit_screen_page.dart';
 import '../utils/shared_storage.dart';
 
 class Messaging {
@@ -13,8 +14,11 @@ class Messaging {
 
   static Future<void> onNotificationReceived(RemoteMessage message) async {
     await Firebase.initializeApp();
-
     print('Handling a message ${message.messageId}');
+    UnitScreenPage.updateVisitorList();
+
+
+
   }
 
   static initFCM() async {

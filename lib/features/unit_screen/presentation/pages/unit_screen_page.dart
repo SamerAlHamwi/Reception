@@ -125,13 +125,13 @@ class UnitScreenPage extends StatelessWidget {
     );
   }
 
-  GetModelCubit? _getModelCubit;
+ static GetModelCubit? _getVisitorListModelCubit;
 
   buildVisitorList() {
     return GetModel<ClientsRequestsModel>(
         repositoryCallBack: (data) => UnitScreenRepository.getClientsList(),
         onSuccess: (ClientsRequestsModel model) {},
-        onCubitCreated: (GetModelCubit? cubit) => _getModelCubit = cubit,
+        onCubitCreated: (GetModelCubit? cubit) => _getVisitorListModelCubit = cubit,
         modelBuilder: (ClientsRequestsModel model) {
           return ListView.separated(
               separatorBuilder: (context, index) {
@@ -147,7 +147,11 @@ class UnitScreenPage extends StatelessWidget {
               itemCount: model.listClientsRequests!.length);
         });
   }
-
+  static void updateVisitorList() {
+if (_getVisitorListModelCubit!=null){
+    _getVisitorListModelCubit!.getModel();
+}
+  }
   Future<bool> willPopCallback(context) async {
     return await showDialog(
         context: context,

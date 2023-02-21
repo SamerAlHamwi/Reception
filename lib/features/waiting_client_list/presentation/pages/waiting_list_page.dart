@@ -30,7 +30,7 @@ class WaitingListPage extends StatelessWidget {
            children: [
            Text("waiting_list".tr(),style: AppTheme.bodyText1.copyWith(color: AppColors.primaryColor)),
            SizedBox(height: 8),
-           Container(height: AppDimension.screenHeight(context) *5/10,
+           Container(height: AppDimension.screenHeight(context) *4/10,
                child: _buildRequestList()),
           Padding(
             padding:  EdgeInsets.symmetric(horizontal:AppDimension.screenWidth(context)/3),

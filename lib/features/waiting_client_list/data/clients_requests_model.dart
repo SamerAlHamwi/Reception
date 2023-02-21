@@ -35,7 +35,7 @@ class OneClientRequest {
   String? employeetreatNumber;
   String? treatTime;
   String? creationTime;
-  int? waitingMinute;
+  int? waitingSeconds;
 
   OneClientRequest(
       {this.id,
@@ -46,7 +46,7 @@ class OneClientRequest {
         this.employeetreatNumber,
         this.treatTime,
         this.creationTime,
-        this.waitingMinute
+        this.waitingSeconds
       });
 
   OneClientRequest.fromJson(Map<String, dynamic> json) {
@@ -61,7 +61,7 @@ class OneClientRequest {
     employeetreatNumber = json['employeetreatNumber'];
     treatTime = json['treatTime'];
     creationTime = json['creationTime'];
-    waitingMinute = json['waitingMinute'];
+    waitingSeconds = json['waitingSeconds'];
   }
 
   Map<String, dynamic> toJson() {
@@ -77,7 +77,7 @@ class OneClientRequest {
     data['employeetreatNumber'] = this.employeetreatNumber;
     data['treatTime'] = this.treatTime;
     data['creationTime'] = this.creationTime;
-    data['waitingMinute'] = this.waitingMinute;
+    data['waitingSeconds'] = this.waitingSeconds;
     return data;
   }
 }

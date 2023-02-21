@@ -20,7 +20,7 @@ class ClientBookDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Duration waitingDuration =
-        _convertMinutesToDuration(oneClientRequest!.waitingMinute);
+    _convertSecondsToDuration(oneClientRequest!.waitingSeconds);
     return DefaultScaffold(
         logoUrl: logoUrl,
         body: Container(
@@ -93,9 +93,10 @@ class ClientBookDetails extends StatelessWidget {
         ));
   }
 
-  Duration _convertMinutesToDuration(dynamic timeInMinutes) {
-    int minutes = (timeInMinutes % 60).toInt();
-    int hours = ((timeInMinutes / 60) % 60).toInt();
-    return Duration(hours: hours, minutes: minutes, seconds: 0.toInt());
+  Duration _convertSecondsToDuration(dynamic timeInSeconds) {
+    int seconds = (timeInSeconds % 60).toInt();
+    int minutes = ((timeInSeconds / 60) % 60).toInt();
+    int hours = ((timeInSeconds / 3600) % 60).toInt();
+    return Duration(hours: hours, minutes: minutes, seconds: seconds);
   }
 }

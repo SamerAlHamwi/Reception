@@ -10,6 +10,7 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'core/constants/constant.dart';
+import 'core/notification/notification.dart';
 import 'core/utils/custom_easy_loading.dart';
 import 'core/utils/shared_storage.dart';
 import 'core/widgets/easy_loading.dart';
@@ -26,7 +27,7 @@ Future<void> main() async {
 
   // if (Platform.isWindows) await WindowManager.instance.setFullScreen(true);
   if (!Platform.isWindows) await AppConstant.getDefaultLanguage();
-  // Messaging.initFCM();
+   Messaging.initFCM();
   runApp(
     EasyLocalization(
       child: Phoenix(child: MyApp()),
