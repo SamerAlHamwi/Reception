@@ -1,19 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/boilerplate/get_model/widgets/GetModel.dart';
+import '../../../../core/boilerplate/pagination/cubits/pagination_cubit.dart';
+import '../../../../core/boilerplate/pagination/widgets/PaginationList.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_theme.dart';
-import '../../../../core/utils/navigation.dart';
+import '../../../../core/frequently_used_function/frequenty_funtions.dart';
 import '../../../../core/widgets/custom_image.dart';
-
-import '../../../../core/boilerplate/get_model/cubits/get_model_cubit.dart';
-import '../../../../core/boilerplate/get_model/widgets/GetModel.dart';
-import '../../../../core/utils/shared_storage.dart';
 import '../../../auth/presentation/pages/login_page.dart';
 import '../../data/clients_requests_model.dart';
 import '../../data/my_ministriy_model.dart';
 import '../../repository/unit_screen_repository.dart';
 import '../widgets/date_time_section.dart';
-import '../widgets/dialog_exit_app.dart';
 import '../widgets/one_visitor_card.dart';
 
 class UnitScreenPage extends StatelessWidget {
@@ -33,7 +32,8 @@ class UnitScreenPage extends StatelessWidget {
             AppColors.white
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
           child: GetModel<MyMinistriyModel>(
-              repositoryCallBack: (data) => UnitScreenRepository.getMyMinistries(),
+              repositoryCallBack: (data) =>
+                  UnitScreenRepository.getMyMinistries(),
               modelBuilder: (MyMinistriyModel myMinistriyModel) {
                 return LayoutBuilder(builder: (context, sizes) {
                   return Column(children: [
@@ -81,7 +81,7 @@ class UnitScreenPage extends StatelessWidget {
                     Container(
                       color: Colors.transparent,
                       height: sizes.maxHeight * 6 / 10,
-                      child: buildVisitorList(),
+                      child:  pagination(),
                     ),
                     Container(
                         height: sizes.maxHeight * 0.5 / 10,
@@ -107,7 +107,9 @@ class UnitScreenPage extends StatelessWidget {
                                     children: [
                                       InkWell(
                                           onTap: () {
-                                            willPopCallback(context);
+                                            FrequentlyFunction
+                                                .showLogoutConfirmDialog(
+                                                    context, LoginPage());
                                           },
                                           child: const Icon(
                                             Icons.logout,
@@ -125,48 +127,41 @@ class UnitScreenPage extends StatelessWidget {
     );
   }
 
- static GetModelCubit? _getVisitorListModelCubit;
+  static PaginationCubit? refresh;
 
-  buildVisitorList() {
-    return GetModel<ClientsRequestsModel>(
-        repositoryCallBack: (data) => UnitScreenRepository.getClientsList(),
-        onSuccess: (ClientsRequestsModel model) {},
-        onCubitCreated: (GetModelCubit? cubit) => _getVisitorListModelCubit = cubit,
-        modelBuilder: (ClientsRequestsModel model) {
-          return ListView.separated(
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  height: 8,
-                );
-              },
-              itemBuilder: ((context, index) {
-                return OneVisitorCard(
-                  oneClientRequest: model.listClientsRequests![index],
-                );
-              }),
-              itemCount: model.listClientsRequests!.length);
-        });
+  Widget pagination() {
+    return PaginationList<OneClientRequest>(
+      onCubitCreated: (cubit) {
+        refresh = cubit;
+      },
+      repositoryCallBack: (data) => UnitScreenRepository.getClientsList(data),
+      listBuilder: (List<OneClientRequest> list) {
+        return buildList(list);
+      },
+    );
   }
+
+  buildList(List<OneClientRequest> list) {
+        return ListView.separated(
+            separatorBuilder: (context, index) {
+              return const SizedBox(
+                height: 8,
+              );
+            },
+            itemBuilder: ((context, index) {
+              return OneVisitorCard(
+                oneClientRequest: list![index],
+              );
+            }),
+            itemCount: list.length);
+
+  }
+
   static void updateVisitorList() {
-if (_getVisitorListModelCubit!=null){
-    _getVisitorListModelCubit!.getModel();
-}
+    if (refresh != null) {
+      refresh!.getList();
+    }
   }
-  Future<bool> willPopCallback(context) async {
-    return await showDialog(
-        context: context,
-        builder: (context) {
-          return DialogExitApp(
-            title: 'logout_confirmation'.tr(),
-            content: 'are_you_sure_you_want_to_logout'.tr(),
-            onPressedYes: () {
-              SharedStorage.removeToken();
-              Navigation.pushAndRemoveUntil(context, LoginPage());
-            },
-            onPressedNo: () {
-              Navigator.pop(context, false);
-            },
-          );
-        });
-  }
+
+
 }

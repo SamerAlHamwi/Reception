@@ -4,7 +4,8 @@ import '../../../core/api/core_models/base_result_model.dart';
 
 class CreateClientResponseModel extends BaseResultModel {
 
-  String? clientNationalNumberOrDisabilityNumber;
+  String? disabilityNumber;
+  String? clientNationalNumber;
   String? treatTime;
   int? clientRequestType;
   int? id;
@@ -13,15 +14,16 @@ class CreateClientResponseModel extends BaseResultModel {
 
   CreateClientResponseModel(
       {this.clientRequestType,
-        this.clientNationalNumberOrDisabilityNumber,
+        this.disabilityNumber,
+        this.clientNationalNumber,
         this.employeetreatNumber,
         this.treatTime,
         this.id});
 
   CreateClientResponseModel.fromJson(Map<String, dynamic> json) {
     clientRequestType = json['clientRequestType'];
-    clientNationalNumberOrDisabilityNumber =
-    json['clientNationalNumberOrDisabilityNumber'];
+    clientNationalNumber = json['clientNationalNumber'];
+    disabilityNumber = json['disabilityNumber'];
     employeetreatNumber = json['employeetreatNumber'];
     treatTime = json['treatTime'];
     id = json['id'];
@@ -30,8 +32,10 @@ class CreateClientResponseModel extends BaseResultModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['clientRequestType'] = this.clientRequestType;
-    data['clientNationalNumberOrDisabilityNumber'] =
-        this.clientNationalNumberOrDisabilityNumber;
+    data['disabilityNumber'] =
+        this.disabilityNumber;
+    data['clientNationalNumber'] =
+        this.clientNationalNumber;
     data['employeetreatNumber'] = this.employeetreatNumber;
     data['treatTime'] = this.treatTime;
     data['id'] = this.id;

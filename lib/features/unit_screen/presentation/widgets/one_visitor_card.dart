@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_theme.dart';
+import '../../../../core/frequently_used_function/frequenty_funtions.dart';
 import '../../../../core/widgets/custom_image.dart';
 
 import '../../data/clients_requests_model.dart';
@@ -26,7 +27,7 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
     // TODO: implement initState
     super.initState();
     waitingTime =
-        _convertSecondsToDuration(widget.oneClientRequest!.waitingSeconds);
+        FrequentlyFunction.convertSecondsToDuration(widget.oneClientRequest!.waitingSeconds);
     _timer = Timer.periodic(const Duration(minutes: 1), (timer) => _update());
   }
 
@@ -55,16 +56,16 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
             width: 25,
           ),
           // Icon(diabledMap[oneClientRequest!.clientRequestType]),
-          Text(widget.oneClientRequest!.employeetreatNumber ?? "",
+          Text(widget.oneClientRequest!.disabilityNumber ?? "",
               style: AppTheme.bodyText1),
           Text(
               widget.oneClientRequest!.clientNationalNumberOrDisabilityNumber ??
                   "",
               style: AppTheme.bodyText1),
           Text(
-              widget.oneClientRequest!.employeetreatNumber == null
-                  ? "in_waiting".tr()
-                  : "treated".tr(),
+              widget.oneClientRequest!.clientRequestType == 1
+                  ? "in_waiting".tr():widget.oneClientRequest!.clientRequestType == 2?
+                   "treated".tr():"canceled".tr(),
               style:
                   AppTheme.bodyText1.copyWith(color: AppColors.lightBlueColor)),
           Text(

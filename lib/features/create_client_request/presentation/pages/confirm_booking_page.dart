@@ -6,7 +6,7 @@ import 'package:ministries_reception_app/core/widgets/default_scaffold.dart';
 import '../../../../core/utils/navigation.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../../select_unit_journy/presentation/widgets/main_elevated_button.dart';
-import '../../../waiting_client_list/presentation/pages/waiting_list_page.dart';
+import '../../../processing_client_request/presentation/pages/waiting_list_page.dart';
 import '../../data/create_client_response_model.dart';
 import '../widgets/key_value_row.dart';
 
@@ -49,9 +49,14 @@ class ConfirmBookingPage extends StatelessWidget {
                     children: [
                       ...[
                         KeyValueRow(
-                            keyText: "national_number".tr(),
-                            value: createClientResponseModel!
-                                .clientNationalNumberOrDisabilityNumber
+                            keyText: myMinistryModel!.ministryRequestType == 1
+                                ? "national_number".tr()
+                                : "disability_number".tr(),
+                            value: myMinistryModel!.ministryRequestType == 1?
+                            createClientResponseModel!
+                                .clientNationalNumber
+                                .toString(): createClientResponseModel!
+                                .disabilityNumber
                                 .toString()),
                         KeyValueRow(
                             keyText: "unit_name".tr(), value: selectedUnitName),

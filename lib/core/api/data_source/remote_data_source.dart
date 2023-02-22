@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../core/constants/constant.dart';
 import '../../../core/utils/shared_storage.dart';
 import 'package:dio/dio.dart';
+import '../../../features/auth/presentation/pages/login_page.dart';
 import '../../utils/navigation.dart';
 import '../core_models/base_result_model.dart';
 import '../errors/unauthorized_error.dart';
@@ -80,6 +81,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
     SharedStorage.removeToken();
     EasyLoading.dismiss();
 //    todo logout
-//    Navigation.pushAndRemoveUntil();
+    Navigation.pushAndRemoveUntil(Keys.scaffoldKey.currentContext!,LoginPage());
   }
  }

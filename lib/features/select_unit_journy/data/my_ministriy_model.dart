@@ -4,6 +4,7 @@ import '../../../core/api/core_models/base_result_model.dart';
 
 class MyMinistryModel extends BaseResultModel {
   int? id;
+  int? ministryRequestType;
   String? name;
   String? description;
   List<Departments>? departments;
@@ -13,6 +14,7 @@ class MyMinistryModel extends BaseResultModel {
 
   MyMinistryModel(
       {this.id,
+        this.ministryRequestType,
         this.name,
         this.description,
         this.departments,
@@ -22,6 +24,7 @@ class MyMinistryModel extends BaseResultModel {
 
   MyMinistryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    ministryRequestType = json['ministryRequestType'];
     name = json['name'];
     description = json['description'];
     if (json['departments'] != null) {
@@ -55,6 +58,7 @@ class MyMinistryModel extends BaseResultModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['ministryRequestType'] = this.ministryRequestType;
     data['name'] = this.name;
     data['description'] = this.description;
     if (this.departments != null) {

@@ -8,12 +8,12 @@ import '../../../create_client_request/presentation/pages/national_number_page.d
 import '../../data/my_ministriy_model.dart';
 import '../widgets/main_elevated_button.dart';
 
-class DeepSelectionPage extends StatelessWidget {
+class UnitsPage extends StatelessWidget {
   final MyMinistryModel? myMinistryModel;
   final int? selectedDepartmentId;
   final int? disabilityCategoryId;
 
-  const DeepSelectionPage(
+  const UnitsPage(
       {Key? key,
       this.myMinistryModel,
       this.selectedDepartmentId,

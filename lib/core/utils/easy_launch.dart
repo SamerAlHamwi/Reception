@@ -35,21 +35,3 @@ enum LaunchType {
   browser,
 }
 
-enum StatePlayer {
-  withoutRole,
-  financialManager,
-  generalManager,
-  marketingManager,
-  productionManager
-}
-
-enum NotificationStatus {
-  init,
-  pushNotification,
-  startFirstRound,
-  startRoundMakeLastDecisionForPreviousRound,
-  startDecision,
-  endRound,
-}
-
-enum RoundStatus { init, active, finished, pending, beforeFinalDecision }

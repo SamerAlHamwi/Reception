@@ -4,11 +4,10 @@ import 'package:ministries_reception_app/core/constants/constant.dart';
 
 import '../../../../core/boilerplate/create_model/cubits/create_model_cubit.dart';
 import '../../../../core/boilerplate/create_model/widgets/CreateModel.dart';
-import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_theme.dart';
 import '../../../../core/utils/navigation.dart';
 import '../../../../core/widgets/custom_text_field.dart';
-
+import '../../../../core/widgets/default_scaffold_with_center_logo.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../../select_unit_journy/presentation/widgets/center_logo.dart';
 import '../../../select_unit_journy/presentation/widgets/main_elevated_button.dart';
@@ -41,57 +40,55 @@ class NationalNumberPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _clientRequestModel = CreateClientRequestModel(
-        clientNationalNumberOrDisabilityNumber: "",
-        unitId: selectedUnitId,
-        disabilityCategoryId:disabilityCategoryId );
-    return Scaffold(
+        unitId: selectedUnitId, disabilityCategoryId: disabilityCategoryId);
+    return DefaultScaffoldWithCenterLogo(
         //resizeToAvoidBottomInset: true,
-        body: Container(
-      height: double.infinity,
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(
-          horizontal: AppDimension.screenWidth(context) * 3 / 10, vertical: 24),
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(AppAssets.background), fit: BoxFit.fill)),
-      child: SingleChildScrollView(
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          ...[
-            CenterLogo(logoUrl: myMinistryModel!.attachment!.url!),
-            Text("enter_national_number".tr(), style: AppTheme.bodyText1),
-            CustomTextField(
-              controller: numberController,
-              hintText: "national_number".tr(),
-              validator: (value) {
-                //   Validator.numberValidate(value!, context);
-              },
-              onChanged: (nationalNumber) {
-                _clientRequestModel!.clientNationalNumberOrDisabilityNumber =
-                    nationalNumber;
-              },
-              textInputAction: TextInputAction.next,
-              inputDecoration: AppTheme.inputDecoration.copyWith(
-                  prefixIcon: null,
-                  fillColor: AppColors.white,
-                  focusColor: AppColors.white,
-                  enabledBorder: AppStyles.inputDecorationBorder.copyWith(
-                    borderSide: const BorderSide(
-                      style: BorderStyle.solid,
-                      width: 0.4,
-                      color: AppColors.white,
-                    ),
-                  )),
-              keyboardType: TextInputType.number,
-              general: false,
-              withOutPadding: true,
-              autofocus: true,
-              required: true,
-            ),
-            _buildSubmitButton(context)
-          ].expand((element) => [element, const SizedBox(height: 16)])
-        ]),
-      ),
-    ));
+        logoUrl: myMinistryModel!.attachment!.url!,
+        body: Padding(padding: EdgeInsets.symmetric(horizontal: AppDimension.screenWidth(context)/4),
+          child: SingleChildScrollView(
+            child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              ...[
+                Text(
+                    myMinistryModel!.ministryRequestType == 1
+                        ? "enter_national_number".tr()
+                        : "enter_disability_number".tr(),
+                    style: AppTheme.bodyText1),
+                CustomTextField(
+                  controller: numberController,
+                  hintText: myMinistryModel!.ministryRequestType == 1
+                      ? "national_number".tr()
+                      : "disability_number".tr(),
+                  validator: (value) {
+                    //   Validator.numberValidate(value!, context);
+                  },
+                  onChanged: (value) {
+                    myMinistryModel!.ministryRequestType == 1
+                        ? _clientRequestModel!.clientNationalNumber = value
+                        : _clientRequestModel!.disabilityNumber = value;
+                  },
+                  textInputAction: TextInputAction.next,
+                  inputDecoration: AppTheme.inputDecoration.copyWith(
+                      prefixIcon: null,
+                      fillColor: AppColors.white,
+                      focusColor: AppColors.white,
+                      enabledBorder: AppStyles.inputDecorationBorder.copyWith(
+                        borderSide: const BorderSide(
+                          style: BorderStyle.solid,
+                          width: 0.4,
+                          color: AppColors.white,
+                        ),
+                      )),
+                  keyboardType: TextInputType.number,
+                  general: false,
+                  withOutPadding: true,
+                  autofocus: true,
+                  required: true,
+                ),
+                _buildSubmitButton(context)
+              ].expand((element) => [element, const SizedBox(height: 16)])
+            ]),
+          ),
+        ));
   }
 
   CreateModelCubit? _createRequestModelCubit;

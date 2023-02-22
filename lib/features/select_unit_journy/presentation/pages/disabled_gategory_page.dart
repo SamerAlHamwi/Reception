@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ministries_reception_app/core/constants/app_dimension.dart';
-import 'package:ministries_reception_app/features/select_unit_journy/presentation/pages/sections_page.dart';
+import 'package:ministries_reception_app/features/select_unit_journy/presentation/pages/departments_page.dart';
 
 import '../../../../core/boilerplate/get_model/widgets/GetModel.dart';
 import '../../../../core/constants/app_assets.dart';
 import '../../../../core/utils/navigation.dart';
+import '../../../../core/widgets/default_scaffold_with_center_logo.dart';
 import '../../data/disability_category_model.dart';
 import '../../data/my_ministriy_model.dart';
 import '../../repository/ministriey_repo.dart';
@@ -21,27 +22,15 @@ class DisabledCategoryPage extends StatelessWidget {
     return GetModel<DisabilityCategoryModel>(
         repositoryCallBack: (data) => MinistrieyRepo.getDisabilityCatergory(),
         modelBuilder: (DisabilityCategoryModel disabilityCategoryModel) {
-          return Scaffold(
-              body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(
-                horizontal: AppDimension.screenWidth(context) / 4),
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppAssets.background), fit: BoxFit.fill)),
-            child: Column(
+          return DefaultScaffoldWithCenterLogo(
+             logoUrl: myMinistryModel!.attachment!.url!,
+            body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(height: AppDimension.screenHeight(context) * 1 / 10),
-                SizedBox(
-                  height: AppDimension.screenHeight(context) * 3 / 10,
-                  child: LogoImage(imageUrl:myMinistryModel!.attachment!.url!),
-
-                ),
                const SizedBox(height: 8),
                // SizedBox(height: AppDimension.screenHeight(context) * 1 / 10),
-                SizedBox(
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: AppDimension.screenWidth(context)/4),
                   height: AppDimension.screenHeight(context) * 5 / 10,
                   child: ListView.separated(
                       separatorBuilder: (context, index) {
@@ -59,7 +48,7 @@ class DisabledCategoryPage extends StatelessWidget {
                             onTap: () {
                               Navigation.push(
                                   context,
-                                  SectionsPage(myMinistryModel:myMinistryModel,
+                                  DepartmentsPage(myMinistryModel:myMinistryModel,
                                       disabilityCategoryId:
                                           disabilityCategoryModel
                                               .disabilityList!.reversed
@@ -70,7 +59,7 @@ class DisabledCategoryPage extends StatelessWidget {
                 ),
               ],
             ),
-          ));
+          );
         });
   }
 }

@@ -1,10 +1,9 @@
-import '../../core/constants/constant.dart';
-import 'package:flutter_fcm/flutter_fcm.dart';
-
-import 'package:flutter_fcm/Notification/FCM.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_fcm/Notification/FCM.dart';
+import 'package:flutter_fcm/flutter_fcm.dart';
 
+import '../../core/constants/constant.dart';
 import '../../features/notification/repository/notification_repository.dart';
 import '../../features/unit_screen/presentation/pages/unit_screen_page.dart';
 import '../utils/shared_storage.dart';
@@ -15,10 +14,10 @@ class Messaging {
   static Future<void> onNotificationReceived(RemoteMessage message) async {
     await Firebase.initializeApp();
     print('Handling a message ${message.messageId}');
-    UnitScreenPage.updateVisitorList();
-
-
-
+    if (message.data['type'].toString() == "2" ||
+        message.data['type'].toString() == "4") {
+      UnitScreenPage.updateVisitorList();
+    }
   }
 
   static initFCM() async {

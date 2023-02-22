@@ -8,7 +8,7 @@ import '../data/clients_requests_model.dart';
 import '../data/my_ministriy_model.dart';
 
 class UnitScreenRepository
-{
+{/*
   static Future<BaseResultModel> getClientsList() async {
     return await RemoteDataSource.request<ClientsRequestsModel>(
       converter: (json) => ClientsRequestsModel.fromJson(json),
@@ -16,7 +16,19 @@ class UnitScreenRepository
       withAuthentication: true,
       url: ApiURLs.getClientsRequestsURL,
     );
+  }*/
+  static Future<BaseResultModel> getClientsList(data) async {
+    var res = await RemoteDataSource.request<ClientsRequestsModel>(
+        converter: (json) => ClientsRequestsModel.fromJson(json),
+        method: HttpMethod.get,
+        queryParameters:  data.toJson(),
+        withAuthentication: true,
+        url: ApiURLs.getClientsRequestsURL);
+    return res;
   }
+
+
+
   static Future<BaseResultModel> getMyMinistries() async {
     return await RemoteDataSource.request<MyMinistriyModel>(
       converter: (json) => MyMinistriyModel.fromJson(json),

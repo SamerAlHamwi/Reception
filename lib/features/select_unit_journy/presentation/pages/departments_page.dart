@@ -6,25 +6,27 @@ import 'package:ministries_reception_app/core/utils/navigation.dart';
 import '../../../../core/boilerplate/get_model/widgets/GetModel.dart';
 import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_dimension.dart';
+import '../../../../core/widgets/default_scaffold.dart';
 import '../../data/my_ministriy_model.dart';
 import '../../repository/ministriey_repo.dart';
 import '../widgets/logo_image.dart';
 import '../widgets/main_elevated_button.dart';
-import 'deep_sections_page.dart';
+import 'units_page.dart';
 
-class SectionsPage extends StatelessWidget {
+class DepartmentsPage extends StatelessWidget {
   final MyMinistryModel? myMinistryModel;
 
   final int? disabilityCategoryId;
 
-  const SectionsPage(
+  const DepartmentsPage(
       {Key? key, this.myMinistryModel, this.disabilityCategoryId})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-              body: Container(
+    return  DefaultScaffold(
+        logoUrl: myMinistryModel!.attachment!.url,
+        body: Container(
             padding: const EdgeInsets.all(24),
             decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -33,13 +35,6 @@ class SectionsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ...[
-                   Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        LogoImage(imageUrl: myMinistryModel!.attachment!.url!)
-                      ],
-
-                  ),
                   Text(
                     "select_desired".tr(),
                     style: AppTheme.bodyText1,
@@ -62,7 +57,7 @@ class SectionsPage extends StatelessWidget {
                                   onTap: () {
                                     Navigation.push(
                                         context,
-                                        DeepSelectionPage(
+                                        UnitsPage(
                                             myMinistryModel: myMinistryModel,
                                             disabilityCategoryId:
                                                 disabilityCategoryId,

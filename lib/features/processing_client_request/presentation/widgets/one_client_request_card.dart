@@ -5,15 +5,16 @@ import 'package:ministries_reception_app/core/utils/navigation.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_theme.dart';
-import '../../../processing_client_request/presentation/pages/client_book_details.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
-import '../../data/clients_requests_model.dart';
+import '../../../unit_screen/data/clients_requests_model.dart';
+import '../pages/client_book_details.dart';
 
-class OneVisitorCard extends StatelessWidget {
+class OneVisitorCardForReception extends StatelessWidget {
   final OneClientRequest? oneClientRequest;
   final MyMinistryModel? ministryModel;
 
-  const OneVisitorCard({Key? key, this.oneClientRequest, this.ministryModel})
+  const OneVisitorCardForReception(
+      {Key? key, this.oneClientRequest, this.ministryModel})
       : super(key: key);
 
   @override
@@ -36,7 +37,12 @@ class OneVisitorCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(oneClientRequest!.clientNationalNumberOrDisabilityNumber!,
+            Text(oneClientRequest!.orderNumber ?? "00000000",
+                style: AppTheme.bodyText1),
+            Text(
+                ministryModel!.ministryRequestType == 1
+                    ? oneClientRequest!.clientNationalNumber ?? ""
+                    : oneClientRequest!.disabilityNumber ?? "",
                 style: AppTheme.bodyText1),
             Text(
                 oneClientRequest!.creationTime!.split("T")[0] +
@@ -46,7 +52,11 @@ class OneVisitorCard extends StatelessWidget {
                         .toString()
                         .split(".")[0],
                 style: AppTheme.bodyText1),
-            Text("request_processing".tr(),style: AppTheme.bodyText1.copyWith(color: AppColors.lightBlueColor),)
+            Text(
+              "request_processing".tr(),
+              style:
+                  AppTheme.bodyText1.copyWith(color: AppColors.lightBlueColor),
+            )
           ],
         ),
       ),

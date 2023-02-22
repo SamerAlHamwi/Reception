@@ -2,10 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ministries_reception_app/core/constants/constant.dart';
 
+import '../../../../core/frequently_used_function/frequenty_funtions.dart';
 import '../../../../core/utils/navigation.dart';
 import '../../../../core/widgets/default_scaffold.dart';
 import '../../../select_unit_journy/presentation/widgets/main_elevated_button.dart';
-import '../../../waiting_client_list/data/clients_requests_model.dart';
+import '../../../unit_screen/data/clients_requests_model.dart';
 import '../../data/time_model.dart';
 import '../widgets/time_row.dart';
 import 'job_number_page.dart';
@@ -20,7 +21,7 @@ class ClientBookDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Duration waitingDuration =
-    _convertSecondsToDuration(oneClientRequest!.waitingSeconds);
+    FrequentlyFunction.convertSecondsToDuration(oneClientRequest!.waitingSeconds);
     return DefaultScaffold(
         logoUrl: logoUrl,
         body: Container(
@@ -62,7 +63,7 @@ class ClientBookDetails extends StatelessWidget {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(oneClientRequest!
-                                      .clientNationalNumberOrDisabilityNumber!),
+                                      .clientNationalNumberOrDisabilityNumber??""),
                                   Text("إدارة الشؤون الإدارية"),
                                   Text("0-00015"),
                                 ]))
@@ -93,10 +94,5 @@ class ClientBookDetails extends StatelessWidget {
         ));
   }
 
-  Duration _convertSecondsToDuration(dynamic timeInSeconds) {
-    int seconds = (timeInSeconds % 60).toInt();
-    int minutes = ((timeInSeconds / 60) % 60).toInt();
-    int hours = ((timeInSeconds / 3600) % 60).toInt();
-    return Duration(hours: hours, minutes: minutes, seconds: seconds);
-  }
+
 }
