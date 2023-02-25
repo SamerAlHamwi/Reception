@@ -1,21 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ministries_reception_app/core/constants/constant.dart';
-import 'package:ministries_reception_app/core/utils/navigation.dart';
 import 'package:ministries_reception_app/core/widgets/default_scaffold.dart';
 
-import '../../../../core/boilerplate/get_model/cubits/get_model_cubit.dart';
-import '../../../../core/boilerplate/get_model/widgets/GetModel.dart';
 import '../../../../core/boilerplate/pagination/cubits/pagination_cubit.dart';
 import '../../../../core/boilerplate/pagination/widgets/PaginationList.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../../select_unit_journy/presentation/pages/welcome_page.dart';
-import '../../../select_unit_journy/presentation/widgets/main_elevated_button.dart';
 import '../../../unit_screen/data/clients_requests_model.dart';
 import '../../../unit_screen/repository/unit_screen_repository.dart';
 import '../widgets/one_client_request_card.dart';
 
-class WaitingListPage extends StatelessWidget {
+class WaitingListPage extends StatefulWidget {
   final MyMinistryModel? myMinistryModel;
 
   WaitingListPage({
@@ -24,37 +20,67 @@ class WaitingListPage extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<WaitingListPage> createState() => _WaitingListPageState();
+  PaginationCubit? refresh;
+}
+
+class _WaitingListPageState extends State<WaitingListPage> {
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        widget.refresh!.getList(loadMore: true);
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DefaultScaffold(
-        logoUrl: myMinistryModel!.attachment!.url,
+         previousPage:WelcomePage() ,
+        logoUrl: widget.myMinistryModel!.attachment!.url,
         body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("waiting_list".tr(),
+              /*  Text("waiting_list".tr(),
                   style: AppTheme.bodyText1
-                      .copyWith(color: AppColors.primaryColor)),
-              SizedBox(height: 8),
+                      .copyWith(color: AppColors.primaryColor)),*/
+              const SizedBox(height: 8),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                Text("role_num".tr(),
+                    style: AppTheme.bodyText1
+                        .copyWith(color: AppColors.primaryColor)),
+                Text("unit_name".tr(),
+                    style: AppTheme.bodyText1
+                        .copyWith(color: AppColors.primaryColor)),
+                Text(
+                    widget.myMinistryModel!.ministryRequestType == 1
+                        ? "national_number".tr()
+                        : "disability_number".tr(),
+                    style: AppTheme.bodyText1
+                        .copyWith(color: AppColors.primaryColor)),
+                Text("request_status".tr(),
+                    style: AppTheme.bodyText1
+                        .copyWith(color: AppColors.primaryColor)),
+              ]),
+              const SizedBox(height: 8),
               Container(
-                  height: AppDimension.screenHeight(context) * 4 / 10,
+                  height: AppDimension.screenHeight(context) * 5.7 / 10,
                   child: pagination()),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: AppDimension.screenWidth(context) / 3),
-                child: MainElevatedButton(
-                    onTap: () {
-                      Navigation.push(context, WelcomePage());
-                    },
-                    text: "create_new_client_request".tr()),
-              )
             ]));
   }
-
-  static PaginationCubit? refresh;
 
   Widget pagination() {
     return PaginationList<OneClientRequest>(
       onCubitCreated: (cubit) {
-        refresh = cubit;
+        widget.refresh = cubit;
       },
       repositoryCallBack: (data) => UnitScreenRepository.getClientsList(data),
       listBuilder: (List<OneClientRequest> list) {
@@ -64,8 +90,8 @@ class WaitingListPage extends StatelessWidget {
   }
 
   buildList(List<OneClientRequest> list) {
-
     return ListView.separated(
+        controller: _scrollController,
         separatorBuilder: (context, index) {
           return const SizedBox(
             height: 8,
@@ -74,13 +100,9 @@ class WaitingListPage extends StatelessWidget {
         itemBuilder: ((context, index) {
           return OneVisitorCardForReception(
             oneClientRequest: list![index],
-            ministryModel: myMinistryModel,
+            ministryModel: widget.myMinistryModel,
           );
         }),
         itemCount: list.length);
-
   }
-
-
-
 }

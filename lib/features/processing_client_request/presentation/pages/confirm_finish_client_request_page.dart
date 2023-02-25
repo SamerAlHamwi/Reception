@@ -8,11 +8,14 @@ import 'package:ministries_reception_app/core/widgets/default_scaffold.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../select_unit_journy/presentation/pages/welcome_page.dart';
 import '../../../select_unit_journy/presentation/widgets/main_elevated_button.dart';
+import '../../../unit_screen/data/clients_requests_model.dart';
 
 class ConfirmFinishClientRequestPage extends StatelessWidget {
   final String? logoUrl;
+  final OneClientRequest? oneClientRequest;
 
-  const ConfirmFinishClientRequestPage({this.logoUrl ,Key? key}) : super(key: key);
+
+  const ConfirmFinishClientRequestPage({this.logoUrl ,this.oneClientRequest,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,9 @@ class ConfirmFinishClientRequestPage extends StatelessWidget {
                 color: AppColors.lightBlueColor,
                 size: 60,
               ),
-              Text("تم استلام طلب العميل رقم 0-1000 بنجاح",
+              Text("customer_order_treated".tr()+" "+
+                  oneClientRequest!.orderNumber!
+                  +" "+"successfully".tr(),
                   style: AppTheme.headline3, textAlign: TextAlign.center),
               MainElevatedButton(
                 onTap: () {

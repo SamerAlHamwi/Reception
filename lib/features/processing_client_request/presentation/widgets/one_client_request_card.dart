@@ -21,12 +21,14 @@ class OneVisitorCardForReception extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigation.push(
-            context,
-            ClientBookDetails(
-              logoUrl: ministryModel!.attachment!.url,
-              oneClientRequest: oneClientRequest,
-            ));
+        oneClientRequest!.clientRequestType == 1
+            ? Navigation.push(
+                context,
+                ClientBookDetails(
+                  logoUrl: ministryModel!.attachment!.url,
+                  oneClientRequest: oneClientRequest,
+                ))
+            : null;
       },
       child: Container(
         padding: const EdgeInsets.all(8),
@@ -37,25 +39,22 @@ class OneVisitorCardForReception extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(oneClientRequest!.orderNumber ?? "00000000",
+            Text(oneClientRequest!.orderNumber ?? "-----",
                 style: AppTheme.bodyText1),
+            Text(oneClientRequest!.unit!.name!, style: AppTheme.bodyText1),
             Text(
                 ministryModel!.ministryRequestType == 1
                     ? oneClientRequest!.clientNationalNumber ?? ""
                     : oneClientRequest!.disabilityNumber ?? "",
                 style: AppTheme.bodyText1),
             Text(
-                oneClientRequest!.creationTime!.split("T")[0] +
-                    "  /  " +
-                    oneClientRequest!.creationTime!
-                        .split("T")[1]
-                        .toString()
-                        .split(".")[0],
-                style: AppTheme.bodyText1),
-            Text(
-              "request_processing".tr(),
-              style:
-                  AppTheme.bodyText1.copyWith(color: AppColors.lightBlueColor),
+              oneClientRequest!.clientRequestType == 1
+                  ? "request_processing".tr()
+                  : "treated".tr(),
+              style: AppTheme.bodyText1.copyWith(
+                  color: oneClientRequest!.clientRequestType == 1
+                      ? AppColors.lightBlueColor
+                      : AppColors.green),
             )
           ],
         ),

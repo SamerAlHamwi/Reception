@@ -31,7 +31,7 @@ class ClientBookDetails extends StatelessWidget {
             children: [
               ...[
                 Text(
-                  "الطلب رقم 0-1000",
+                   "request_number".tr()+" "+oneClientRequest!.orderNumber!,
                   style: AppTheme.bodyText1,
                 ),
                 Container(
@@ -64,11 +64,11 @@ class ClientBookDetails extends StatelessWidget {
                                 children: [
                                   Text(oneClientRequest!
                                       .clientNationalNumberOrDisabilityNumber??""),
-                                  Text("إدارة الشؤون الإدارية"),
-                                  Text("0-00015"),
+                                  Text(oneClientRequest!.unit!.name!),
+                                  Text(oneClientRequest!.orderNumber!),
                                 ]))
                       ].expand(
-                        (element) => [element, const SizedBox(height: 16)],
+                        (element) => [element, const SizedBox(height: 8)],
                       ),
                     ],
                   ),
@@ -86,7 +86,7 @@ class ClientBookDetails extends StatelessWidget {
               ].expand((element) => [
                     element,
                     const SizedBox(
-                      height: 24,
+                      height: 8,
                     )
                   ])
             ],

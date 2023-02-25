@@ -9,7 +9,6 @@ import '../../../../core/utils/navigation.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/default_scaffold_with_center_logo.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
-import '../../../select_unit_journy/presentation/widgets/center_logo.dart';
 import '../../../select_unit_journy/presentation/widgets/main_elevated_button.dart';
 import '../../data/create_client_request_model.dart';
 import '../../data/create_client_response_model.dart';
@@ -35,18 +34,20 @@ class NationalNumberPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController? numberController = TextEditingController();
-  CreateClientRequestModel? _clientRequestModel;
+  CreateClientRequestModel? _clientRequestModel= CreateClientRequestModel();
 
   @override
   Widget build(BuildContext context) {
-    _clientRequestModel = CreateClientRequestModel(
-        unitId: selectedUnitId, disabilityCategoryId: disabilityCategoryId);
+
     return DefaultScaffoldWithCenterLogo(
         //resizeToAvoidBottomInset: true,
         logoUrl: myMinistryModel!.attachment!.url!,
-        body: Padding(padding: EdgeInsets.symmetric(horizontal: AppDimension.screenWidth(context)/4),
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: AppDimension.screenWidth(context) / 4),
           child: SingleChildScrollView(
-            child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               ...[
                 Text(
                     myMinistryModel!.ministryRequestType == 1
@@ -67,6 +68,7 @@ class NationalNumberPage extends StatelessWidget {
                         : _clientRequestModel!.disabilityNumber = value;
                   },
                   textInputAction: TextInputAction.next,
+                  maxLength: 20,
                   inputDecoration: AppTheme.inputDecoration.copyWith(
                       prefixIcon: null,
                       fillColor: AppColors.white,
@@ -112,8 +114,29 @@ class NationalNumberPage extends StatelessWidget {
       child: MainElevatedButton(
           text: "next".tr(),
           onTap: () {
-            _createRequestModelCubit!.createModel(_clientRequestModel);
+            _clientRequestModel!.unitId=selectedUnitId;
+            _clientRequestModel!.disabilityCategoryId= disabilityCategoryId;
+            if (myMinistryModel!.ministryRequestType == 1) {
+              if (_isValidNumber(_clientRequestModel!.clientNationalNumber)) {
+                _createRequestModelCubit!.createModel(_clientRequestModel);
+              }
+            } else if (myMinistryModel!.ministryRequestType == 2) {
+              if (_isValidNumber(_clientRequestModel!.disabilityNumber)) {
+                _createRequestModelCubit!.createModel(_clientRequestModel);
+              }
+            }
           }),
     );
+  }
+
+  _isValidNumber(String? value) {
+    if (value == null) {
+      return false;
+    }
+    if (value.length < 1) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

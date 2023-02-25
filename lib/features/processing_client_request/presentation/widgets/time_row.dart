@@ -20,6 +20,7 @@ class TimeRow extends StatelessWidget {
         Column(
           children: [
             TimeCell(value: timeModel!.second),
+            SizedBox(height: 4),
             Text(
               "second".tr(),
               style:
@@ -31,6 +32,7 @@ class TimeRow extends StatelessWidget {
         Column(
           children: [
             TimeCell(value: timeModel!.minutes),
+            SizedBox(height: 4),
             Text(
               "minutes".tr(),
               style:
@@ -42,6 +44,7 @@ class TimeRow extends StatelessWidget {
         Column(
           children: [
             TimeCell(value: timeModel!.hour),
+            SizedBox(height: 4),
             Text(
               "hour".tr(),
               style:

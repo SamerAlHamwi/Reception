@@ -6,7 +6,7 @@ import '../utils/shared_storage.dart';
 import '../widgets/dialog/dialog_exit_app.dart';
 
 class FrequentlyFunction {
-  static Future<bool> showLogoutConfirmDialog( context,Widget destinationPage) async {
+  static Future<bool> showLogoutConfirmDialog(context,Widget destinationPage) async {
     return await showDialog(
         context: context,
         builder: (context) {
@@ -29,6 +29,18 @@ class FrequentlyFunction {
     int minutes = ((timeInSeconds /60)%60).toInt();
     int hours = ((timeInSeconds/60)/60).toInt();
     return Duration(hours: hours, minutes: minutes, seconds: seconds);
+  }
+  static isValidNumber(String? value){
+    if(value==null)
+    {
+      return false;
+    }
+    if (value.length<1){
+      return false;
+    }
+    else {
+      return true;
+    }
 
   }
 }

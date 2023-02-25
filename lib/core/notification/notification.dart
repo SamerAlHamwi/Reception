@@ -16,7 +16,7 @@ class Messaging {
     print('Handling a message ${message.messageId}');
     if (message.data['type'].toString() == "2" ||
         message.data['type'].toString() == "4") {
-      UnitScreenPage.updateVisitorList();
+       UnitScreenPage.updateVisitorList();
     }
   }
 

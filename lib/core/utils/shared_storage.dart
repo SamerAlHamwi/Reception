@@ -4,11 +4,12 @@ import 'package:get_storage/get_storage.dart';
 
 
 class SharedStorage {
-  static String storageName = 'scs_container';
+  static String storageName = 'ministries_container';
   static GetStorage box = GetStorage(storageName);
   static String tokenKey = 'token';
   static String languageKey = 'language';
   static String userType = 'userType';
+  static String slaCompare = 'slaCompare';
 
 
 
@@ -48,6 +49,13 @@ class SharedStorage {
 
   static writeLanguage(value) {
     box.write(languageKey, value);
+  }
+static getSlaCompare() {
+    return box.read(slaCompare) ??10;
+  }
+
+  static writeSlaCompare(value) {
+    box.write(slaCompare, value);
   }
 
 

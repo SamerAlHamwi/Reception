@@ -56,7 +56,15 @@
   "are_you_sure_you_want_to_logout": "Are you sure you want to logout?",
   "yes": "Yes",
   "no": "No",
-  "treated": "Treated"
+  "treated": "Treated",
+  "request_number": "Request Number",
+  "customer_order_treated": "Customer Order Number",
+  "successfully": "Successfully Received",
+  "request_status": "Request Status",
+  "role_num": "Role Number",
+  "view_clients_requests": "View Clients Requests",
+  "create_new_request": "Create New Request"
+
 
 
 }

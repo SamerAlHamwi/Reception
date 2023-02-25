@@ -24,40 +24,42 @@ class DisabledCategoryPage extends StatelessWidget {
         modelBuilder: (DisabilityCategoryModel disabilityCategoryModel) {
           return DefaultScaffoldWithCenterLogo(
              logoUrl: myMinistryModel!.attachment!.url!,
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-               const SizedBox(height: 8),
-               // SizedBox(height: AppDimension.screenHeight(context) * 1 / 10),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: AppDimension.screenWidth(context)/4),
-                  height: AppDimension.screenHeight(context) * 5 / 10,
-                  child: ListView.separated(
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 8,
-                        );
-                      },
-                      itemCount: disabilityCategoryModel.disabilityList!.length,
-                      itemBuilder: (context, index) {
-                        return MainElevatedButton(
-                            text: disabilityCategoryModel
-                                .disabilityList!.reversed
-                                .toList()[index]
-                                .name,
-                            onTap: () {
-                              Navigation.push(
-                                  context,
-                                  DepartmentsPage(myMinistryModel:myMinistryModel,
-                                      disabilityCategoryId:
-                                          disabilityCategoryModel
-                                              .disabilityList!.reversed
-                                              .toList()[index]
-                                              .id));
-                            });
-                      }),
-                ),
-              ],
+            body: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                 const SizedBox(height: 8),
+                 // SizedBox(height: AppDimension.screenHeight(context) * 1 / 10),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: AppDimension.screenWidth(context)/4),
+                    height: AppDimension.screenHeight(context) * 5 / 10,
+                    child: ListView.separated(
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 8,
+                          );
+                        },
+                        itemCount: disabilityCategoryModel.disabilityList!.length,
+                        itemBuilder: (context, index) {
+                          return MainElevatedButton(
+                              text: disabilityCategoryModel
+                                  .disabilityList!.reversed
+                                  .toList()[index]
+                                  .name,
+                              onTap: () {
+                                Navigation.push(
+                                    context,
+                                    DepartmentsPage(myMinistryModel:myMinistryModel,
+                                        disabilityCategoryId:
+                                            disabilityCategoryModel
+                                                .disabilityList!.reversed
+                                                .toList()[index]
+                                                .id));
+                              });
+                        }),
+                  ),
+                ],
+              ),
             ),
           );
         });

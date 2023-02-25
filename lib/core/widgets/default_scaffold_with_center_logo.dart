@@ -24,28 +24,30 @@ class DefaultScaffoldWithCenterLogo extends StatelessWidget {
                 image: DecorationImage(
                     image: AssetImage(AppAssets.background), fit: BoxFit.fill)),
             child:
-            Column(mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-              Row(mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_forward),
-                    onPressed: () {
-                      Navigation.pop(context);
-                    },
-                  )
-                ],
-              ),
-              SizedBox(
-                height: AppDimension.screenHeight(context) * 3 / 10,
-                child: LogoImage(imageUrl:logoUrl),
+            SingleChildScrollView(
+              child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                Row(mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_forward),
+                      onPressed: () {
+                        Navigation.pop(context);
+                      },
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: AppDimension.screenHeight(context) * 3 / 10,
+                  child: LogoImage(imageUrl:logoUrl),
 
-              ),
+                ),
 
 
 
 
-              body!
-            ])));
+                body!
+              ]),
+            )));
   }
 }

@@ -28,9 +28,6 @@ class DepartmentsPage extends StatelessWidget {
         logoUrl: myMinistryModel!.attachment!.url,
         body: Container(
             padding: const EdgeInsets.all(24),
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppAssets.background), fit: BoxFit.fill)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

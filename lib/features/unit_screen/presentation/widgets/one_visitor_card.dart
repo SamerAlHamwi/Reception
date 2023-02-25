@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:ministries_reception_app/core/utils/shared_storage.dart';
+
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_theme.dart';
 import '../../../../core/frequently_used_function/frequenty_funtions.dart';
 import '../../../../core/widgets/custom_image.dart';
-
 import '../../data/clients_requests_model.dart';
 
 class OneVisitorCard extends StatefulWidget {
@@ -21,13 +22,15 @@ class OneVisitorCard extends StatefulWidget {
 class _OneVisitorCardState extends State<OneVisitorCard> {
   late Timer _timer;
   Duration? waitingTime;
+  Duration? isLateDuration = Duration(minutes: SharedStorage.getSlaCompare());
+  bool? isLate = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    waitingTime =
-        FrequentlyFunction.convertSecondsToDuration(widget.oneClientRequest!.waitingSeconds);
+    waitingTime = FrequentlyFunction.convertSecondsToDuration(
+        widget.oneClientRequest!.waitingSeconds);
     _timer = Timer.periodic(const Duration(minutes: 1), (timer) => _update());
   }
 
@@ -39,7 +42,6 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       padding: const EdgeInsets.all(8),
       height: 60,
@@ -55,26 +57,30 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
             height: 25,
             width: 25,
           ),
+          Text(widget.oneClientRequest!.orderNumber ?? "",
+              style: AppTheme.bodyText1),
           // Icon(diabledMap[oneClientRequest!.clientRequestType]),
           Text(widget.oneClientRequest!.disabilityNumber ?? "",
               style: AppTheme.bodyText1),
-          Text(
-              widget.oneClientRequest!.clientNationalNumberOrDisabilityNumber ??
-                  "",
+          Text(widget.oneClientRequest!.clientNationalNumber ?? "",
               style: AppTheme.bodyText1),
+
           Text(
               widget.oneClientRequest!.clientRequestType == 1
-                  ? "in_waiting".tr():widget.oneClientRequest!.clientRequestType == 2?
-                   "treated".tr():"canceled".tr(),
+                  ? "in_waiting".tr()
+                  : widget.oneClientRequest!.clientRequestType == 2
+                      ? "treated".tr()
+                      : "canceled".tr(),
               style:
                   AppTheme.bodyText1.copyWith(color: AppColors.lightBlueColor)),
           Text(
               widget.oneClientRequest!.waitingSeconds != null
-                  ? waitingTime!.toString().split(":")[0]
-                  +":"
-                  +waitingTime!.toString().split(":")[1]
+                  ? waitingTime!.toString().split(":")[0] +
+                      ":" +
+                      waitingTime!.toString().split(":")[1]
                   : "",
-              style: AppTheme.bodyText1),
+              style: AppTheme.bodyText1.copyWith(
+                  color: (widget.oneClientRequest!.isLate!||waitingTime!.inMinutes>isLateDuration!.inMinutes) ? Colors.red : null)),
         ],
       ),
     );

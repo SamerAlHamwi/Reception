@@ -55,8 +55,14 @@
   "are_you_sure_you_want_to_logout": "هل أنت متأكد من رغبتك في تسجيل الخروج؟",
   "yes": "نعم",
   "no": "لا",
-  "treated": "تمت المعالجة"
-
+  "treated": "تمت المعالجة",
+  "request_number": "رقم الطلب",
+  "customer_order_treated": "تم استلام طلب العميل رقم",
+  "successfully": "بنجاح",
+  "request_status": "حالة الطلب",
+  "role_num": "رقم الطلب",
+  "view_clients_requests": "عرض طلبات العملاء",
+  "create_new_request": "إنشاء طلب جديد"
 
 
 }

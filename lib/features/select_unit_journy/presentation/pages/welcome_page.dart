@@ -28,96 +28,93 @@ class WelcomePage extends StatelessWidget {
         modelBuilder: (MyMinistryModel myMinistryModel) {
           return Scaffold(
               body: Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(AppAssets.background),
-                        fit: BoxFit.fill)),
-                child: SizedBox(
-                  height: AppDimension.screenHeight(context) * 9 / 10,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Align(alignment:Alignment.topLeft,
-                        child: PopupMenuButton(itemBuilder: (context) {
-                          return [
-                            PopupMenuItem(
-                              value: "logout",
-                              child: ListTile(
-                                leading: Icon(Icons.logout),
-                                title: Text(
-                                  "logout".tr(),
-                                  style: AppTheme.bodyText1,
-                                ),
+            height: double.infinity,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppAssets.background), fit: BoxFit.fill)),
+            child: SizedBox(
+              height: AppDimension.screenHeight(context) * 9 / 10,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: PopupMenuButton(
+                      itemBuilder: (context) {
+                        return [
+                          PopupMenuItem(
+                            value: "logout",
+                            child: ListTile(
+                              leading: Icon(Icons.logout),
+                              title: Text(
+                                "logout".tr(),
+                                style: AppTheme.bodyText1,
                               ),
-                            )
-                          ];
-                        },onSelected: (String value){
-                          if(value=="logout")
-                          {
-                            FrequentlyFunction
-                                .showLogoutConfirmDialog(
-                                context, LoginPage());
-
-                          }
-                        },
-
-                        ),
-                      ),
-                      Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ...[
-                              CenterLogo(logoUrl: myMinistryModel.attachment!.url!),
-                              Text(
-                                myMinistryModel!.name ?? "",
-                                style: AppTheme.headline3,
-                              ),
-                              Text(
-                                myMinistryModel!.description ?? "",
-                                style: AppTheme.headline3,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal:
-                                        AppDimension.screenWidth(context) / 4),
-                                child: Column(
-                                  children: [
-                                    ...[
-                                      MainElevatedButton(
-                                        onTap: () {
-                                          Navigation.push(
-                                              context,
-                                              WaitingListPage(
-                                                  myMinistryModel:
-                                                      myMinistryModel));
-                                        },
-                                        text: "waiting_list".tr(),
-                                      ),
-                                      MainElevatedButton(
-                                        onTap: () {
-                                          Navigation.push(
-                                              context,
-                                              DisabledCategoryPage(
-                                                  myMinistryModel:
-                                                      myMinistryModel));
-                                        },
-                                        text: "create_new_client_request".tr(),
-                                      ),
-                                    ].expand((element) =>
-                                        [SizedBox(height: 16), element])
-                                  ],
-                                ),
-                              )
-                            ].expand((element) => [element, SizedBox(height: 8)])
-                          ]),
-                    ],
+                            ),
+                          )
+                        ];
+                      },
+                      onSelected: (String value) {
+                        if (value == "logout") {
+                          FrequentlyFunction.showLogoutConfirmDialog(
+                              context, LoginPage());
+                        }
+                      },
+                    ),
                   ),
-                ),
-              ));
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ...[
+                          CenterLogo(logoUrl: myMinistryModel.attachment!.url!),
+                          Text(
+                            myMinistryModel!.name ?? "",
+                            style: AppTheme.headline3,
+                          ),
+                          Text(
+                            myMinistryModel!.description ?? "",
+                            style: AppTheme.headline3,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    AppDimension.screenWidth(context) / 4),
+                            child: Column(
+                              children: [
+                                ...[
+                                  MainElevatedButton(
+                                    onTap: () {
+                                      Navigation.push(
+                                          context,
+                                          WaitingListPage(
+                                              myMinistryModel:
+                                                  myMinistryModel));
+                                    },
+                                    text: "view_clients_requests".tr(),
+                                  ),
+                                  MainElevatedButton(
+                                    onTap: () {
+                                      Navigation.push(
+                                          context,
+                                          DisabledCategoryPage(
+                                              myMinistryModel:
+                                                  myMinistryModel));
+                                    },
+                                    text: "create_new_request".tr(),
+                                  ),
+                                ].expand((element) =>
+                                    [SizedBox(height: 16), element])
+                              ],
+                            ),
+                          )
+                        ].expand((element) => [element, SizedBox(height: 8)])
+                      ]),
+                ],
+              ),
+            ),
+          ));
         });
   }
-
 }

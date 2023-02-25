@@ -6,9 +6,11 @@ import '../constants/app_assets.dart';
 
 class DefaultScaffold extends StatelessWidget {
   final Widget? body;
+  final Widget? previousPage;
+
   final String? logoUrl;
 
-  const DefaultScaffold({Key? key, this.body, this.logoUrl}) : super(key: key);
+  const DefaultScaffold({Key? key, this.body, this.logoUrl,this.previousPage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,12 @@ class DefaultScaffold extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.arrow_forward),
                     onPressed: () {
-                      Navigation.pop(context);
+                      if(previousPage==null){
+                      Navigation.pop(context);}
+                      else
+                        {
+                          Navigation.pushAndRemoveUntil(context, previousPage!);
+                        }
                     },
                   )
                 ],
