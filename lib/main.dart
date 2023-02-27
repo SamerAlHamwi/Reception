@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:ministries_reception_app/core/notification/notification.dart';
+import 'package:ministries_reception_app/core/utils/service_locator.dart';
 
 import 'core/constants/constant.dart';
 import 'core/utils/custom_easy_loading.dart';
@@ -16,6 +18,8 @@ Future<void> main() async {
   DartPluginRegistrant.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await SharedStorage.init();
+  await Messaging.initFCM();
+  ServiceLocator.registerModels();
 
   if (!Platform.isWindows) await AppConstant.getDefaultLanguage();
   runApp(
