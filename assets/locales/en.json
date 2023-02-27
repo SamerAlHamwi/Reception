@@ -71,7 +71,9 @@
   "calls": "Calls",
   "are_you_sure": "Are you sure you want to make an appointment?",
   "start_call": "Start call",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "required_entity":"Required Entity",
+  "leader_name":"Leader Name"
 
 
 

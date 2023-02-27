@@ -18,6 +18,7 @@ class CallListPage extends StatelessWidget {
     return DefaultScaffold(
         logoUrl: myMinistryModel!.attachment!.url,
         body: Container(
+            padding: EdgeInsets.symmetric(horizontal: AppDimension.screenWidth(context)*2/10),
           height: AppDimension.screenHeight(context)*7/10,
           child: pagination()
 

@@ -6,7 +6,6 @@ import '../../../../core/api/core_models/empty_model.dart';
 import '../../../../core/boilerplate/create_model/cubits/create_model_cubit.dart';
 import '../../../../core/boilerplate/create_model/widgets/CreateModel.dart';
 import '../../../../core/constants/app_colors.dart';
-import '../../../../core/constants/app_dimension.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../data/call_model.dart';
 import '../../data/notify_screen_model.dart';
@@ -28,8 +27,7 @@ class CallCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width:  AppDimension.screenWidth(context)/3,
-
+        width: 50,
         height: 220,
         margin: const EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.all(20),
@@ -44,44 +42,68 @@ class CallCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(myMinistryModel!.departments!
-                .firstWhere(
-                    (element) => element.id == call.leader!.departmentId)!
-                .name!,style: AppTheme.headline3,),
+            Text(
+              myMinistryModel!.departments!
+                  .firstWhere(
+                      (element) => element.id == call.leader!.departmentId)!
+                  .name!,
+              style: AppTheme.headline3,
+            ),
+            Column(crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("required_entity".tr() + " : ",style: AppTheme.bodyText1,),
+                    Text(call.leader!.userPosition ?? "",style: AppTheme.bodyText1),
+                  ],
+                ),
+                SizedBox(height: 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("leader_name".tr() + " : ",style: AppTheme.bodyText1),
+                    Text(
+                        call.leader!.name! + " " + call.leader!.surname! ?? "",style: AppTheme.bodyText1,),
+                  ],
+                ),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
                   children: [
-                    Icon(Icons.date_range, color: AppColors.primaryColor),
-                    SizedBox(width: 8),
+                    const Icon(Icons.date_range, color: AppColors.primaryColor),
+                    const SizedBox(width: 8),
                     Text(
-                      "date".tr() +
-                          " : " ,
-                      style:
-                          AppTheme.headline3.copyWith(color: AppColors.primaryColor),
+                      "date".tr() + " : ",
+                      style: AppTheme.headline3
+                          .copyWith(color: AppColors.primaryColor),
                     ),
-                    Text(call.creationTime!.split("T")[0].toString(),style:
-                    AppTheme.headline3.copyWith(color: AppColors.white))
+                    Text(call.creationTime!.split("T")[0].toString(),
+                        style:
+                            AppTheme.headline3.copyWith(color: AppColors.offWhite,fontWeight: FontWeight.w700))
                   ],
                 ),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.access_time_outlined,
                       color: AppColors.primaryColor,
                     ),
-                    SizedBox(width: 8),
-                    Text(
-                        "time".tr() +
-                            " : " ,
+                    const SizedBox(width: 8),
+                    Text("time".tr() + " : ",
                         style: AppTheme.headline3
                             .copyWith(color: AppColors.primaryColor)),
-                    Text(call.creationTime!
-                        .split("T")[1]
-                        .split(".")[0]
-                        .toString(),style: AppTheme.headline3
-                        .copyWith(color: AppColors.white,fontWeight: FontWeight.w600))
+                    Text(
+                        call.creationTime!
+                            .split("T")[1]
+                            .split(".")[0]
+                            .toString(),
+                        style: AppTheme.headline3.copyWith(
+                            color: AppColors.offWhite,
+                            fontWeight: FontWeight.w700))
                   ],
                 ),
               ],
