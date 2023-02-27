@@ -32,6 +32,7 @@ class Jitsi {
     Map<FeatureFlag, bool> featureFlags = {
       FeatureFlag.isPrejoinPageEnabled: false,
       FeatureFlag.isNotificationsEnabled: false,
+      FeatureFlag.isFullscreenEnabled: true,
       // FeatureFlag.isWelcomePageEnabled: false,
       FeatureFlag.isInviteEnabled: true,
       FeatureFlag.isChatEnabled: true,

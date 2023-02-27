@@ -82,6 +82,7 @@ dev_dependencies:
   wakelock: ^0.6.2
   flutter_rating_bar: ^4.0.1
   flutter_phoenix: ^1.0.0
+  animated_snack_bar: ^0.2.1
   get_it: ^7.2.0
   #  flutter_launcher_name:
   #Vieo Stuff
