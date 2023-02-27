@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ministries_reception_app/core/constants/constant.dart';
+import 'package:ministries_reception_app/core/utils/shared_storage.dart';
 
 import '../../../../core/frequently_used_function/frequenty_funtions.dart';
 import '../../../../core/utils/navigation.dart';
@@ -20,8 +21,8 @@ class ClientBookDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Duration waitingDuration =
-    FrequentlyFunction.convertSecondsToDuration(oneClientRequest!.waitingSeconds);
+    Duration waitingDuration = FrequentlyFunction.convertSecondsToDuration(
+        oneClientRequest!.waitingSeconds);
     return DefaultScaffold(
         logoUrl: logoUrl,
         body: Container(
@@ -31,7 +32,7 @@ class ClientBookDetails extends StatelessWidget {
             children: [
               ...[
                 Text(
-                   "request_number".tr()+" "+oneClientRequest!.orderNumber!,
+                  "request_number".tr() + " " + oneClientRequest!.orderNumber!,
                   style: AppTheme.bodyText1,
                 ),
                 Container(
@@ -50,10 +51,12 @@ class ClientBookDetails extends StatelessWidget {
                         ),
                         TimeRow(
                           timeModel: TimeModel(
-                              second: waitingDuration.toString().split(":")[2].split('.')[0],
-                              minutes:waitingDuration.toString().split(":")[1],
-                              hour:waitingDuration.toString().split(":")[0]
-                          ),
+                              second: waitingDuration
+                                  .toString()
+                                  .split(":")[2]
+                                  .split('.')[0],
+                              minutes: waitingDuration.toString().split(":")[1],
+                              hour: waitingDuration.toString().split(":")[0]),
                         ),
                         Container(
                             padding: const EdgeInsets.all(16),
@@ -62,8 +65,10 @@ class ClientBookDetails extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  Text(oneClientRequest!
-                                      .clientNationalNumberOrDisabilityNumber??""),
+                                  Text(SharedStorage.getMinistryRequestType() ==
+                                          1
+                                      ? oneClientRequest!.clientNationalNumber!
+                                      : oneClientRequest!.disabilityNumber!),
                                   Text(oneClientRequest!.unit!.name!),
                                   Text(oneClientRequest!.orderNumber!),
                                 ]))
@@ -93,6 +98,4 @@ class ClientBookDetails extends StatelessWidget {
           ),
         ));
   }
-
-
 }

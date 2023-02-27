@@ -10,9 +10,9 @@ import '../../../../core/constants/app_theme.dart';
 import '../../../../core/frequently_used_function/frequenty_funtions.dart';
 import '../../../../core/widgets/custom_image.dart';
 import '../../../auth/presentation/pages/login_page.dart';
+import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../data/clients_requests_model.dart';
 import '../../data/configuration_model.dart';
-import '../../data/my_ministriy_model.dart';
 import '../../repository/unit_screen_repository.dart';
 import '../widgets/date_time_section.dart';
 import '../widgets/one_visitor_card.dart';
@@ -24,27 +24,24 @@ class UnitScreenPage extends StatefulWidget {
   State<UnitScreenPage> createState() => _UnitScreenPageState();
 
   static PaginationCubit? refresh;
+  static ScrollController _scrollController = ScrollController();
+
 
   static void updateVisitorList() {
     if (refresh != null) {
-      refresh!.getList();
+       refresh!.getList();
+      _scrollController.animateTo(0,duration: Duration(seconds: 1), curve: Curves.linear);
     }
   }
 }
 
 class _UnitScreenPageState extends State<UnitScreenPage> {
-  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        UnitScreenPage.refresh!.getList(loadMore: true);
-      }
-    });
+
   }
 
   @override
@@ -60,10 +57,10 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
             AppColors.white,
             AppColors.white
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-          child: GetModel<MyMinistriyModel>(
+          child: GetModel<MyMinistryModel>(
               repositoryCallBack: (data) =>
                   UnitScreenRepository.getMyMinistries(),
-              modelBuilder: (MyMinistriyModel myMinistriyModel) {
+              modelBuilder: (MyMinistryModel myMinistriyModel) {
                 return GetModel<ConfigurationModel>(
                     repositoryCallBack: (data) =>
                         UnitScreenRepository.getConfiguration(),
@@ -114,7 +111,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
                           ),
                           Container(height: sizes.maxHeight * 0.2 / 10,
                          /* child: Row(children: [
-                            Text("نوع الإعاقة",style: AppTheme.bodyText1.copyWith(color: AppColors.primaryColor),)
+                            Text("disability type",style: AppTheme.bodyText1.copyWith(color: AppColors.primaryColor),)
                           ],),*/
                           ),
                           Container(
@@ -182,7 +179,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
 
   buildList(List<OneClientRequest> list) {
     return ListView.separated(
-      controller: _scrollController,
+      controller: UnitScreenPage._scrollController,
       itemCount: list.length,
       separatorBuilder: (context, index) {
         return const SizedBox(
@@ -192,7 +189,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
       itemBuilder: ((context, index) {
         return list![index].clientRequestType == 1
             ? OneVisitorCard(
-                oneClientRequest: list![index],
+                oneClientRequest: list![index],key: GlobalKey(),
               )
             : Container();
       }),

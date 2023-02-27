@@ -10,6 +10,7 @@ class SharedStorage {
   static String languageKey = 'language';
   static String userType = 'userType';
   static String slaCompare = 'slaCompare';
+  static String ministryRequestType = 'ministryRequestType';
 
 
 
@@ -56,6 +57,13 @@ static getSlaCompare() {
 
   static writeSlaCompare(value) {
     box.write(slaCompare, value);
+  }
+  static getMinistryRequestType() {
+    return box.read(ministryRequestType) ??1;
+  }
+
+  static writeMinistryRequestType(value) {
+    box.write(ministryRequestType, value);
   }
 
 

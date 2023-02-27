@@ -39,7 +39,7 @@ class _DialogExitAppState extends State<DialogExitApp> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width / 8,
-height: 50,
+                 height: 50,
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
                     color: AppColors.lightBlueColor,

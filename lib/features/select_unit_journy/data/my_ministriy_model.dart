@@ -9,6 +9,7 @@ class MyMinistryModel extends BaseResultModel {
   String? description;
   List<Departments>? departments;
   List<Receptions>? receptions;
+  List<Screen>? screens;
   List<Translations>? translations;
   Attachment? attachment;
 
@@ -17,6 +18,7 @@ class MyMinistryModel extends BaseResultModel {
         this.ministryRequestType,
         this.name,
         this.description,
+        this.screens,
         this.departments,
         this.receptions,
         this.translations,
@@ -48,6 +50,12 @@ class MyMinistryModel extends BaseResultModel {
         translations!.add(new Translations.fromJson(v));
       });
     }
+    if (json['screens'] != null) {
+      screens =[];
+      json['screens'].forEach((v) {
+        screens!.add(new Screen.fromJson(v));
+      });
+    }
 
     attachment = json['attachment'] != null
         ? new Attachment.fromJson(json['attachment'])
@@ -77,7 +85,7 @@ class MyMinistryModel extends BaseResultModel {
   }
 }
 
-class Departments {
+class Departments extends BaseResultModel{
   int? id;
   String? name;
   String? description;
@@ -169,6 +177,7 @@ class Employees {
   String? userName;
   String? name;
   String? surname;
+  String? userPosition;
   String? emailAddress;
   bool? isActive;
   String? fullName;
@@ -178,7 +187,6 @@ class Employees {
   int? unitId;
   int? departmentId;
   int? ministryId;
-  List<String>? roleNames;
 
   Employees(
       {this.id,
@@ -186,6 +194,7 @@ class Employees {
         this.name,
         this.surname,
         this.emailAddress,
+        this.userPosition,
         this.isActive,
         this.fullName,
         this.lastLoginTime,
@@ -194,7 +203,7 @@ class Employees {
         this.unitId,
         this.departmentId,
         this.ministryId,
-        this.roleNames});
+      });
 
   Employees.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -202,6 +211,7 @@ class Employees {
     name = json['name'];
     surname = json['surname'];
     emailAddress = json['emailAddress'];
+    userPosition = json['userPosition'] ?? '';
     isActive = json['isActive'];
     fullName = json['fullName'];
     lastLoginTime = json['lastLoginTime'];
@@ -210,16 +220,16 @@ class Employees {
     unitId = json['unitId'];
     departmentId = json['departmentId'];
     ministryId = json['ministryId'];
-    roleNames = json['roleNames'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data =  Map<String, dynamic>();
     data['id'] = this.id;
     data['userName'] = this.userName;
     data['name'] = this.name;
     data['surname'] = this.surname;
     data['emailAddress'] = this.emailAddress;
+    data['userPosition'] = userPosition;
     data['isActive'] = this.isActive;
     data['fullName'] = this.fullName;
     data['lastLoginTime'] = this.lastLoginTime;
@@ -228,7 +238,6 @@ class Employees {
     data['unitId'] = this.unitId;
     data['departmentId'] = this.departmentId;
     data['ministryId'] = this.ministryId;
-    data['roleNames'] = this.roleNames;
     return data;
   }
 }
@@ -326,6 +335,82 @@ class Receptions {
     data['id'] = this.id;
     data['userName'] = this.userName;
     data['name'] = this.name;
+    data['surname'] = this.surname;
+    data['emailAddress'] = this.emailAddress;
+    data['isActive'] = this.isActive;
+    data['fullName'] = this.fullName;
+    data['lastLoginTime'] = this.lastLoginTime;
+    data['creationTime'] = this.creationTime;
+    data['userType'] = this.userType;
+    data['unitId'] = this.unitId;
+    data['departmentId'] = this.departmentId;
+    data['ministryId'] = this.ministryId;
+    data['roleNames'] = this.roleNames;
+    return data;
+  }
+}
+class Screen {
+  int? id;
+  String? userName;
+  String? name;
+  String? userPosition;
+  String? surname;
+  String? emailAddress;
+  bool? isActive;
+  String? fullName;
+  String? lastLoginTime;
+  String? creationTime;
+  int? userType;
+  int? unitId;
+  int? departmentId;
+  int? ministryId;
+  List<String>? roleNames;
+
+  Screen(
+      {this.id,
+        this.userName,
+        this.name,
+        this.userPosition,
+        this.surname,
+        this.emailAddress,
+        this.isActive,
+        this.fullName,
+        this.lastLoginTime,
+        this.creationTime,
+        this.userType,
+        this.unitId,
+        this.departmentId,
+        this.ministryId,
+        this.roleNames});
+
+  Screen.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userName = json['userName'];
+    name = json['name'];
+    userPosition = json['userPosition'];
+    surname = json['surname'];
+    emailAddress = json['emailAddress'];
+    isActive = json['isActive'];
+    fullName = json['fullName'];
+    lastLoginTime = json['lastLoginTime'];
+    creationTime = json['creationTime'];
+    userType = json['userType'];
+    unitId = json['unitId'];
+    departmentId = json['departmentId'];
+    ministryId = json['ministryId'];
+    if(json['roleNames']!=null){
+    json['roleNames'].forEach((v) {
+      roleNames!.add(v);
+    });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['userName'] = this.userName;
+    data['name'] = this.name;
+    data['userPosition'] = this.userPosition;
     data['surname'] = this.surname;
     data['emailAddress'] = this.emailAddress;
     data['isActive'] = this.isActive;

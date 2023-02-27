@@ -6,7 +6,7 @@ import 'package:ministries_reception_app/core/widgets/default_scaffold.dart';
 import '../../../../core/boilerplate/pagination/cubits/pagination_cubit.dart';
 import '../../../../core/boilerplate/pagination/widgets/PaginationList.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
-import '../../../select_unit_journy/presentation/pages/welcome_page.dart';
+import '../../../select_unit_journy/presentation/pages/welcome_reception_page.dart';
 import '../../../unit_screen/data/clients_requests_model.dart';
 import '../../../unit_screen/repository/unit_screen_repository.dart';
 import '../widgets/one_client_request_card.dart';
@@ -25,26 +25,19 @@ class WaitingListPage extends StatefulWidget {
 }
 
 class _WaitingListPageState extends State<WaitingListPage> {
-  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    super.initState();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        widget.refresh!.getList(loadMore: true);
-      }
-    });
+
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultScaffold(
-         previousPage:WelcomePage() ,
+         previousPage:WelcomeReceptionPage() ,
         logoUrl: widget.myMinistryModel!.attachment!.url,
         body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +84,6 @@ class _WaitingListPageState extends State<WaitingListPage> {
 
   buildList(List<OneClientRequest> list) {
     return ListView.separated(
-        controller: _scrollController,
         separatorBuilder: (context, index) {
           return const SizedBox(
             height: 8,
@@ -99,6 +91,7 @@ class _WaitingListPageState extends State<WaitingListPage> {
         },
         itemBuilder: ((context, index) {
           return OneVisitorCardForReception(
+            key: GlobalKey(),
             oneClientRequest: list![index],
             ministryModel: widget.myMinistryModel,
           );

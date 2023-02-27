@@ -6,7 +6,7 @@ import 'package:ministries_reception_app/core/utils/navigation.dart';
 import 'package:ministries_reception_app/core/widgets/default_scaffold.dart';
 
 import '../../../../core/constants/app_colors.dart';
-import '../../../select_unit_journy/presentation/pages/welcome_page.dart';
+import '../../../select_unit_journy/presentation/pages/welcome_reception_page.dart';
 import '../../../select_unit_journy/presentation/widgets/main_elevated_button.dart';
 import '../../../unit_screen/data/clients_requests_model.dart';
 
@@ -39,7 +39,7 @@ class ConfirmFinishClientRequestPage extends StatelessWidget {
                   style: AppTheme.headline3, textAlign: TextAlign.center),
               MainElevatedButton(
                 onTap: () {
-                  Navigation.push(context, WelcomePage());
+                  Navigation.push(context, WelcomeReceptionPage());
                 },
                 text: "back_to_the_beginning".tr(),
               )

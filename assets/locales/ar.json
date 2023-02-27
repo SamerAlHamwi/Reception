@@ -62,7 +62,16 @@
   "request_status": "حالة الطلب",
   "role_num": "رقم الطلب",
   "view_clients_requests": "عرض طلبات العملاء",
-  "create_new_request": "إنشاء طلب جديد"
+  "create_new_request": "إنشاء طلب جديد",
+  "create_video_call_request": "إنشاء طلب مكالمة فيديو",
+  "view_video_call_requests": "عرض طلبات المكالمات",
+  "select_desired_employee": "يرجى اختيار القيادي المطلوب",
+
+  "appointments": "المواعيد",
+  "calls": "المكالمات",
+  "are_you_sure": "هل أنت متأكد من حجز موعد؟",
+  "start_call": "دخول",
+  "cancel": "إلغاء الطلب"
 
 
 }

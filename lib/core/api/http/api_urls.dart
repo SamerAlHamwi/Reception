@@ -20,6 +20,11 @@ class ApiURLs {
       baseUrl + 'services/app/Notification/GetUserNotifications';
   static const String setTokenNotification =
       baseUrl + 'services/app/User/SetCurrentFcmToken';
+  static const String getCalls = baseUrl + 'services/app/Call/GetAll';
+  static const String createCall = baseUrl + 'services/app/Call/Create';
+  static const String notitfyScreenUrl = baseUrl + 'services/app/Call/NotifyScreenToJoin';
+  static const String CancleCallRequestUrl = baseUrl + 'services/app/Call/CancleRequest';
+  static const String getDepartmentByIdURL = baseUrl + 'services/app/Department/Get';
 
 
 

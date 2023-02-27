@@ -63,7 +63,19 @@
   "request_status": "Request Status",
   "role_num": "Role Number",
   "view_clients_requests": "View Clients Requests",
-  "create_new_request": "Create New Request"
+  "create_new_request": "Create New Request",
+  "create_video_call_request": "Create Video Call Request",
+  "view_video_call_requests": "View Video Call Requests",
+  "select_desired_employee": "Please select the desired leader",
+  "appointments": "Appointments",
+  "calls": "Calls",
+  "are_you_sure": "Are you sure you want to make an appointment?",
+  "start_call": "Start call",
+  "cancel": "Cancel"
+
+
+
+
 
 
 
