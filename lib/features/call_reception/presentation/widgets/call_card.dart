@@ -108,6 +108,7 @@ class CallCard extends StatelessWidget {
                 ),
               ],
             ),
+            Text(call.id.toString()),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: call!.callStatus == 1

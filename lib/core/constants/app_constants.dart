@@ -20,13 +20,24 @@ class AppConstant {
     'ar': Locale('ar'),
     'en': Locale('en'),
   };
-  static Locale defaultLocal=Locale("en");
-  static getDefaultLanguage()async{
+  static Locale defaultLocal = Locale("en");
+
+  static getDefaultLanguage() async {
     List? languages = await Devicelocale.preferredLanguages;
-    defaultLocal= Locale(languages!.elementAt(0).toString().split("-")[0]);
+    defaultLocal = Locale(languages!.elementAt(0).toString().split("-")[0]);
     return defaultLocal;
   }
 }
+
+enum NotificationType {
+  NULL,
+  PushNotification,
+  NewRequestHasPublished,
+  NewCallRequestHasPublished,
+  TheRequestHasTreated,
+  YouShouldJoinCall
+}
+
 
 class AppScrollBehavior extends MaterialScrollBehavior {
   /// just to provide scroll to web and windows

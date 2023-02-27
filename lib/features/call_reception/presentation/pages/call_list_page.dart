@@ -1,36 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:ministries_reception_app/core/constants/app_dimension.dart';
-import '../../../../core/boilerplate/pagination/cubits/pagination_cubit.dart';
+import 'package:ministries_reception_app/core/utils/service_locator.dart';
 import '../../../../core/boilerplate/pagination/widgets/PaginationList.dart';
 import '../../../../core/widgets/default_scaffold.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../data/call_model.dart';
 import '../../repository/call_reception_repo.dart';
 import '../widgets/call_card.dart';
+import 'package:get_it/get_it.dart';
 
 class CallListPage extends StatelessWidget {
   final MyMinistryModel? myMinistryModel;
 
-  CallListPage({Key? key, this.myMinistryModel}) : super(key: key);
+  const CallListPage({Key? key, this.myMinistryModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DefaultScaffold(
         logoUrl: myMinistryModel!.attachment!.url,
         body: Container(
-            padding: EdgeInsets.symmetric(horizontal: AppDimension.screenWidth(context)*2/10),
-          height: AppDimension.screenHeight(context)*7/10,
-          child: pagination()
-
-        ));
+            padding: EdgeInsets.symmetric(
+                horizontal: AppDimension.screenWidth(context) * 2 / 10),
+            height: AppDimension.screenHeight(context) * 7 / 10,
+            child: pagination()));
   }
-
-  PaginationCubit? refresh;
 
   Widget pagination() {
     return PaginationList<Call>(
       onCubitCreated: (cubit) {
-        refresh = cubit;
+        GetIt.I<CubitsStore>().callsList = cubit;
       },
       repositoryCallBack: (data) => CallReceptionRepo.getCalls(data),
       listBuilder: (List<Call> list) {
@@ -50,7 +48,7 @@ class CallListPage extends StatelessWidget {
           return CallCard(
             key: GlobalKey(),
             call: list[index],
-              myMinistryModel:myMinistryModel,
+            myMinistryModel: myMinistryModel,
             onTap: () {},
           );
         }),

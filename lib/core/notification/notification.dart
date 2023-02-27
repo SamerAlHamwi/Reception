@@ -1,46 +1,59 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_fcm/Notification/FCM.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_fcm/flutter_fcm.dart';
+import 'package:ministries_reception_app/core/utils/shared_storage.dart';
 
-import '../../core/constants/constant.dart';
-import '../../features/notification/repository/notification_repository.dart';
-import '../../features/unit_screen/presentation/pages/unit_screen_page.dart';
-import '../utils/shared_storage.dart';
+import '../constants/Keys.dart';
+import 'data/fcm_notification_model.dart';
+import 'domin/cubit/notification_cubit.dart';
+import 'domin/notification_middleware.dart';
 
 class Messaging {
   static String? token;
 
-  static Future<void> onNotificationReceived(RemoteMessage message) async {
-    await Firebase.initializeApp();
-    print('Handling a message ${message.messageId}');
-    if (message.data['type'].toString() == "2" ||
-        message.data['type'].toString() == "4") {
-       UnitScreenPage.updateVisitorList();
-    }
+  static deleteToken() {
+    Messaging.token = null;
+    FCM.deleteRefreshToken();
   }
 
+  @pragma('vm:entry-point')
+  static Future<void> onNotificationReceived(RemoteMessage message) async {
+    await Firebase.initializeApp();
+    var notification = FCMNotificationModel.fromJson(message.data);
+    NotificationMiddleware.onRceived(notification);
+  }
+
+  @pragma('vm:entry-point')
   static initFCM() async {
     try {
+      await Firebase.initializeApp();
       await FCM.initializeFCM(
-        onNotificationReceived: onNotificationReceived,
         withLocalNotification: true,
+        navigatorKey: Keys.navigatorKey,
+        onNotificationReceived: onNotificationReceived,
         onNotificationPressed: (Map<String, dynamic> data) {
-          // Notifications notification = Notifications.fromFCM(data);
-          // NotificationMiddleware.forward(notification);
+          var notification = FCMNotificationModel.fromJson(data);
+          NotificationMiddleware.forward(notification);
         },
         onTokenChanged: (String? token) {
-          Messaging.token = token;
-          if (SharedStorage.hasToken()) {
-            NotificationRepository.uploadNotificationsToken(Messaging.token);
+          if (token != null) {
+            Messaging.token = token;
+            if (SharedStorage.hasToken()) {
+              NotificationCubit.updateFCMToken(Messaging.token);
+              if (kDebugMode) {
+                print('FCM Token  $token');
+              }
+            }
           }
-          print("token");
-          print(token);
         },
         // TODO add this icon to android/app/src/main/res/drawable/ic_launcher.png
         icon: 'ic_launcher',
-        navigatorKey: Keys.navigatorKey,
       );
-    } catch (e) {}
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
   }
 }
