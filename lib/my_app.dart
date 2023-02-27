@@ -14,9 +14,7 @@ import 'features/unit_screen/presentation/pages/unit_screen_page.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-
 import 'features/video_call_screen/presentation/pages/video_call_page.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
 class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
