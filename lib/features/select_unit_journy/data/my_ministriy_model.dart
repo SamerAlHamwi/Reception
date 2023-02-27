@@ -187,6 +187,7 @@ class Employees {
   int? unitId;
   int? departmentId;
   int? ministryId;
+  Attachment? attachment;
 
   Employees(
       {this.id,
@@ -195,6 +196,7 @@ class Employees {
         this.surname,
         this.emailAddress,
         this.userPosition,
+        this.attachment,
         this.isActive,
         this.fullName,
         this.lastLoginTime,
@@ -220,6 +222,9 @@ class Employees {
     unitId = json['unitId'];
     departmentId = json['departmentId'];
     ministryId = json['ministryId'];
+    if (json['attachment'] != null) {
+      attachment = Attachment.fromJson(json["attachment"]);
+    }
   }
 
   Map<String, dynamic> toJson() {

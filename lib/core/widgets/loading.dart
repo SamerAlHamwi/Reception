@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:loading_animations/loading_animations.dart';
 import '../constants/constant.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -9,15 +9,13 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return const Center(
-      child: SizedBox(
-        width: 20,
-        height: 20,
-        child: CircularProgressIndicator(
-          strokeWidth: 1,
-          color: AppColors.lightBlueColor,
-        ),
-      ),
+    return  Center(
+
+        child:LoadingBouncingGrid.square(
+          borderColor:AppColors.primaryColor,
+          backgroundColor: AppColors.primaryColor,
+          size: 80.0,
+        )
     );
   }
 }

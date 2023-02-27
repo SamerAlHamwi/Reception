@@ -17,7 +17,7 @@ class CallListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultScaffold(
         logoUrl: myMinistryModel!.attachment!.url,
-        body: Container(padding: EdgeInsets.symmetric(horizontal: AppDimension.screenWidth(context)*2/10),
+        body: Container(
           height: AppDimension.screenHeight(context)*7/10,
           child: pagination()
 
@@ -49,6 +49,7 @@ class CallListPage extends StatelessWidget {
           return CallCard(
             key: GlobalKey(),
             call: list[index],
+              myMinistryModel:myMinistryModel,
             onTap: () {},
           );
         }),

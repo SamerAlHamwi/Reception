@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ministries_reception_app/core/constants/app_assets.dart';
 import 'package:ministries_reception_app/core/constants/app_dimension.dart';
+import 'package:ministries_reception_app/core/widgets/custom_image.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_theme.dart';
@@ -28,7 +30,7 @@ class LeadersCard extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-            height: 120,
+            height: 150,
             width: AppDimension.screenWidth(context) / 4,
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -41,6 +43,15 @@ class LeadersCard extends StatelessWidget {
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                CustomImage.rectangle(
+                  height: 50,
+                  image: leaderDetails!.attachment != null
+                      ? leaderDetails!.attachment!.url
+                      : AppAssets.leaderImageUrl,
+                  isNetworkImage:
+                      leaderDetails!.attachment != null ? true : false,
+                  svg: false,
+                ),
                 Text(
                   leaderDetails!.userPosition!,
                   style: AppTheme.headline3.copyWith(

@@ -23,7 +23,6 @@ class PaginationCubit<ListModel> extends Cubit<PaginationState> {
       Map<String, dynamic>? param,
       String? keyword}) async {
     if (getData == null) return;
-
     if (!loadMore) {
       skipCount = 0;
       if (list.isEmpty) emit(Loading());

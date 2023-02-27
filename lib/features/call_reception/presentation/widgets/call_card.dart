@@ -6,6 +6,8 @@ import '../../../../core/api/core_models/empty_model.dart';
 import '../../../../core/boilerplate/create_model/cubits/create_model_cubit.dart';
 import '../../../../core/boilerplate/create_model/widgets/CreateModel.dart';
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/constants/app_dimension.dart';
+import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../data/call_model.dart';
 import '../../data/notify_screen_model.dart';
 import '../../repository/call_reception_repo.dart';
@@ -13,9 +15,12 @@ import 'call_actions_button.dart';
 
 class CallCard extends StatelessWidget {
   final VoidCallback onTap;
+  final MyMinistryModel? myMinistryModel;
+
   final Call call;
 
-  CallCard({Key? key, required this.onTap, required this.call})
+  CallCard(
+      {Key? key, required this.onTap, required this.call, this.myMinistryModel})
       : super(key: key);
 
   @override
@@ -23,7 +28,8 @@ class CallCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: double.infinity,
+        width:  AppDimension.screenWidth(context)/3,
+
         height: 220,
         margin: const EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.all(20),
@@ -38,31 +44,44 @@ class CallCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            Text(myMinistryModel!.departments!
+                .firstWhere(
+                    (element) => element.id == call.leader!.departmentId)!
+                .name!,style: AppTheme.headline3,),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
                   children: [
-                    Icon(Icons.date_range),
+                    Icon(Icons.date_range, color: AppColors.primaryColor),
+                    SizedBox(width: 8),
                     Text(
                       "date".tr() +
-                          " : " +
-                          call.creationTime!.split("T")[0].toString(),
-                      style: AppTheme.headline3.copyWith(color: AppColors.white),
+                          " : " ,
+                      style:
+                          AppTheme.headline3.copyWith(color: AppColors.primaryColor),
                     ),
+                    Text(call.creationTime!.split("T")[0].toString(),style:
+                    AppTheme.headline3.copyWith(color: AppColors.white))
                   ],
                 ),
                 Row(
                   children: [
-                    Icon(Icons.access_time_outlined),
+                    Icon(
+                      Icons.access_time_outlined,
+                      color: AppColors.primaryColor,
+                    ),
+                    SizedBox(width: 8),
                     Text(
                         "time".tr() +
-                            " : " +
-                            call.creationTime!
-                                .split("T")[1]
-                                .split(".")[0]
-                                .toString(),
-                        style: AppTheme.headline3.copyWith(color: AppColors.white)),
+                            " : " ,
+                        style: AppTheme.headline3
+                            .copyWith(color: AppColors.primaryColor)),
+                    Text(call.creationTime!
+                        .split("T")[1]
+                        .split(".")[0]
+                        .toString(),style: AppTheme.headline3
+                        .copyWith(color: AppColors.white,fontWeight: FontWeight.w600))
                   ],
                 ),
               ],
@@ -110,7 +129,7 @@ class CallCard extends StatelessWidget {
         },
         child: CallActionsButton(
             buttonText: "cancel".tr(),
-            buttonColor: AppColors.primaryColor,
+            buttonColor: AppColors.lightBlueColor,
             textColor: AppColors.white,
             onTap: () {
               CancleCallRequestCubit!.createModel(call!.id!);

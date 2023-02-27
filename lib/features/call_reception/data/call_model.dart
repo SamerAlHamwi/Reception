@@ -1,3 +1,5 @@
+import '../../../core/data/attachments_model.dart';
+
 class Call {
   int? id;
   String? screenJoinedDate;
@@ -9,6 +11,7 @@ class Call {
   String? room;
   Leader? leader;
   Screen? screen;
+  Attachments? attachment;
 
   Call({
     this.id,
@@ -21,6 +24,7 @@ class Call {
     this.room,
     this.leader,
     this.screen,
+    this.attachment
   });
 
   Call.fromJson(Map<String, dynamic> json) {
@@ -39,6 +43,9 @@ class Call {
     if (json['screen'] != null) {
       screen = Screen.fromJson(json["screen"]);
     }
+    if (json['attachment'] != null) {
+      attachment = Attachments.fromJson(json["attachment"]);
+    }
   }
 
   @override
@@ -54,6 +61,7 @@ class Call {
     data['room'] = room;
     data['leader'] = leader;
     data['screen'] = screen;
+    data['attachment'] = attachment;
     return data;
   }
 }

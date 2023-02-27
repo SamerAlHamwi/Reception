@@ -22,7 +22,7 @@ Future<void> main() async {
 
   channel.stream.listen((message) {
     channel.sink.add('received!');
-    //channel.sink.close(status.goingAway);
+    channel.sink.close(status.goingAway);
   });
   WidgetsFlutterBinding.ensureInitialized();
   DartPluginRegistrant.ensureInitialized();

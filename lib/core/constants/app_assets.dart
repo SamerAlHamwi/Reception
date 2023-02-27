@@ -6,5 +6,6 @@ class AppAssets {
   static const String disabledLogo  =baseAssetsURI+ 'disability_symbol3.png';
   static const String background  =baseAssetsURI+ 'app_background_1.png';
   static const String noData  =baseAssetsURI+ 'noData.png';
+  static const String leaderImageUrl  =baseAssetsURI+ 'leader.png';
 
 }
