@@ -78,6 +78,8 @@ dev_dependencies:
   pin_code_fields: ^7.4.0
   flutter_staggered_animations: ^1.0.0
   confetti: ^0.7.0
+  jitsi_meet_wrapper: ^0.0.6
+  wakelock: ^0.6.2
   flutter_rating_bar: ^4.0.1
   flutter_phoenix: ^1.0.0
   get_it: ^7.2.0

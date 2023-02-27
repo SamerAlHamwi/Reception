@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:get_storage/get_storage.dart';
 
-
 class SharedStorage {
   static String storageName = 'ministries_container';
   static GetStorage box = GetStorage(storageName);
@@ -11,9 +10,7 @@ class SharedStorage {
   static String userType = 'userType';
   static String slaCompare = 'slaCompare';
   static String ministryRequestType = 'ministryRequestType';
-
-
-
+  static String isInCallKey = 'isInCallKey';
 
   static init() async {
     await GetStorage.init(storageName);
@@ -26,12 +23,15 @@ class SharedStorage {
       return false;
     }
   }
+
   static writeUserType(value) {
-   box.write(userType, value);
+    box.write(userType, value);
   }
+
   static getUserType() {
-    return box.read(userType)??1;
+    return box.read(userType) ?? 1;
   }
+
   static getToken() {
     return box.read(tokenKey);
   }
@@ -45,27 +45,34 @@ class SharedStorage {
   }
 
   static getLanguage() {
-    return box.read(languageKey) ??"ar";
+    return box.read(languageKey) ?? "ar";
   }
 
   static writeLanguage(value) {
     box.write(languageKey, value);
   }
-static getSlaCompare() {
-    return box.read(slaCompare) ??10;
+
+  static getSlaCompare() {
+    return box.read(slaCompare) ?? 10;
   }
 
   static writeSlaCompare(value) {
     box.write(slaCompare, value);
   }
+
   static getMinistryRequestType() {
-    return box.read(ministryRequestType) ??1;
+    return box.read(ministryRequestType) ?? 1;
   }
 
   static writeMinistryRequestType(value) {
     box.write(ministryRequestType, value);
   }
 
+  static writeIsInCall(value) {
+    box.write(isInCallKey, value);
+  }
 
-
+  static getIsInCall() {
+    return box.read(isInCallKey) ?? false;
+  }
 }
