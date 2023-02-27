@@ -78,7 +78,11 @@ dev_dependencies:
   pin_code_fields: ^7.4.0
   flutter_staggered_animations: ^1.0.0
   confetti: ^0.7.0
-  jitsi_meet_wrapper: ^0.0.6
+  jitsi_meet_wrapper:
+    git:
+      url: https://github.com/mosab-omari/jitsi_meet_wrapper
+      path: jitsi_meet_wrapper/
+      ref: main
   wakelock: ^0.6.2
   flutter_rating_bar: ^4.0.1
   flutter_phoenix: ^1.0.0
