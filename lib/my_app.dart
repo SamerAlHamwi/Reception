@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:ministries_reception_app/features/standby/presentation/standby_page.dart';
 import 'core/constants/app_constants.dart';
 import 'core/constants/app_settings.dart';
 import 'core/constants/app_theme.dart';
@@ -21,19 +22,20 @@ class MyApp extends StatefulWidget {
 
   @override
   State<MyApp> createState() => _MyAppState();
+
   static getNextPage() {
     if (SharedStorage.hasToken()) {
       if (SharedStorage.getUserType() == 1) {
-        return WelcomeReceptionPage();
+        return const WelcomeReceptionPage();
       }
       if (SharedStorage.getUserType() == 3) {
         return UnitScreenPage();
       }
       if (SharedStorage.getUserType() == 4) {
-        return VideoCallPage();
+        return const StandByPage();
       }
       if (SharedStorage.getUserType() == 5) {
-        return WelcomeCallReceptionPage();
+        return const WelcomeCallReceptionPage();
       }
     } else {
       return LoginPage();
@@ -72,8 +74,8 @@ class _MyAppState extends State<MyApp> {
           builder: EasyLoading.init(),
           locale: context.locale,
           title: AppSettings.appName,
-          home:// LoginPage(),
-          MyApp.getNextPage(),
+          home: // LoginPage(),
+              MyApp.getNextPage(),
           material: (_, __) => MaterialAppData(
               scrollBehavior: AppScrollBehavior(),
               theme: AppTheme.appTheme,
@@ -87,6 +89,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-
-
 }

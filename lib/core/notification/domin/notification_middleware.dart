@@ -1,6 +1,7 @@
 import 'package:ministries_reception_app/core/utils/service_locator.dart';
 
 import '../../constants/app_constants.dart';
+import '../../utils/jitsi_video_meeting/video_meeting_service.dart';
 import '../data/fcm_notification_model.dart';
 
 class NotificationMiddleware {
@@ -18,6 +19,11 @@ class NotificationMiddleware {
       case NotificationType.NewCallRequestHasPublished:
         ServiceLocator.refreshCalls();
         break;
+      case NotificationType.YouShouldJoinCall:
+        VideoMeetingService.startMeeting(
+            roomText: notification.room!,
+            serverUrl: notification.serverLink!,
+            meetingId: int.parse(notification.callId!));
     }
   }
 }
