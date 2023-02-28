@@ -1,4 +1,5 @@
 import 'package:ministries_reception_app/core/utils/service_locator.dart';
+import 'package:ministries_reception_app/features/unit_screen/presentation/pages/unit_screen_page.dart';
 
 import '../../constants/app_constants.dart';
 import '../../utils/jitsi_video_meeting/video_meeting_service.dart';
@@ -24,6 +25,17 @@ class NotificationMiddleware {
             roomText: notification.room!,
             serverUrl: notification.serverLink!,
             meetingId: int.parse(notification.callId!));
+        break;
+
+      case NotificationType.NewRequestHasPublished:
+        UnitScreenPage.updateVisitorList();
+        break;
+         case NotificationType.TheRequestHasTreated:
+           UnitScreenPage.updateVisitorList();
+
+           break;
+
+
     }
   }
 }

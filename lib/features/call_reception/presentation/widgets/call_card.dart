@@ -42,6 +42,7 @@ class CallCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            Align(alignment: Alignment.topRight,child: Text(call!.orderNumber!)),
             Text(
               myMinistryModel!.departments!
                   .firstWhere(
@@ -96,11 +97,7 @@ class CallCard extends StatelessWidget {
                     Text("time".tr() + " : ",
                         style: AppTheme.headline3
                             .copyWith(color: AppColors.primaryColor)),
-                    Text(
-                        call.creationTime!
-                            .split("T")[1]
-                            .split(".")[0]
-                            .toString(),
+                    Text(DateTime.tryParse(call!.creationTime!+  'Z')!.toLocal().toString().split('.')[0].toString().split(" ")[1].toString(),
                         style: AppTheme.headline3.copyWith(
                             color: AppColors.offWhite,
                             fontWeight: FontWeight.w700))
@@ -108,7 +105,6 @@ class CallCard extends StatelessWidget {
                 ),
               ],
             ),
-            Text(call.id.toString()),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: call!.callStatus == 1

@@ -3,8 +3,8 @@ class AppSettings {
   AppSettings._();
 
   static const appName = 'Ministries Management App';
-  static const appVersion = 'V1.0.2';
-  static const appVersionCode = '3';
+  static const appVersion = 'V1.0.3';
+  static const appVersionCode = '4';
   static bool isDebug = false;
   static String appFont = 'Cairo';
   static const playLink="https://play.google.com/store/apps/details?id=com.itland.ministries_system";

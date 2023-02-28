@@ -15,7 +15,6 @@ import 'features/unit_screen/presentation/pages/unit_screen_page.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'features/video_call_screen/presentation/pages/video_call_page.dart';
 
 class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
@@ -24,6 +23,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 
   static getNextPage() {
+
     if (SharedStorage.hasToken()) {
       if (SharedStorage.getUserType() == 1) {
         return const WelcomeReceptionPage();

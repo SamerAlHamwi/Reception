@@ -4,6 +4,7 @@ class Call {
   int? id;
   String? screenJoinedDate;
   String? screenLeaveDate;
+  String? orderNumber;
   String? creationTime;
   int? numberOfCallMinutes;
   int? callStatus;
@@ -18,6 +19,7 @@ class Call {
     this.screenJoinedDate,
     this.screenLeaveDate,
     this.creationTime,
+    this.orderNumber,
     this.numberOfCallMinutes,
     this.callStatus,
     this.link,
@@ -31,6 +33,7 @@ class Call {
     id = json['id'] ?? 0;
     screenJoinedDate = json['screenJoinedDate'];
     creationTime = json['creationTime'];
+    orderNumber = json['orderNumber'];
     screenLeaveDate = json['screenJoinedDate'];
     numberOfCallMinutes = json['numberOfCallMinutes'] ?? 0;
     callStatus = json['callStatus'] ?? 0;
@@ -53,6 +56,7 @@ class Call {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['screenJoinedDate'] = screenJoinedDate;
+    data['orderNumber'] = orderNumber;
     data['screenLeaveDate'] = screenLeaveDate;
     data['numberOfCallMinutes'] = numberOfCallMinutes;
     data['callStatus'] = callStatus;
