@@ -28,6 +28,7 @@ class OneVisitorCardForReception extends StatelessWidget {
                   context,
                   ClientBookDetails(
                     logoUrl: ministryModel!.attachment!.url,
+                    requestId: oneClientRequest!.id!,
                     oneClientRequest: oneClientRequest,
                   ))
               : null;

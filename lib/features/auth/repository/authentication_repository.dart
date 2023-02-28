@@ -22,7 +22,7 @@ class AuthenticationRepository {
       withAuthentication: false,
       url: ApiURLs.loginURL,
     );
-    if (Messaging.token == null) {
+   /* if (Messaging.token == null) {
       Print.showSnackBar(
         message: 'Your device is not supported by Google services',
       );
@@ -33,7 +33,7 @@ class AuthenticationRepository {
         SharedStorage.writeToken(null);
         SharedStorage.writeIsInCall(false);
       }
-    }
+    }*/
     return res;
   }
 }
