@@ -2,11 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ministries_reception_app/core/constants/constant.dart';
 import 'package:ministries_reception_app/core/widgets/default_scaffold.dart';
+import 'package:ministries_reception_app/features/select_unit_journy/presentation/pages/welcome_reception_page.dart';
 
 import '../../../../core/utils/navigation.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../../select_unit_journy/presentation/widgets/main_elevated_button.dart';
-import '../../../processing_client_request/presentation/pages/waiting_list_page.dart';
 import '../../data/create_client_response_model.dart';
 import '../widgets/key_value_row.dart';
 
@@ -27,7 +27,7 @@ class ConfirmBookingPage extends StatelessWidget {
     return DefaultScaffold(
         logoUrl: myMinistryModel!.attachment!.url,
         body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ...[
@@ -52,12 +52,12 @@ class ConfirmBookingPage extends StatelessWidget {
                             keyText: myMinistryModel!.ministryRequestType == 1
                                 ? "national_number".tr()
                                 : "disability_number".tr(),
-                            value: myMinistryModel!.ministryRequestType == 1?
-                            createClientResponseModel!
-                                .clientNationalNumber
-                                .toString(): createClientResponseModel!
-                                .disabilityNumber
-                                .toString()),
+                            value: myMinistryModel!.ministryRequestType == 1
+                                ? createClientResponseModel!
+                                    .clientNationalNumber
+                                    .toString()
+                                : createClientResponseModel!.disabilityNumber
+                                    .toString()),
                         KeyValueRow(
                             keyText: "unit_name".tr(), value: selectedUnitName),
                         //  KeyValueRow(keyText: "رقم الدور", value: "0-00012"),
@@ -80,11 +80,7 @@ class ConfirmBookingPage extends StatelessWidget {
                           height: 50,
                           child: MainElevatedButton(
                             onTap: () {
-                              Navigation.push(
-                                  context,
-                                  WaitingListPage(
-                                    myMinistryModel: myMinistryModel,
-                                  ));
+                              Navigation.push(context, WelcomeReceptionPage());
                             },
                             text: "finish_process".tr(),
                           ))

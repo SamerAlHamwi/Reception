@@ -14,6 +14,7 @@ class ApiURLs {
   static const String getDisabilityCategoryURL = baseUrl + 'services/app/DisabilityCategory/GetAll';
   static const String createClientRequestUrl = baseUrl + 'services/app/ClientRequest/Create';
   static const String getClientsRequestsURL = baseUrl + 'services/app/ClientRequest/GetAll';
+  static const String getRequestById = baseUrl + 'services/app/ClientRequest/Get';
   static const String updateClientRequestUrl = baseUrl + 'services/app/ClientRequest/Update';
   static const String getConfigurationUrl = baseUrl + 'services/app/Configuration/Get';
   static const String getAllNotification =

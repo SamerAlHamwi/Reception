@@ -24,61 +24,63 @@ class DepartmentsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultScaffold(
         logoUrl: myMinistryModel!.attachment!.url,
-        body: Container(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              ...[
-                Text(
-                  "select_desired".tr(),
-                  style: AppTheme.bodyText1,
-                ),
-                Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.screenWidth(context) / 4),
-                    child: SizedBox(
-                      height: AppDimension.screenHeight(context) * 5 / 10,
-                      child: ListView.separated(
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              height: 8,
-                            );
-                          },
-                          itemCount: myMinistryModel!.departments!.length,
-                          itemBuilder: (context, index) {
-                            return MainElevatedButton(
-                                text: myMinistryModel!.departments![index].name,
-                                onTap: () {
-                                  if (SharedStorage.getUserType() == 1) {
-                                    Navigation.push(
-                                        context,
-                                        UnitsPage(
-                                            myMinistryModel: myMinistryModel,
-                                            disabilityCategoryId:
-                                                disabilityCategoryId,
-                                            selectedDepartmentId:
-                                                myMinistryModel!
-                                                    .departments![index].id));
-                                  } else {
-                                    Navigation.push(
-                                        context,
-                                        LeadersPage(
-                                          myMinistryModel: myMinistryModel,
-                                          departmentId: myMinistryModel!
-                                              .departments![index].id,
-                                        ));
-                                  }
-                                });
-                          }),
-                    ))
-              ].expand((element) => [
-                    element,
-                    const SizedBox(
-                      height: 8,
-                    )
-                  ])
-            ],
+        body: Center(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+                  Expanded(flex: 3,
+                    child: Center(
+                      child: Text(
+                        "select_desired".tr(),
+                        style: AppTheme.bodyText1,
+                      ),
+                    ),
+                  ),
+                  Expanded(flex: 7,
+                    child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: AppDimension.screenWidth(context) / 4),
+
+                          child: ListView.separated(
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(
+                                  height: 8,
+                                );
+                              },
+                              itemCount: myMinistryModel!.departments!.length,
+                              itemBuilder: (context, index) {
+                                return MainElevatedButton(
+                                    text: myMinistryModel!.departments![index].name,
+                                    onTap: () {
+                                      if (SharedStorage.getUserType() == 1) {
+                                        Navigation.push(
+                                            context,
+                                            UnitsPage(
+                                                myMinistryModel: myMinistryModel,
+                                                disabilityCategoryId:
+                                                    disabilityCategoryId,
+                                                selectedDepartmentId:
+                                                    myMinistryModel!
+                                                        .departments![index].id));
+                                      } else {
+                                        Navigation.push(
+                                            context,
+                                            LeadersPage(
+                                              myMinistryModel: myMinistryModel,
+                                              departmentId: myMinistryModel!
+                                                  .departments![index].id,
+                                            ));
+                                      }
+                                    });
+                              }),
+                        ),
+                  )
+
+              ],
+            ),
           ),
         ));
   }

@@ -28,6 +28,7 @@ class OneVisitorCardForReception extends StatelessWidget {
                   context,
                   ClientBookDetails(
                     logoUrl: ministryModel!.attachment!.url,
+                    requestId: oneClientRequest!.id!,
                     oneClientRequest: oneClientRequest,
                   ))
               : null;
@@ -51,7 +52,7 @@ class OneVisitorCardForReception extends StatelessWidget {
                   style: AppTheme.bodyText1),
               Text(
                 oneClientRequest!.clientRequestType == 1
-                    ? "request_processing".tr()
+                    ? "in_waiting".tr()
                     : "treated".tr(),
                 style: AppTheme.bodyText1.copyWith(
                     color: oneClientRequest!.clientRequestType == 1
