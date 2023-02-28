@@ -64,5 +64,15 @@ class FCMNotificationModel {
     }
   }
 
-  FCMNotificationModel.fromSignalR(Map<String, dynamic> json) {}
+  FCMNotificationModel.fromSignalR(Map<String, dynamic> json) {
+    if (json['type'] != null) {
+      type = NotificationType.values[int.parse(json['type'])];
+    }
+    if (json['relatedId'] != null) {
+      relatedId = int.parse(json['relatedId']);
+    }
+    if (json['time'] != null) {
+      dateTime = json['time'];
+    }
+  }
 }
