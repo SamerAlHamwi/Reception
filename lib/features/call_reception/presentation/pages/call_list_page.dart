@@ -38,6 +38,7 @@ class CallListPage extends StatelessWidget {
   }
 
   buildList(List<Call> list) {
+    bool hasActive = list.where((e) => e.callStatus == 4).toList().isNotEmpty;
     return ListView.separated(
         separatorBuilder: (context, index) {
           return const SizedBox(
@@ -46,10 +47,11 @@ class CallListPage extends StatelessWidget {
         },
         itemBuilder: ((context, index) {
           return CallCard(
+            hasActive: hasActive,
             key: GlobalKey(),
             call: list[index],
             myMinistryModel: myMinistryModel,
-            onTap: () {},
+            onTap: null,
           );
         }),
         itemCount: list.length);

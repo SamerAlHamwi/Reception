@@ -1,4 +1,5 @@
 import 'package:ministries_reception_app/core/utils/shared_storage.dart';
+import 'package:ministries_reception_app/features/call_reception/repository/call_reception_repo.dart';
 import 'package:quiver/async.dart';
 
 import '../../notification/data/fcm_notification_model.dart';
@@ -31,6 +32,7 @@ class VideoMeetingService {
         nameText: displayName,
         serverUrl: serverUrl,
         onLeave: () async {
+          await CallReceptionRepo.leaveCall(id: meetingId);
           await Future.delayed(const Duration(seconds: 5));
           SharedStorage.writeIsInCall(false);
           try {
@@ -55,6 +57,7 @@ class VideoMeetingService {
   static leaveMeeting(FCMNotificationModel fcm) async {
     try {
       VideoMeetingService.timer?.cancel();
+      jitsi?.leaveMeeting();
     } on Exception {}
   }
 }

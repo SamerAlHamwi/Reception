@@ -19,16 +19,47 @@ class CallReceptionRepo {
       url: ApiURLs.getDepartmentByIdURL,
     );
   }
-  static Future<BaseResultModel> notifyScreeen(NotifyScreenModel notifyScreenModel) async {
+  static Future<BaseResultModel> notifyScreenToJoin(NotifyScreenModel notifyScreenModel) async {
     return await RemoteDataSource.request<EmptyModel>(
       converter: (json) => EmptyModel.fromJson(json),
       data: notifyScreenModel.toJson(),
       method: HttpMethod.post,
       withAuthentication: true,
-      url: ApiURLs.notitfyScreenUrl,
+      url: ApiURLs.notifyScreenToJoinUrl,
     );
   }
-  static Future<BaseResultModel> CancleCallRequest(int callId) async {
+  static Future<BaseResultModel> notifyScreenToLeave(NotifyScreenModel notifyScreenModel) async {
+    return await RemoteDataSource.request<EmptyModel>(
+      converter: (json) => EmptyModel.fromJson(json),
+      data: notifyScreenModel.toJson(),
+      method: HttpMethod.post,
+      withAuthentication: true,
+      url: ApiURLs.notifyScreenToLeaveUrl,
+    );
+  }
+
+  static Future<BaseResultModel> joinCall(
+      {required int id}) async {
+    return await RemoteDataSource.request<EmptyModel>(
+      converter: (json) => EmptyModel.fromJson(json),
+      method: HttpMethod.post,
+      withAuthentication: true,
+      data: {"id": id},
+      url: ApiURLs.joinCall,
+    );
+  }
+  static Future<BaseResultModel> leaveCall(
+      {required int id}) async {
+    return await RemoteDataSource.request<EmptyModel>(
+      converter: (json) => EmptyModel.fromJson(json),
+      method: HttpMethod.post,
+      withAuthentication: true,
+      data: {"id": id},
+      url: ApiURLs.leaveCall,
+    );
+  }
+
+  static Future<BaseResultModel> cancelCallRequest(int callId) async {
     return await RemoteDataSource.request<EmptyModel>(
       converter: (json) => EmptyModel.fromJson(json),
       data: {"id":callId},
@@ -52,7 +83,7 @@ class CallReceptionRepo {
     var res;
     try {
       res = await RemoteDataSource.request<EmptyModel>(
-          converter: (json) => EmptyModel.fromJson(json!),
+          converter: (json) => EmptyModel.fromJson(json),
           method: HttpMethod.post,
           withAuthentication: true,
           data: requestData.toJson(),

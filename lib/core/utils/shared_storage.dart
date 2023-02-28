@@ -72,7 +72,7 @@ class SharedStorage {
     box.write(isInCallKey, value);
   }
 
-  static getIsInCall() {
+  static isInCall() {
     return box.read(isInCallKey) ?? false;
   }
 }

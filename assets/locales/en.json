@@ -73,12 +73,6 @@
   "start_call": "Start call",
   "cancel": "Cancel",
   "required_entity":"Required Entity",
-  "leader_name":"Leader Name"
-
-
-
-
-
-
-
+  "leader_name":"Leader Name",
+  "end_call": "End Call"
 }

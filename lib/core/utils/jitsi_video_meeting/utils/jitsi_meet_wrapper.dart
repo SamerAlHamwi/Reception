@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
+import 'package:ministries_reception_app/core/utils/shared_storage.dart';
 import 'package:wakelock/wakelock.dart';
 
 class Jitsi {
@@ -26,6 +27,7 @@ class Jitsi {
 
   leaveMeeting() {
     JitsiMeetWrapper.hangUp();
+    SharedStorage.writeIsInCall(false);
   }
 
   _call() async {
@@ -33,6 +35,8 @@ class Jitsi {
       FeatureFlag.isPrejoinPageEnabled: false,
       FeatureFlag.isNotificationsEnabled: false,
       FeatureFlag.isFullscreenEnabled: true,
+      FeatureFlag.isFilmstripEnabled: false,
+      FeatureFlag.isPipEnabled: false,
       // FeatureFlag.isWelcomePageEnabled: false,
       FeatureFlag.isInviteEnabled: true,
       FeatureFlag.isChatEnabled: true,

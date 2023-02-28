@@ -22,9 +22,14 @@ class ApiURLs {
       baseUrl + 'services/app/User/SetCurrentFcmToken';
   static const String getCalls = baseUrl + 'services/app/Call/GetAll';
   static const String createCall = baseUrl + 'services/app/Call/Create';
-  static const String notitfyScreenUrl = baseUrl + 'services/app/Call/NotifyScreenToJoin';
+  static const String notifyScreenToJoinUrl = baseUrl + 'services/app/Call/NotifyScreenToJoin';
+  static const String notifyScreenToLeaveUrl = baseUrl + 'services/app/Call/NotifyScreenToLeave';
   static const String CancleCallRequestUrl = baseUrl + 'services/app/Call/CancleRequest';
   static const String getDepartmentByIdURL = baseUrl + 'services/app/Department/Get';
+  static const String joinCall = baseUrl + 'services/app/Call/JoinCall';
+  static const String leaveCall = baseUrl + 'services/app/Call/LeaveCall';
+
+
 
 
 

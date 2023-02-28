@@ -70,7 +70,8 @@
   "appointments": "المواعيد",
   "calls": "المكالمات",
   "are_you_sure": "هل أنت متأكد من حجز موعد؟",
-  "start_call": "دخول",
+  "start_call": "الدخول للمكالمة",
+  "end_call": "انهاء المكالمة",
   "cancel": "إلغاء الطلب",
   "required_entity":"الجهة المطلوبة",
   "leader_name":"اسم القيادي"

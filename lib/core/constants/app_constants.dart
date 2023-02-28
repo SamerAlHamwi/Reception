@@ -35,9 +35,12 @@ enum NotificationType {
   NewRequestHasPublished,
   NewCallRequestHasPublished,
   TheRequestHasTreated,
-  YouShouldJoinCall
+  YouShouldJoinCall,
+  TheCallHasCanseld,
+  YouShouldLeaveCall,
+  ScreenLeaveCall,
+  ScreenJoinCall,
 }
-
 
 class AppScrollBehavior extends MaterialScrollBehavior {
   /// just to provide scroll to web and windows

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ministries_reception_app/core/constants/app_theme.dart';
+import 'package:ministries_reception_app/core/utils/service_locator.dart';
 
 import '../../../../core/api/core_models/empty_model.dart';
 import '../../../../core/boilerplate/create_model/cubits/create_model_cubit.dart';
@@ -13,13 +14,17 @@ import '../../repository/call_reception_repo.dart';
 import 'call_actions_button.dart';
 
 class CallCard extends StatelessWidget {
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final MyMinistryModel? myMinistryModel;
-
+  final bool hasActive;
   final Call call;
 
   CallCard(
-      {Key? key, required this.onTap, required this.call, this.myMinistryModel})
+      {Key? key,
+      required this.onTap,
+      required this.call,
+      this.myMinistryModel,
+      required this.hasActive})
       : super(key: key);
 
   @override
@@ -42,7 +47,8 @@ class CallCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Align(alignment: Alignment.topRight,child: Text(call!.orderNumber!)),
+            Align(
+                alignment: Alignment.topRight, child: Text(call!.orderNumber!)),
             Text(
               myMinistryModel!.departments!
                   .firstWhere(
@@ -50,22 +56,29 @@ class CallCard extends StatelessWidget {
                   .name!,
               style: AppTheme.headline3,
             ),
-            Column(crossAxisAlignment: CrossAxisAlignment.start,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("required_entity".tr() + " : ",style: AppTheme.bodyText1,),
-                    Text(call.leader!.userPosition ?? "",style: AppTheme.bodyText1),
+                    Text(
+                      "required_entity".tr() + " : ",
+                      style: AppTheme.bodyText1,
+                    ),
+                    Text(call.leader!.userPosition ?? "",
+                        style: AppTheme.bodyText1),
                   ],
                 ),
                 SizedBox(height: 4),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("leader_name".tr() + " : ",style: AppTheme.bodyText1),
+                    Text("leader_name".tr() + " : ", style: AppTheme.bodyText1),
                     Text(
-                        call.leader!.name! + " " + call.leader!.surname! ?? "",style: AppTheme.bodyText1,),
+                      call.leader!.name! + " " + call.leader!.surname! ?? "",
+                      style: AppTheme.bodyText1,
+                    ),
                   ],
                 ),
               ],
@@ -83,8 +96,9 @@ class CallCard extends StatelessWidget {
                           .copyWith(color: AppColors.primaryColor),
                     ),
                     Text(call.creationTime!.split("T")[0].toString(),
-                        style:
-                            AppTheme.headline3.copyWith(color: AppColors.offWhite,fontWeight: FontWeight.w700))
+                        style: AppTheme.headline3.copyWith(
+                            color: AppColors.offWhite,
+                            fontWeight: FontWeight.w700))
                   ],
                 ),
                 Row(
@@ -97,7 +111,14 @@ class CallCard extends StatelessWidget {
                     Text("time".tr() + " : ",
                         style: AppTheme.headline3
                             .copyWith(color: AppColors.primaryColor)),
-                    Text(DateTime.tryParse(call!.creationTime!+  'Z')!.toLocal().toString().split('.')[0].toString().split(" ")[1].toString(),
+                    Text(
+                        DateTime.tryParse(call!.creationTime! + 'Z')!
+                            .toLocal()
+                            .toString()
+                            .split('.')[0]
+                            .toString()
+                            .split(" ")[1]
+                            .toString(),
                         style: AppTheme.headline3.copyWith(
                             color: AppColors.offWhite,
                             fontWeight: FontWeight.w700))
@@ -105,53 +126,86 @@ class CallCard extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: call!.callStatus == 1
-                  ? [_buildNotifiyScreenButton(), _builCancelButton()]
-                  : call!.callStatus == 2
-                      ? []
-                      : [],
-            )
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              _buildNotifyScreenToJoinButton(),
+              SizedBox(
+                width: 10,
+              ),
+              _builCancelButton(),
+              SizedBox(
+                width: 10,
+              ),
+              _buildNotifyScreenToLeaveButton(),
+            ])
           ],
         ),
       ),
     );
   }
 
-  CreateModelCubit? notifyScreenCubit;
-  CreateModelCubit? CancleCallRequestCubit;
+  CreateModelCubit? notifyScreenToLeaveCubit;
+  CreateModelCubit? notifyScreenToJoinCubit;
+  CreateModelCubit? cancelCallRequestCubit;
 
-  _buildNotifiyScreenButton() {
+  _buildNotifyScreenToJoinButton() {
     return CreateModel<EmptyModel>(
         onSuccess: (EmptyModel model) {},
-        repositoryCallBack: (data) => CallReceptionRepo.notifyScreeen(data),
+        repositoryCallBack: (data) =>
+            CallReceptionRepo.notifyScreenToJoin(data),
         onCubitCreated: (CreateModelCubit cubit) {
-          notifyScreenCubit = cubit;
+          notifyScreenToJoinCubit = cubit;
         },
         child: CallActionsButton(
             buttonText: "start_call".tr(),
-            buttonColor: AppColors.primaryColor,
+            buttonColor: call.callStatus == 4 || hasActive
+                ? AppColors.grey
+                : AppColors.primaryColor,
             textColor: AppColors.white,
-            onTap: () {
-              notifyScreenCubit!.createModel(
-                  NotifyScreenModel(id: call.id, screenId: call.screen!.id));
-            }));
+            onTap: call.callStatus == 4 || hasActive
+                ? null
+                : () {
+                    notifyScreenToJoinCubit!.createModel(NotifyScreenModel(
+                        id: call.id, screenId: call.screen!.id));
+                  }));
+  }
+
+  _buildNotifyScreenToLeaveButton() {
+    return CreateModel<EmptyModel>(
+        onSuccess: (EmptyModel model) {},
+        repositoryCallBack: (data) =>
+            CallReceptionRepo.notifyScreenToLeave(data),
+        onCubitCreated: (CreateModelCubit cubit) {
+          notifyScreenToLeaveCubit = cubit;
+        },
+        child: CallActionsButton(
+            buttonText: "end_call".tr(),
+            buttonColor: call.callStatus == 4 ? AppColors.red : AppColors.grey,
+            textColor: AppColors.white,
+            onTap: call.callStatus == 4
+                ? () {
+                    notifyScreenToLeaveCubit!.createModel(NotifyScreenModel(
+                        id: call.id, screenId: call.screen!.id));
+                  }
+                : null));
   }
 
   _builCancelButton() {
     return CreateModel<EmptyModel>(
-        onSuccess: (EmptyModel model) {},
-        repositoryCallBack: (data) => CallReceptionRepo.CancleCallRequest(data),
+        onSuccess: (EmptyModel model) {
+          ServiceLocator.refreshCalls();
+        },
+        repositoryCallBack: (data) => CallReceptionRepo.cancelCallRequest(data),
         onCubitCreated: (CreateModelCubit cubit) {
-          CancleCallRequestCubit = cubit;
+          cancelCallRequestCubit = cubit;
         },
         child: CallActionsButton(
             buttonText: "cancel".tr(),
-            buttonColor: AppColors.lightBlueColor,
+            buttonColor: call.callStatus == 4
+                ? AppColors.grey
+                : AppColors.lightBlueColor,
             textColor: AppColors.white,
             onTap: () {
-              CancleCallRequestCubit!.createModel(call!.id!);
+              cancelCallRequestCubit!.createModel(call!.id!);
             }));
   }
 }
