@@ -9,13 +9,15 @@ class OneClientRequestModel extends BaseResultModel{
   String? employeetreatNumber;
   String? treatTime;
   String? orderNumber;
+  double? waitingSeconds;
+
 
   OneClientRequestModel(
       {this.id,
         this.clientRequestType,
         this.clientNationalNumber,
         this.disabilityNumber,
-        this.employeetreatNumber,
+        this.employeetreatNumber,this.waitingSeconds,
         this.treatTime,
         this.orderNumber});
 
@@ -27,6 +29,7 @@ class OneClientRequestModel extends BaseResultModel{
     employeetreatNumber = json['employeetreatNumber'];
     treatTime = json['treatTime'];
     orderNumber = json['orderNumber'];
+    waitingSeconds = json['waitingSeconds'];
   }
 
   Map<String, dynamic> toJson() {
@@ -38,6 +41,7 @@ class OneClientRequestModel extends BaseResultModel{
     data['employeetreatNumber'] = this.employeetreatNumber;
     data['treatTime'] = this.treatTime;
     data['orderNumber'] = this.orderNumber;
+    data['waitingSeconds'] = this.waitingSeconds;
     return data;
   }
 }

@@ -10,19 +10,19 @@ class DefaultScaffold extends StatelessWidget {
 
   final String? logoUrl;
 
-  const DefaultScaffold({Key? key, this.body, this.logoUrl,this.previousPage}) : super(key: key);
+  const DefaultScaffold({Key? key, this.body, this.logoUrl, this.previousPage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(AppAssets.background), fit: BoxFit.fill)),
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            child: Stack(fit: StackFit.expand, children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,12 +31,11 @@ class DefaultScaffold extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.arrow_forward),
                     onPressed: () {
-                      if(previousPage==null){
-                      Navigation.pop(context);}
-                      else
-                        {
-                          Navigation.pushAndRemoveUntil(context, previousPage!);
-                        }
+                      if (previousPage == null) {
+                        Navigation.pop(context);
+                      } else {
+                        Navigation.pushAndRemoveUntil(context, previousPage!);
+                      }
                     },
                   )
                 ],

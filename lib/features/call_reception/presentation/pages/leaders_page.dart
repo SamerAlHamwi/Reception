@@ -20,7 +20,7 @@ class LeadersPage extends StatelessWidget {
   final MyMinistryModel? myMinistryModel;
   final int? departmentId;
 
-   LeadersPage({Key? key, this.myMinistryModel, this.departmentId})
+  LeadersPage({Key? key, this.myMinistryModel, this.departmentId})
       : super(key: key);
 
   @override
@@ -32,35 +32,40 @@ class LeadersPage extends StatelessWidget {
           return DefaultScaffold(
             logoUrl: myMinistryModel!.attachment!.url,
             body: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
-                    height: AppDimension.screenHeight(context) * 1 / 10,
-                    child: Text(
-                      "select_desired".tr(),
-                      style: AppTheme.bodyText1,
+                Expanded(
+                    flex: 3,
+                    child: Center(
+                      child: Text(
+                        "select_desired".tr(),
+                        style: AppTheme.bodyText1,
+                      ),
                     )),
-                Container(
-                  height: AppDimension.screenHeight(context) * 6 / 10,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 48),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Wrap(
-                        direction: Axis.horizontal, //default
-                        spacing: 24,
-                        runSpacing: 24,
-                        children: department!.employees != null
-                            ? [
-                                ...department!.employees!
-                                    .map((Employees employee) => LeadersCard(
-                                       leaderDetails:employee,
-                                          onTap: () {
-                                            _showConfirmDialog(context,employee.id);
-                                          },
-                                        ))
-                                    .toList()
-                              ]
-                            : []),
+                Expanded(
+                  flex: 8,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 48),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Wrap(
+                          direction: Axis.horizontal, //default
+                          spacing: 24,
+                          runSpacing: 24,
+                          children: department!.employees != null
+                              ? [
+                                  ...department!.employees!
+                                      .map((Employees employee) => LeadersCard(
+                                            leaderDetails: employee,
+                                            onTap: () {
+                                              _showConfirmDialog(
+                                                  context, employee.id);
+                                            },
+                                          ))
+                                      .toList()
+                                ]
+                              : []),
+                    ),
                   ),
                 ),
               ],
@@ -71,64 +76,73 @@ class LeadersPage extends StatelessWidget {
 
   CreateModelCubit? cubit;
 
-  _showConfirmDialog(context,leaderId) {
+  _showConfirmDialog(context, leaderId) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: Text('are_you_sure'.tr()),
-            actions:  <Widget>[Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 8),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width / 8,
-                    height: 50,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                        color: AppColors.primaryColor.shade600,
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    child: TextButton(
-                        onPressed: (){Navigation.pop(context);},
-                        child:Text('no'.tr(), style: AppTheme.bodyText2.copyWith(color: AppColors.white))),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              title: Text('are_you_sure'.tr()),
+              actions: <Widget>[
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width / 8,
+                        height: 50,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            color: AppColors.primaryColor.shade600,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0))),
+                        child: TextButton(
+                            onPressed: () {
+                              Navigation.pop(context);
+                            },
+                            child: Text('no'.tr(),
+                                style: AppTheme.bodyText2
+                                    .copyWith(color: AppColors.white))),
+                      ),
+                      const SizedBox(width: 8),
+                      CreateModel(
+                        repositoryCallBack: (data) =>
+                            CallReceptionRepo.createCards(data),
+                        onCubitCreated: (CreateModelCubit c) {
+                          cubit = c!;
+                        },
+                        onSuccess: (model) {
+                          Navigator.pop(context);
+                          Navigation.push(context, WelcomeCallReceptionPage());
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 8,
+                          height: 50,
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: AppColors.lightBlueColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
+                          child: TextButton(
+                            child: Text('yes'.tr(),
+                                style: AppTheme.bodyText1
+                                    .copyWith(color: Colors.white)),
+                            onPressed: () {
+                              cubit!.createModel(CreateCallRequest(
+                                  leaderId: leaderId,
+                                  screenId: myMinistryModel!.screens![0].id));
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                 const SizedBox(width: 8),
-                  CreateModel(
-                    repositoryCallBack: (data) =>
-                        CallReceptionRepo.createCards(data),
-                    onCubitCreated: (CreateModelCubit c) {
-                      cubit = c!;
-                    },
-                    onSuccess: (model) {
-                      Navigator.pop(context);
-                      Navigation.push(context, WelcomeCallReceptionPage());
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 8,
-                      height: 50,
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: AppColors.lightBlueColor,
-                          borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                      child: TextButton(
-                          child: Text('yes'.tr(),
-                              style: AppTheme.bodyText1
-                                  .copyWith(color: Colors.white)),onPressed: (){
-                        cubit!.createModel(CreateCallRequest(
-                            leaderId:leaderId,
-                            screenId: myMinistryModel!.screens![0].id
-                        ));
-                      },),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ]);
+                ),
+              ]);
         });
   }
 }

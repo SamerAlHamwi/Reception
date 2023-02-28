@@ -26,18 +26,19 @@ class ClientBookDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Duration waitingDuration = FrequentlyFunction.convertSecondsToDuration(
-        oneClientRequest!.waitingSeconds);
+
     return DefaultScaffold(
         logoUrl: logoUrl,
         body: GetModel<OneClientRequestModel>(
             repositoryCallBack: (data) =>
                 ProcessingRequestRepository.getOneRequestDetails(requestId!),
             modelBuilder: (OneClientRequestModel _oneClientRequestModel) {
+              Duration waitingDuration = FrequentlyFunction.convertSecondsToDuration(
+                  _oneClientRequestModel!.waitingSeconds);
               return Container(
                 padding: EdgeInsets.symmetric(
                     horizontal: AppDimension.screenWidth(context) * 2 / 10),
-                child: Column(
+                child: Column(mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ...[
                       Text(

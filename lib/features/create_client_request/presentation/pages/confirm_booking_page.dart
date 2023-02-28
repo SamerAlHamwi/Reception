@@ -27,7 +27,7 @@ class ConfirmBookingPage extends StatelessWidget {
     return DefaultScaffold(
         logoUrl: myMinistryModel!.attachment!.url,
         body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ...[

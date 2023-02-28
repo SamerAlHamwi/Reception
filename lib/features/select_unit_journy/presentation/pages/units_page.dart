@@ -24,21 +24,22 @@ class UnitsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultScaffold(
       logoUrl: myMinistryModel!.attachment!.url,
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: AppDimension.screenWidth(context) * 2 / 10),
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          ...[
-            SizedBox(
-              height: AppDimension.screenHeight(context) * 0.5 / 10,
+      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        ...[
+          Expanded(
+            flex: 2,
+            child: Center(
               child: Text(
                 "select_desired".tr(),
                 style: AppTheme.bodyText1,
               ),
             ),
-            SizedBox(
-              height: AppDimension.screenHeight(context) * 1 / 10,
+          ),
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding:   EdgeInsets.symmetric(
+            horizontal: AppDimension.screenWidth(context) * 2 / 10),
               child: MainElevatedButton(
                   text: myMinistryModel!.departments!
                       .firstWhere(
@@ -47,58 +48,48 @@ class UnitsPage extends StatelessWidget {
                   onTap: () {},
                   isDark: true),
             ),
-            Container(
-              height: AppDimension.screenHeight(context) * 5 / 10,
-              padding: EdgeInsets.symmetric(
-                  horizontal: AppDimension.screenWidth(context) / 10,vertical: 8),
-              child: ListView.separated(
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(
-                      height: 8,
-                    );
-                  },
-                  itemCount: myMinistryModel!.departments!
-                      .firstWhere(
-                          (element) => element.id == selectedDepartmentId)!
-                      .units!
-                      .length,
-                  itemBuilder: (context, index) {
-                    return MainElevatedButton(
-                        //isSquared: true,
-                        text: myMinistryModel!.departments!
-                            .firstWhere((element) =>
-                                element.id == selectedDepartmentId)!
-                            .units![index]
-                            .name,
-                        onTap: () {
-                          Navigation.push(
-                              context,
-                              NationalNumberPage(
-                                  myMinistryModel: myMinistryModel,
-                                  selectedDepartmentId: selectedDepartmentId,
-                                  disabilityCategoryId: disabilityCategoryId,
-                                  selectedUnitId: myMinistryModel!.departments!
-                                      .firstWhere((element) =>
-                                          element.id == selectedDepartmentId)!
-                                      .units![index]
-                                      .id,
-                              selectedUnitName:myMinistryModel!.departments!
-                                  .firstWhere((element) =>
-                              element.id == selectedDepartmentId)!
-                                  .units![index]
-                                  .name)
-                          );
-                        });
-                  }),
-            )
-          ]..expand((element) => [
-                element,
-                const SizedBox(
-                  height: 24,
-                )
-              ])
-        ]),
-      ),
+          ),
+          Expanded(flex: 1, child: Container()),
+          Expanded(
+            flex: 6,
+            child: SingleChildScrollView(scrollDirection: Axis.vertical,
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                  direction: Axis.horizontal, //default
+                  spacing: 24,
+                  runSpacing: 24,
+                  children: [
+                    ...myMinistryModel!.departments!
+                        .firstWhere(
+                            (element) => element.id == selectedDepartmentId)!
+                        .units!
+                        .map((unit) {
+                      return MainElevatedButton(
+                          //isSquared: true,
+                        height: 75,
+                          width: AppDimension.screenWidth(context) / 3,
+                          text: unit.name,
+                          onTap: () {
+                            Navigation.push(
+                                context,
+                                NationalNumberPage(
+                                    myMinistryModel: myMinistryModel,
+                                    selectedDepartmentId: selectedDepartmentId,
+                                    disabilityCategoryId: disabilityCategoryId,
+                                    selectedUnitId: unit.id,
+                                    selectedUnitName: unit.name));
+                          });
+                    }).toList()
+                  ]),
+            ),
+          )
+        ]..expand((element) => [
+              element,
+              const SizedBox(
+                height: 24,
+              )
+            ])
+      ]),
     );
   }
 }
