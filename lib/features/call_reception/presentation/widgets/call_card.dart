@@ -32,10 +32,10 @@ class CallCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: 50,
-        height: 220,
+        //  width: 50,
+        // height: 220,
         margin: const EdgeInsets.symmetric(vertical: 10),
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
             color: call!.callStatus == 1
                 ? AppColors.primarySwatch[100]
@@ -44,33 +44,32 @@ class CallCard extends StatelessWidget {
                     : AppColors.secondaryColor,
             borderRadius: BorderRadius.circular(10)),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Align(
-                alignment: Alignment.topRight, child: Text(call!.orderNumber!)),
-            Text(
-              myMinistryModel!.departments!
-                  .firstWhere(
-                      (element) => element.id == call.leader!.departmentId)!
-                  .name!,
-              style: AppTheme.headline3,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "required_entity".tr() + " : ",
-                      style: AppTheme.bodyText1,
-                    ),
-                    Text(call.leader!.userPosition ?? "",
-                        style: AppTheme.bodyText1),
-                  ],
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ...[
+                Align(
+                    alignment: Alignment.topRight,
+                    child: Text(call!.orderNumber!)),
+                Text(
+                  myMinistryModel!.departments!
+                      .firstWhere(
+                          (element) => element.id == call.leader!.departmentId)!
+                      .name!,
+                  style: AppTheme.headline3,
                 ),
-                SizedBox(height: 4),
+                Row(mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  Text(
+                    "required_entity".tr() + " : ",
+                    style: AppTheme.bodyText1,
+                  ),
+                  Text(
+                    call.leader!.userPosition ?? "",
+                    style: AppTheme.bodyText1,
+                    maxLines: 3,
+                  ),
+                ]),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -81,64 +80,64 @@ class CallCard extends StatelessWidget {
                     ),
                   ],
                 ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Icon(Icons.date_range, color: AppColors.primaryColor),
-                    const SizedBox(width: 8),
-                    Text(
-                      "date".tr() + " : ",
-                      style: AppTheme.headline3
-                          .copyWith(color: AppColors.primaryColor),
+                    Row(
+                      children: [
+                        const Icon(Icons.date_range,
+                            color: AppColors.primaryColor),
+                        const SizedBox(width: 8),
+                        Text(
+                          "date".tr() + " : ",
+                          style: AppTheme.headline3
+                              .copyWith(color: AppColors.primaryColor),
+                        ),
+                        Text(call.creationTime!.split("T")[0].toString(),
+                            style: AppTheme.headline3.copyWith(
+                                color: AppColors.offWhite,
+                                fontWeight: FontWeight.w700))
+                      ],
                     ),
-                    Text(call.creationTime!.split("T")[0].toString(),
-                        style: AppTheme.headline3.copyWith(
-                            color: AppColors.offWhite,
-                            fontWeight: FontWeight.w700))
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.access_time_outlined,
+                          color: AppColors.primaryColor,
+                        ),
+                        const SizedBox(width: 8),
+                        Text("time".tr() + " : ",
+                            style: AppTheme.headline3
+                                .copyWith(color: AppColors.primaryColor)),
+                        Text(
+                            DateTime.tryParse(call!.creationTime! + 'Z')!
+                                .toLocal()
+                                .toString()
+                                .split('.')[0]
+                                .toString()
+                                .split(" ")[1]
+                                .toString(),
+                            style: AppTheme.headline3.copyWith(
+                                color: AppColors.offWhite,
+                                fontWeight: FontWeight.w700))
+                      ],
+                    ),
                   ],
                 ),
                 Row(
-                  children: [
-                    const Icon(
-                      Icons.access_time_outlined,
-                      color: AppColors.primaryColor,
-                    ),
-                    const SizedBox(width: 8),
-                    Text("time".tr() + " : ",
-                        style: AppTheme.headline3
-                            .copyWith(color: AppColors.primaryColor)),
-                    Text(
-                        DateTime.tryParse(call!.creationTime! + 'Z')!
-                            .toLocal()
-                            .toString()
-                            .split('.')[0]
-                            .toString()
-                            .split(" ")[1]
-                            .toString(),
-                        style: AppTheme.headline3.copyWith(
-                            color: AppColors.offWhite,
-                            fontWeight: FontWeight.w700))
-                  ],
-                ),
-              ],
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-              _buildNotifyScreenToJoinButton(),
-              SizedBox(
-                width: 10,
-              ),
-              _builCancelButton(),
-              SizedBox(
-                width: 10,
-              ),
-              _buildNotifyScreenToLeaveButton(),
-            ])
-          ],
-        ),
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildNotifyScreenToJoinButton(),
+                      _builCancelButton(),
+                      _buildNotifyScreenToLeaveButton(),
+                    ])
+              ].expand((element) => [
+                    element,
+                    const SizedBox(
+                      height:8,
+                    )
+                  ])
+            ]),
       ),
     );
   }
