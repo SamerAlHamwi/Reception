@@ -7,9 +7,8 @@ import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_dimension.dart';
 import '../../../../core/constants/app_theme.dart';
 import '../../../../core/constants/constant.dart';
-import '../../../../core/frequently_used_function/frequenty_funtions.dart';
 import '../../../../core/utils/navigation.dart';
-import '../../../auth/presentation/pages/login_page.dart';
+import '../../../../core/widgets/logout_popup_menu_button.dart';
 import '../../../processing_client_request/presentation/pages/waiting_list_page.dart';
 import '../../data/my_ministriy_model.dart';
 import '../../repository/ministriey_repo.dart';
@@ -31,80 +30,60 @@ class WelcomeReceptionPage extends StatelessWidget {
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(AppAssets.background), fit: BoxFit.fill)),
-            child:  Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Align(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Align(
                     alignment: Alignment.topLeft,
-                    child: PopupMenuButton(
-                      itemBuilder: (context) {
-                        return [
-                          PopupMenuItem(
-                            value: "logout",
-                            child: ListTile(
-                              leading: Icon(Icons.logout),
-                              title: Text(
-                                "logout".tr(),
-                                style: AppTheme.bodyText1,
-                              ),
-                            ),
-                          )
-                        ];
-                      },
-                      onSelected: (String value) {
-                        if (value == "logout") {
-                          FrequentlyFunction.showLogoutConfirmDialog(
-                              context, LoginPage());
-                        }
-                      },
+                    child: LogoutPopupMenuButton()),
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ...[
+                        CenterLogo(logoUrl: myMinistryModel.attachment!.url!),
+                        Text(
+                          myMinistryModel!.name ?? "",
+                          style: AppTheme.headline3,
+                        ),
+                        Text(
+                          myMinistryModel!.description ?? "",
+                          style: AppTheme.headline3
+                              .copyWith(overflow: TextOverflow.ellipsis),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  AppDimension.screenWidth(context) / 4),
+                          child: MainElevatedButton(
+                            onTap: () {
+                              Navigation.push(
+                                  context,
+                                  DisabledCategoryPage(
+                                      myMinistryModel: myMinistryModel));
+                            },
+                            text: "create_new_request".tr(),
+                          ),
+                        )
+                      ].expand((element) => [element, SizedBox(height: 8)]),
+                    ]),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  alignment: Alignment.bottomLeft,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigation.push(context,
+                          WaitingListPage(myMinistryModel: myMinistryModel));
+                    },
+                    child: Text(
+                      "view_clients_requests".tr(),
+                      style: AppTheme.headline3
+                          .copyWith(color: AppColors.primaryColor),
                     ),
                   ),
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ...[
-                          CenterLogo(logoUrl: myMinistryModel.attachment!.url!),
-                          Text(
-                            myMinistryModel!.name ?? "",
-                            style: AppTheme.headline3,
-                          ),
-                          Text(
-                            myMinistryModel!.description ?? "",
-                            style: AppTheme.headline3.copyWith(overflow: TextOverflow.ellipsis),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    AppDimension.screenWidth(context) / 4),
-                            child: MainElevatedButton(
-                              onTap: () {
-                                Navigation.push(
-                                    context,
-                                    DisabledCategoryPage(
-                                        myMinistryModel: myMinistryModel));
-                              },
-                              text: "create_new_request".tr(),
-                            ),
-                          )
-                        ].expand((element) => [element, SizedBox(height: 8)]),
-                      ]),
-                  Container(padding: EdgeInsets.all(8),
-                    alignment: Alignment.bottomLeft,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigation.push(
-                            context,
-                            WaitingListPage(
-                                myMinistryModel:
-                                myMinistryModel));
-                      },
-                      child:Text( "view_clients_requests".tr(),style: AppTheme.headline3.copyWith(color: AppColors.primaryColor),),
-                    ),
-                  ),
-                ],
-              ),
-
+                ),
+              ],
+            ),
           ));
         });
   }

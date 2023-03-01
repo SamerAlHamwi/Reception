@@ -7,6 +7,7 @@ import '../../../../core/constants/app_dimension.dart';
 import '../../../../core/constants/app_theme.dart';
 import '../../../../core/frequently_used_function/frequenty_funtions.dart';
 import '../../../../core/utils/navigation.dart';
+import '../../../../core/widgets/logout_popup_menu_button.dart';
 import '../../../auth/presentation/pages/login_page.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../../select_unit_journy/presentation/pages/departments_page.dart';
@@ -35,28 +36,7 @@ class WelcomeCallReceptionPage extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.topLeft,
-                  child: PopupMenuButton(
-                    itemBuilder: (context) {
-                      return [
-                        PopupMenuItem(
-                          value: "logout",
-                          child: ListTile(
-                            leading: Icon(Icons.logout),
-                            title: Text(
-                              "logout".tr(),
-                              style: AppTheme.bodyText1,
-                            ),
-                          ),
-                        )
-                      ];
-                    },
-                    onSelected: (String value) {
-                      if (value == "logout") {
-                        FrequentlyFunction.showLogoutConfirmDialog(
-                            context, LoginPage());
-                      }
-                    },
-                  ),
+                  child: LogoutPopupMenuButton()
                 ),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,

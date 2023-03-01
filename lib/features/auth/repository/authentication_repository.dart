@@ -23,7 +23,7 @@ class AuthenticationRepository {
       withAuthentication: false,
       url: ApiURLs.loginURL,
     );
-    if (res is LoginResponseModel) {
+   /* if (res is LoginResponseModel) {
       NotificationCubit.updateFCMToken(Messaging.token);
       if (Messaging.token == null) {
         Print.showSnackBar(
@@ -37,7 +37,7 @@ class AuthenticationRepository {
           SharedStorage.writeIsInCall(false);
         }
       }
-    }
+    }*/
     return res;
   }
 }

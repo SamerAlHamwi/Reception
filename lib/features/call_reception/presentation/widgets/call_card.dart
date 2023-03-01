@@ -40,7 +40,7 @@ class CallCard extends StatelessWidget {
             color: call!.callStatus == 1
                 ? AppColors.primarySwatch[100]
                 : call!.callStatus == 2
-                    ? AppColors.green
+                    ? Colors.green[200]
                     : AppColors.secondaryColor,
             borderRadius: BorderRadius.circular(10)),
         child: Column(

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:ministries_reception_app/core/notification/notification.dart';
 
 import '../utils/navigation.dart';
 import '../utils/shared_storage.dart';
@@ -15,6 +16,8 @@ class FrequentlyFunction {
             content: 'are_you_sure_you_want_to_logout'.tr(),
             onPressedYes: () {
               SharedStorage.removeToken();
+              if(Messaging.token!=null){
+              Messaging.deleteToken();}
               Navigation.pushAndRemoveUntil(context,destinationPage);
             },
             onPressedNo: () {

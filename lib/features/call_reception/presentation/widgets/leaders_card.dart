@@ -30,7 +30,7 @@ class LeadersCard extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-            height: 150,
+            height: 200,
             width: AppDimension.screenWidth(context) / 4,
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -41,24 +41,25 @@ class LeadersCard extends StatelessWidget {
                         : [Colors.cyan, Colors.blue])),
             child: Center(
                 child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomImage.rectangle(
                   height: 50,
                   image: leaderDetails!.attachment != null
-                      ? leaderDetails!.attachment!.url
+                      ? leaderDetails!.attachment!.url??AppAssets.leaderImageUrl
                       : AppAssets.leaderImageUrl,
                   isNetworkImage:
                       leaderDetails!.attachment != null ? true : false,
                   svg: false,
                 ),
                 Text(
-                  leaderDetails!.userPosition!,
-                  style: AppTheme.headline3.copyWith(
-                      color: AppColors.white, overflow: TextOverflow.ellipsis),
-                  softWrap: true,
-                  textAlign: TextAlign.center,
-                ),
+                    leaderDetails!.userPosition!,
+                    style: AppTheme.headline3.copyWith(
+                        color: AppColors.white),
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                  ),
+
                 Text(
                   leaderDetails!.name! + " " + leaderDetails!.surname!,
                   style: AppTheme.headline3.copyWith(

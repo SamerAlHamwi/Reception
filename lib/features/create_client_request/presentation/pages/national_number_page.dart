@@ -116,6 +116,7 @@ class NationalNumberPage extends StatelessWidget {
           onTap: () {
             _clientRequestModel!.unitId=selectedUnitId;
             _clientRequestModel!.disabilityCategoryId= disabilityCategoryId;
+
             if (myMinistryModel!.ministryRequestType == 1) {
               if (_isValidNumber(_clientRequestModel!.clientNationalNumber)) {
                 _createRequestModelCubit!.createModel(_clientRequestModel);
