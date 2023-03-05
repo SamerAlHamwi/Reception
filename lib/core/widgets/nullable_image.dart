@@ -5,7 +5,7 @@ class NullableImage {
   static Image build({
     required final String? image,
     final bool network = true,
-    final String placeholder = AppAssets.appLogoURI,
+    final String placeholder = AppAssets.disabledLogo,
     final BoxFit fit = BoxFit.cover,
   }) {
     if (image == null) {

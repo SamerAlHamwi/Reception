@@ -23,8 +23,9 @@ class AuthenticationRepository {
       withAuthentication: false,
       url: ApiURLs.loginURL,
     );
-   /* if (res is LoginResponseModel) {
-      NotificationCubit.updateFCMToken(Messaging.token);
+    if (res is LoginResponseModel) {
+      await Messaging.initFCM();
+      await NotificationCubit.updateFCMToken(Messaging.token);
       if (Messaging.token == null) {
         Print.showSnackBar(
           message: 'Your device is not supported by Google services',
@@ -37,7 +38,7 @@ class AuthenticationRepository {
           SharedStorage.writeIsInCall(false);
         }
       }
-    }*/
+    }
     return res;
   }
 }

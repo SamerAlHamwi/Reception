@@ -117,7 +117,7 @@ class LeadersPage extends StatelessWidget {
                         },
                         onSuccess: (model) {
                           Navigator.pop(context);
-                          Navigation.push(context, WelcomeCallReceptionPage());
+                          Navigation.pushAndRemoveUntil(context, WelcomeCallReceptionPage());
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width / 8,

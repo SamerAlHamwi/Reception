@@ -31,7 +31,7 @@ class NotificationCubit extends Cubit<NotificationState> {
   static startSignalR() {
     if (
         // Platform.isIOS ||
-        Messaging.token == null) {
+    Messaging.token == null) {
       SignalR().start(onReceived: (data) {
         var notification =
             FCMNotificationModel.fromJson(data as Map<String, dynamic>);
