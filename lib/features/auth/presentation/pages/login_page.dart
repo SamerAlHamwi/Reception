@@ -134,8 +134,7 @@ class _LoginPageState extends State<LoginPage> {
   _buildLoginButton(context) {
     return CreateModel<LoginResponseModel>(
         onSuccess: (LoginResponseModel model) {
-          SharedStorage.writeToken(model.accessToken);
-          SharedStorage.writeUserType(model.userType);
+
             Navigation.pushAndRemoveUntil(context,  MyApp.getNextPage());
 
         },

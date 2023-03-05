@@ -16,6 +16,7 @@ class NotificationMiddleware {
   }
 
   static onRceived(FCMNotificationModel notification) async {
+    print(notification.type);
     switch (notification.type) {
       case NotificationType.NULL:
         break;

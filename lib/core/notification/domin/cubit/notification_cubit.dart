@@ -29,14 +29,10 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   static startSignalR() {
-    if (
+    // if (
         // Platform.isIOS ||
-    Messaging.token == null) {
-      SignalR().start(onReceived: (data) {
-        var notification =
-            FCMNotificationModel.fromJson(data as Map<String, dynamic>);
-        NotificationMiddleware.onRceived(notification);
-      });
-    }
+    // Messaging.token == null) {
+
+    // }
   }
 }

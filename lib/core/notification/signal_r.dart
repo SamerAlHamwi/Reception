@@ -7,9 +7,10 @@ import 'package:signalr_netcore/hub_connection_builder.dart';
 import 'package:signalr_netcore/itransport.dart';
 
 import '../constants/app_settings.dart';
+import '../utils/print/print.dart';
 
 class SignalR {
-  final serverUrl = "${ApiURLs.baseUrl}/signalr";
+  final serverUrl = "${ApiURLs.baseUrl1}/signalr";
   HubConnection? hubConnection;
   int tryNumber = 10;
 
