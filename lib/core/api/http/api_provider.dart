@@ -1,100 +1,152 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
+import 'package:dio_http_cache_lts/dio_http_cache_lts.dart';
+import 'package:dio_smart_retry/dio_smart_retry.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../.,/../../core/api/errors/custom_error.dart';
-import 'package:dio/dio.dart';
-import 'package:dio_http_cache/dio_http_cache.dart';
+import '../../constants/app_constants.dart';
+import '../../notification/local_notifications_service.dart';
 import '../core_models/base_response_model.dart';
 import '../core_models/base_result_model.dart';
-import '../errors/internal_server_error.dart';
-import '../errors/unauthorized_error.dart';
 import '../errors/bad_request_error.dart';
-import '../errors/not_found_error.dart';
-import '../errors/unknown_error.dart';
 import '../errors/base_error.dart';
-import '../errors/http_error.dart';
-import '../errors/net_error.dart';
 import '../errors/cancel_error.dart';
-import '../errors/socket_error.dart';
-import '../errors/timeout_error.dart';
 import '../errors/conflict_error.dart';
 import '../errors/forbidden_error.dart';
+import '../errors/http_error.dart';
+import '../errors/internal_server_error.dart';
+import '../errors/net_error.dart';
+import '../errors/not_found_error.dart';
+import '../errors/socket_error.dart';
+import '../errors/timeout_error.dart';
+import '../errors/unauthorized_error.dart';
+import '../errors/unknown_error.dart';
 
- class ApiProvider {
-   static var dio = Dio();
-   static initial() {
-//     dio.interceptors.add(PrettyDioLogger(
-//         request: kDebugMode,
-//         requestHeader: kDebugMode,
-//         requestBody: kDebugMode,
-//         responseBody: kDebugMode,
-//         responseHeader: kDebugMode,
-//         error: kDebugMode,
-//         compact: kDebugMode,
-//         maxWidth: 90));
-   }
-
-  static Future<BaseResponseModel> sendObjectRequest<T extends BaseResultModel>({
+class ApiProvider {
+  static Future<BaseResponseModel>
+      sendObjectRequest<T extends BaseResultModel>({
     required T Function(Map<String, dynamic>) converter,
     required String method,
     required String url,
     Map<String, dynamic>? data,
     required Map<String, String> headers,
     Map<String, dynamic>? queryParameters,
-    Map<String,String>? files,
+    Map<String, String>? files,
     CancelToken? cancelToken,
     bool isLongTime = false,
+    bool uploadNotification = false,
+    bool downloadNotification = false,
     bool isLaravel = false,
+    int retries = 0,
   }) async {
-
-    var baseOptions =  BaseOptions(
-        connectTimeout: isLongTime? 60 *1000 : 15 *1000,
+    if (uploadNotification) downloadNotification = false;
+    if (downloadNotification) uploadNotification = false;
+    var baseOptions = BaseOptions(
+      connectTimeout: isLongTime ? 60 * 1000 : 15 * 1000,
     );
+    var dio = Dio();
 
-    Options options =Options(
+    dio.options = baseOptions;
+    dio.interceptors.add(PrettyDioLogger(
+        request: kDebugMode,
+        requestHeader: kDebugMode,
+        requestBody: kDebugMode,
+        responseBody: kDebugMode,
+        responseHeader: kDebugMode,
+        error: kDebugMode,
+        compact: kDebugMode,
+        maxWidth: 90));
+    dio.interceptors.add(RetryInterceptor(
+      dio: dio,
+      logPrint: print, // specify log function
+      retries: retries, // retry count
+      retryDelays: const [
+        Duration(seconds: 1), // wait 1 sec before first retry
+        Duration(seconds: 2), // wait 2 sec before second retry
+        Duration(seconds: 3), // wait 3 sec before third retry
+      ],
+    ));
+
+    Options options = Options(
       headers: headers,
-      method: method ,
+      method: method,
       contentType: Headers.jsonContentType,
-      sendTimeout: 4000,
+      sendTimeout: files == null ? 4000 : null,
     );
 
-
-    if(files != null)
-    {
-      headers.remove("Content-Type");
+    if (files != null) {
+      headers.remove(HEADER_CONTENT_TYPE);
       data ??= {};
 
       await Future.forEach(files.entries, (MapEntry entry) async {
-        if(entry.value != null) {
+        if (entry.value != null) {
           data!.addAll({
-          entry.key: await MultipartFile.fromFile(entry.value)
-        });
+            entry.key: await MultipartFile.fromFile(entry.value,
+                filename: entry.value, contentType: MediaType("image", "jpeg"))
+          });
         }
       });
-
     }
     try {
-      Dio dio = ApiProvider.dio;
       Response response;
-      dio.interceptors.add(PrettyDioLogger(
-          request: true,
-          requestHeader: true,
-          requestBody: true,
-          responseBody: true,
-          responseHeader: false,
-          error: true,
-          compact: true,
-          maxWidth: 90));
-      response = await dio.request(
-           url,
-        queryParameters: queryParameters,
-     options: options,
-     //   options: buildCacheOptions(Duration(days: 7),maxStale: Duration(days: 14),options: options,forceRefresh: true),
-     //   cancelToken: cancelToken,
-        data: files!= null? FormData.fromMap(data!):data
-      );
+      response = await dio.request(url,
+          queryParameters: queryParameters,
+          options: options, onSendProgress: (sent, total) {
+        if (uploadNotification) {
+          int progress = ((sent / total) * 100).floor();
+          if (progress == 100) {
+            LocalNotificationService().showNotification(
+                title: 'Uploading...'.tr(),
+                showProgress: true,
+                ongoing: true,
+                progress: 100,
+                enableVibration: true,
+                playSound: true);
+          } else {
+            LocalNotificationService().showNotification(
+                title: 'Uploading'.tr(),
+                progress: progress,
+                showProgress: true,
+                ongoing: false,
+                playSound: true,
+                enableVibration: true,
+                onlyAlertOnce: true);
+          }
+        }
+      }, onReceiveProgress: (received, total) {
+        int progress = ((received / total) * 100).floor();
+        if (uploadNotification) {
+          if (progress == 100) {
+            LocalNotificationService().showNotification(
+                title: 'Uploaded Successfully'.tr(),
+                enableVibration: true,
+                playSound: true);
+          }
+        } else if (downloadNotification) {
+          if (progress == 100) {
+            LocalNotificationService().showNotification(
+              title: 'Downloaded Successfully'.tr(),
+              playSound: true,
+              enableVibration: true,
+            );
+          } else {
+            LocalNotificationService().showNotification(
+                title: 'Downloading...'.tr(),
+                progress: progress,
+                showProgress: true);
+          }
+        }
+      },
+
+          //   options: buildCacheOptions(Duration(days: 7),maxStale: Duration(days: 14),options: options,forceRefresh: true),
+          //   cancelToken: cancelToken,
+          data: files != null ? FormData.fromMap(data!) : data);
       if (null != response.headers.value(DIO_CACHE_HEADER_KEY_DATA_SOURCE)) {
         // data come from cache
       } else {
@@ -103,29 +155,25 @@ import '../errors/forbidden_error.dart';
       // Get the decoded json
       dynamic decodedJson;
 
-      if (response.data is String )
-       {
-         if(response.data.length ==0) {
-           decodedJson={"":""};
-         } else {
-           decodedJson = json.decode(response.data);
-         }
-       }
-      else {
+      if (response.data is String) {
+        if (response.data.length == 0) {
+          decodedJson = {"": ""};
+        } else {
+          decodedJson = json.decode(response.data);
+        }
+      } else {
         decodedJson = response.data;
       }
 
-
-
-      return BaseResponseModel.fromJson(json: decodedJson,fromJson: converter ,isLaravel: isLaravel);
+      return BaseResponseModel.fromJson(
+          json: decodedJson, fromJson: converter, isLaravel: isLaravel);
     }
 
     // Handling errors
     on DioError catch (e) {
-      BaseError error = _handleDioError(e);
-      dynamic json ;
-     debugPrint('DioErrorDioErrorDioError $error');
-      if(e.response!=null ) {
+      var error = _handleDioError(e);
+      dynamic json;
+      if (e.response != null) {
         if (e.response!.data != null) {
           if (e.response!.data is! String) {
             json = e.response!.data;
@@ -133,21 +181,26 @@ import '../errors/forbidden_error.dart';
         }
       }
 
-      return BaseResponseModel.fromJson(json: json,error: error ,isLaravel: isLaravel);
+      return BaseResponseModel.fromJson(
+          json: json, error: error, isLaravel: isLaravel);
     }
 
     // Couldn't reach out the server
     on SocketException catch (e) {
-      return BaseResponseModel.fromJson(error: SocketError() , isLaravel: isLaravel);
-    }
-    catch(e) {
-      return BaseResponseModel.fromJson(error: CustomError(message: 'parse error') ,isLaravel: isLaravel);
+      return BaseResponseModel.fromJson(
+          error: SocketError(), isLaravel: isLaravel);
+    } catch (e, s) {
+      if (kDebugMode) {
+        print(e);
+        print(s);
+      }
+      return BaseResponseModel.fromJson(
+          error: CustomError(message: 'parse error'.tr()),
+          isLaravel: isLaravel);
     }
   }
 
-
   static BaseError _handleDioError(DioError error) {
-    debugPrint('error.type = ${(error.type)}');
     if (error.type == DioErrorType.other ||
         error.type == DioErrorType.response) {
       if (error is SocketException) return SocketError();
