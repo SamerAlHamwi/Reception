@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/boilerplate/get_model/widgets/GetModel.dart';
 import '../../../../core/constants/app_assets.dart';
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimension.dart';
 import '../../../../core/constants/app_theme.dart';
 import '../../../../core/frequently_used_function/frequenty_funtions.dart';
@@ -35,9 +36,8 @@ class WelcomeCallReceptionPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Align(
-                  alignment: Alignment.topLeft,
-                  child: LogoutPopupMenuButton()
-                ),
+                    alignment: Alignment.topLeft,
+                    child: LogoutPopupMenuButton()),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,11 +74,29 @@ class WelcomeCallReceptionPage extends StatelessWidget {
                                   Navigation.push(
                                       context,
                                       CallListPage(
-                                        myMinistryModel:
-                                            myMinistryModel!,
+                                        myMinistryModel: myMinistryModel!,
                                       ));
                                 },
                                 text: "view_video_call_requests".tr(),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                alignment: Alignment.bottomLeft,
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigation.push(
+                                        context,
+                                        CallListPage(
+                                          myMinistryModel: myMinistryModel,
+                                          isOld: true,
+                                        ));
+                                  },
+                                  child: Text(
+                                    "view_calls_history".tr(),
+                                    style: AppTheme.headline3.copyWith(
+                                        color: AppColors.primaryColor),
+                                  ),
+                                ),
                               ),
                             ],
                           ),

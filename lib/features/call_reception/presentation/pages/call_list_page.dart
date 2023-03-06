@@ -11,8 +11,10 @@ import 'package:get_it/get_it.dart';
 
 class CallListPage extends StatelessWidget {
   final MyMinistryModel? myMinistryModel;
+  final bool isOld;
 
-  const CallListPage({Key? key, this.myMinistryModel}) : super(key: key);
+  const CallListPage({Key? key, this.myMinistryModel, this.isOld = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,10 @@ class CallListPage extends StatelessWidget {
       onCubitCreated: (cubit) {
         GetIt.I<CubitsStore>().callsList = cubit;
       },
-      repositoryCallBack: (data) => CallReceptionRepo.getCalls(data),
+      repositoryCallBack: (data) => CallReceptionRepo.getCalls(
+        data: data,
+        isOld: isOld,
+      ),
       listBuilder: (List<Call> list) {
         return buildList(list);
       },

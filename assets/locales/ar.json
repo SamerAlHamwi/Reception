@@ -74,7 +74,9 @@
   "end_call": "إنهاء المكالمة",
   "cancel": "إلغاء الطلب",
   "required_entity":"الجهة المطلوبة",
-  "leader_name":"اسم القيادي"
+  "leader_name":"اسم القيادي",
+
+  "view_calls_history": "عرض سجل المكالمات"
 
 
 }

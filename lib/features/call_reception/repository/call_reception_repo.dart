@@ -19,7 +19,9 @@ class CallReceptionRepo {
       url: ApiURLs.getDepartmentByIdURL,
     );
   }
-  static Future<BaseResultModel> notifyScreenToJoin(NotifyScreenModel notifyScreenModel) async {
+
+  static Future<BaseResultModel> notifyScreenToJoin(
+      NotifyScreenModel notifyScreenModel) async {
     return await RemoteDataSource.request<EmptyModel>(
       converter: (json) => EmptyModel.fromJson(json),
       data: notifyScreenModel.toJson(),
@@ -28,7 +30,9 @@ class CallReceptionRepo {
       url: ApiURLs.notifyScreenToJoinUrl,
     );
   }
-  static Future<BaseResultModel> notifyScreenToLeave(NotifyScreenModel notifyScreenModel) async {
+
+  static Future<BaseResultModel> notifyScreenToLeave(
+      NotifyScreenModel notifyScreenModel) async {
     return await RemoteDataSource.request<EmptyModel>(
       converter: (json) => EmptyModel.fromJson(json),
       data: notifyScreenModel.toJson(),
@@ -38,8 +42,7 @@ class CallReceptionRepo {
     );
   }
 
-  static Future<BaseResultModel> joinCall(
-      {required int id}) async {
+  static Future<BaseResultModel> joinCall({required int id}) async {
     return await RemoteDataSource.request<EmptyModel>(
       converter: (json) => EmptyModel.fromJson(json),
       method: HttpMethod.post,
@@ -48,8 +51,8 @@ class CallReceptionRepo {
       url: ApiURLs.joinCall,
     );
   }
-  static Future<BaseResultModel> leaveCall(
-      {required int id}) async {
+
+  static Future<BaseResultModel> leaveCall({required int id}) async {
     return await RemoteDataSource.request<EmptyModel>(
       converter: (json) => EmptyModel.fromJson(json),
       method: HttpMethod.post,
@@ -62,18 +65,19 @@ class CallReceptionRepo {
   static Future<BaseResultModel> cancelCallRequest(int callId) async {
     return await RemoteDataSource.request<EmptyModel>(
       converter: (json) => EmptyModel.fromJson(json),
-      data: {"id":callId},
+      data: {"id": callId},
       method: HttpMethod.put,
       withAuthentication: true,
       url: ApiURLs.CancleCallRequestUrl,
     );
   }
 
-  static Future<BaseResultModel> getCalls(data) async {
+  static Future<BaseResultModel> getCalls(
+      {required data, bool isOld = false}) async {
     var res = await RemoteDataSource.request<CallsModel>(
         converter: (json) => CallsModel.fromJson(json),
         method: HttpMethod.get,
-        queryParameters: data.toJson(),
+        queryParameters: {if (isOld) "IsOldCalls": true}..addAll(data.toJson()),
         withAuthentication: true,
         url: ApiURLs.getCalls);
     return res;
