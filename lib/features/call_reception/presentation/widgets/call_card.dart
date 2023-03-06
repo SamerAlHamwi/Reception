@@ -44,8 +44,18 @@ class CallCard extends StatelessWidget {
           children: [
             // Date and time
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                SizedBox(width: 2,),
+                Container(
+                  height: 8,
+                  width: 8,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _getStatusColor(_getStatus(call.callStatus!))),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
                 Text(
                   "${call.orderNumber}",
                   style: AppTheme.headline3,
@@ -53,6 +63,7 @@ class CallCard extends StatelessWidget {
                 // CancelCallPopUp(callId: call.id)
               ],
             ),
+            SizedBox(height: 8,),
             Row(
               children: [
                 const Icon(Icons.date_range, color: AppColors.primaryColor),
@@ -66,6 +77,7 @@ class CallCard extends StatelessWidget {
                     style: AppTheme.bodyText2)
               ],
             ),
+            SizedBox(height: 4,),
             Row(
               children: [
                 const Icon(
@@ -87,7 +99,9 @@ class CallCard extends StatelessWidget {
                     style: AppTheme.bodyText2)
               ],
             ),
-            SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             _getButtons(),
           ],
         ));
