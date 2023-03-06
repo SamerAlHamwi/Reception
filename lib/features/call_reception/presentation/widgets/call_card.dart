@@ -119,7 +119,7 @@ class CallCard extends StatelessWidget {
     } else if (status == "Canceled".tr()) {
       return Colors.redAccent;
     } else if (status == "Active".tr()) {
-      return Colors.green;
+      return Colors.deepOrange;
     }
   }
 
