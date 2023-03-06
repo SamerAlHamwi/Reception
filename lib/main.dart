@@ -21,14 +21,14 @@ Future<void> main() async {
   DartPluginRegistrant.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await SharedStorage.init();
+  if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
+    await Messaging.initFCM();
+  }
   await SignalR().start(onReceived: (data) {
     var notification =
     FCMNotificationModel.fromSignalR(data as Map<String, dynamic>);
     NotificationMiddleware.onRceived(notification);
   });
-  if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
-    await Messaging.initFCM();
-  }
   ServiceLocator.registerModels();
 
   if (!Platform.isWindows) await AppConstant.getDefaultLanguage();

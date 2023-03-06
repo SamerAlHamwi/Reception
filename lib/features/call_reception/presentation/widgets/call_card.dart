@@ -14,131 +14,142 @@ import '../../repository/call_reception_repo.dart';
 import 'call_actions_button.dart';
 
 class CallCard extends StatelessWidget {
-  final VoidCallback? onTap;
-  final MyMinistryModel? myMinistryModel;
-  final bool hasActive;
   final Call call;
+  final bool active;
 
-  CallCard(
-      {Key? key,
-      required this.onTap,
-      required this.call,
-      this.myMinistryModel,
-      required this.hasActive})
-      : super(key: key);
+  CreateModelCubit? deleteCubit;
+
+  CallCard({
+    super.key,
+    this.active = true,
+    required this.call,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        //  width: 50,
-        // height: 220,
+    return _buildCallCard(
+      context,
+    );
+  }
+
+  Widget _buildCallCard(context) {
+    return Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         decoration: BoxDecoration(
-            color: call!.callStatus == 1
-                ? AppColors.primarySwatch[100]
-                : call!.callStatus == 2
-                    ? Colors.green[200]
-                    : AppColors.secondaryColor,
-            borderRadius: BorderRadius.circular(10)),
+            color: AppColors.white, borderRadius: BorderRadius.circular(10)),
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ...[
-                Align(
-                    alignment: Alignment.topRight,
-                    child: Text(call!.orderNumber!)),
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Date and time
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Text(
-                  myMinistryModel!.departments!
-                      .firstWhere(
-                          (element) => element.id == call.leader!.departmentId)!
-                      .name!,
+                  "${call.orderNumber}",
                   style: AppTheme.headline3,
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                  Text(
-                    "required_entity".tr() + " : ",
-                    style: AppTheme.bodyText1,
-                  ),
-                  Text(
-                    call.leader!.userPosition ?? "",
-                    style: AppTheme.bodyText1,
-                    maxLines: 3,
-                  ),
-                ]),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("leader_name".tr() + " : ", style: AppTheme.bodyText1),
-                    Text(
-                      call.leader!.name! + " " + call.leader!.surname! ?? "",
-                      style: AppTheme.bodyText1,
-                    ),
-                  ],
+                // CancelCallPopUp(callId: call.id)
+              ],
+            ),
+            Row(
+              children: [
+                const Icon(Icons.date_range, color: AppColors.primaryColor),
+                const SizedBox(width: 8),
+                Text(
+                  "${"date".tr()} : ",
+                  style: AppTheme.bodyText2
+                      .copyWith(color: AppColors.primaryColor),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.date_range,
-                            color: AppColors.primaryColor),
-                        const SizedBox(width: 8),
-                        Text(
-                          "date".tr() + " : ",
-                          style: AppTheme.headline3
-                              .copyWith(color: AppColors.primaryColor),
-                        ),
-                        Text(call.creationTime!.split("T")[0].toString(),
-                            style: AppTheme.headline3.copyWith(
-                                color: AppColors.offWhite,
-                                fontWeight: FontWeight.w700))
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.access_time_outlined,
-                          color: AppColors.primaryColor,
-                        ),
-                        const SizedBox(width: 8),
-                        Text("time".tr() + " : ",
-                            style: AppTheme.headline3
-                                .copyWith(color: AppColors.primaryColor)),
-                        Text(
-                            DateTime.tryParse(call!.creationTime! + 'Z')!
-                                .toLocal()
-                                .toString()
-                                .split('.')[0]
-                                .toString()
-                                .split(" ")[1]
-                                .toString(),
-                            style: AppTheme.headline3.copyWith(
-                                color: AppColors.offWhite,
-                                fontWeight: FontWeight.w700))
-                      ],
-                    ),
-                  ],
+                Text(call.creationTime!.split("T")[0].toString(),
+                    style: AppTheme.bodyText2)
+              ],
+            ),
+            Row(
+              children: [
+                const Icon(
+                  Icons.access_time_outlined,
+                  color: AppColors.primaryColor,
                 ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildNotifyScreenToJoinButton(),
-                      _builCancelButton(),
-                      _buildNotifyScreenToLeaveButton(),
-                    ])
-              ].expand((element) => [
-                    element,
-                    const SizedBox(
-                      height:8,
-                    )
-                  ])
-            ]),
-      ),
+                const SizedBox(width: 8),
+                Text("${"time".tr()} : ",
+                    style: AppTheme.bodyText2
+                        .copyWith(color: AppColors.primaryColor)),
+                Text(
+                    DateTime.tryParse('${call.creationTime!}Z')!
+                        .toLocal()
+                        .toString()
+                        .split('.')[0]
+                        .toString()
+                        .split(" ")[1]
+                        .toString(),
+                    style: AppTheme.bodyText2)
+              ],
+            ),
+            SizedBox(height: 8,),
+            _getButtons(),
+          ],
+        ));
+  }
+
+  String getDate(DateTime date) {
+    return "${date.day}/${date.month}/${date.year}";
+  }
+
+  _getStatusColor(String status) {
+    if (status == "Waiting".tr()) {
+      return Colors.yellow;
+    } else if (status == "Treated".tr()) {
+      return Colors.green;
+    } else if (status == "Canceled".tr()) {
+      return Colors.redAccent;
+    } else if (status == "Active".tr()) {
+      return Colors.green;
+    }
+  }
+
+  String _getStatus(int status) {
+    if (status == 1) {
+      return "Waiting".tr();
+    } else if (status == 2) {
+      return "Treated".tr();
+    } else if (status == 3) {
+      return "Canceled".tr();
+    } else if (status == 4) {
+      return "Active".tr();
+    }
+    return "Active".tr();
+  }
+
+  /* CreateModelCubit? CancleCallRequestCubit;
+
+  _buildCancelButton() {
+    return CreateModel<EmptyModel>(
+        onSuccess: (EmptyModel model) {},
+        repositoryCallBack: (data) => CallReceptionRepo.CancleCallRequest(data),
+        onCubitCreated: (CreateModelCubit cubit) {
+          CancleCallRequestCubit = cubit;
+        },
+        child: CallActionsButton(
+            buttonText: "cancel".tr(),
+            buttonColor: Colors.red[400],
+            textColor: AppColors.white,
+            onTap: () {
+              CancleCallRequestCubit!.createModel(call!.id!).then((value) {
+                HomeApp.updateWaitingCallList();
+              });
+            }));
+  }*/
+
+  Widget _getButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        _buildNotifyScreenToJoinButton(),
+        _buildCancelButton(),
+        _buildNotifyScreenToLeaveButton(),
+      ],
     );
   }
 
@@ -156,11 +167,11 @@ class CallCard extends StatelessWidget {
         },
         child: CallActionsButton(
             buttonText: "start_call".tr(),
-            buttonColor: call.callStatus == 4 || hasActive
+            buttonColor: call.callStatus == 4 || active
                 ? AppColors.grey
-                : AppColors.primaryColor,
+                : AppColors.green,
             textColor: AppColors.white,
-            onTap: call.callStatus == 4 || hasActive
+            onTap: call.callStatus == 4 || active
                 ? null
                 : () {
                     notifyScreenToJoinCubit!.createModel(NotifyScreenModel(
@@ -188,7 +199,7 @@ class CallCard extends StatelessWidget {
                 : null));
   }
 
-  _builCancelButton() {
+  _buildCancelButton() {
     return CreateModel<EmptyModel>(
         onSuccess: (EmptyModel model) {
           ServiceLocator.refreshCalls();
@@ -203,8 +214,10 @@ class CallCard extends StatelessWidget {
                 ? AppColors.grey
                 : AppColors.lightBlueColor,
             textColor: AppColors.white,
-            onTap: () {
-              cancelCallRequestCubit!.createModel(call!.id!);
-            }));
+            onTap: call.callStatus == 4
+                ? null
+                : () {
+                    cancelCallRequestCubit!.createModel(call.id!);
+                  }));
   }
 }

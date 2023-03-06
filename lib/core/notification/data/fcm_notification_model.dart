@@ -71,10 +71,6 @@ class FCMNotificationModel {
         .toString()
         .toLowerCase()
         .contains(
-        json['notification']['notificationName'].toString().toLowerCase()));
-    print(type);
-    print('Hamodinan');
-
-
+            json['notification']['notificationName'].toString().toLowerCase()));
   }
 }

@@ -47,11 +47,9 @@ class CallListPage extends StatelessWidget {
         },
         itemBuilder: ((context, index) {
           return CallCard(
-            hasActive: hasActive,
+            active: hasActive,
             key: GlobalKey(),
             call: list[index],
-            myMinistryModel: myMinistryModel,
-            onTap: null,
           );
         }),
         itemCount: list.length);
