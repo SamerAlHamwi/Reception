@@ -30,7 +30,7 @@ class LeadersCard extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-            height: 200,
+            height: 230,
             width: AppDimension.screenWidth(context) / 4,
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -44,7 +44,8 @@ class LeadersCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomImage.rectangle(
-                  height: 50,
+                  height: 80,
+                  width: 100,
                   image: leaderDetails!.attachment != null
                       ? leaderDetails!.attachment!.url??AppAssets.leaderImageUrl
                       : AppAssets.leaderImageUrl,
