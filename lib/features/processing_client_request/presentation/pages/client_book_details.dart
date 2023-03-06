@@ -81,15 +81,17 @@ class ClientBookDetails extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        Text(SharedStorage
-                                                    .getMinistryRequestType() ==
-                                                1
-                                            ? oneClientRequest!
-                                                .clientNationalNumber!
-                                            : oneClientRequest!
-                                                .disabilityNumber!),
-                                        Text(oneClientRequest!.unit!.name!),
                                         Text(oneClientRequest!.orderNumber!),
+                                        Text(oneClientRequest!.unit!.name!),
+
+                                        Text(SharedStorage
+                                            .getMinistryRequestType() ==
+                                                1
+                                            ? _oneClientRequestModel!
+                                                .clientNationalNumber??""
+                                            : _oneClientRequestModel!
+                                                .disabilityNumber!??""),
+
                                       ]))
                             ].expand(
                               (element) => [element, const SizedBox(height: 8)],

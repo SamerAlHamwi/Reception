@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                               ...[
                                 CustomTextField(
                                   controller: userName,
-                                  hintText: 'user_name'.tr(),
+                                  hintText: 'email_address'.tr(),
                                   validator: (value) {
                                     Validator.nameValidate(value!, context);
                                   },
