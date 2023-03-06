@@ -21,8 +21,7 @@ class ConfirmFinishClientRequestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultScaffold(
       logoUrl: logoUrl,
-      body: Expanded(
-        child: Container(
+      body:  Container(
           padding: EdgeInsets.symmetric(
               horizontal: AppDimension.screenWidth(context) / 4),
           child: Column(mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +38,7 @@ class ConfirmFinishClientRequestPage extends StatelessWidget {
                   style: AppTheme.headline3, textAlign: TextAlign.center),
               MainElevatedButton(
                 onTap: () {
-                  Navigation.push(context, WelcomeReceptionPage());
+                  Navigation.pushAndRemoveUntil(context, WelcomeReceptionPage());
                 },
                 text: "back_to_the_beginning".tr(),
               )
@@ -50,7 +49,7 @@ class ConfirmFinishClientRequestPage extends StatelessWidget {
                   )
                 ])
           ]),
-        ),
+
       ),
     );
   }
