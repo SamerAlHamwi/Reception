@@ -24,8 +24,6 @@ class NotificationMiddleware {
         ServiceLocator.refreshCalls();
         break;
       case NotificationType.YouShouldJoinCall:
-        CallReceptionRepo.leaveCall(id: int.parse(notification.callId!));
-        VideoMeetingService.leaveMeeting(notification);
         CallReceptionRepo.joinCall(id: int.parse(notification.callId!));
         await Future.delayed(const Duration(seconds: 3)).then((value) =>
             VideoMeetingService.startMeeting(
