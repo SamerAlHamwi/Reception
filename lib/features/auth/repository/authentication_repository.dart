@@ -39,18 +39,18 @@ class AuthenticationRepository {
         await Messaging.initFCM();
         await NotificationCubit.updateFCMToken(Messaging.token);
       }
-      // if (Messaging.token == null) {
-      //   Print.showSnackBar(
-      //     message: 'Your device is not supported by Google services',
-      //   );
-      // } else {
-      //   if (res == false) {
-      //     Print.showErrorSnackBar(
-      //         message: 'Error occurred while sending fcm token');
-      //     SharedStorage.writeToken(null);
-      //     SharedStorage.writeIsInCall(false);
-      //   }
-      // }
+      if (Messaging.token == null) {
+        Print.showSnackBar(
+          message: 'Your device is not supported by Google services',
+        );
+      } else {
+        if (res == false) {
+          Print.showErrorSnackBar(
+              message: 'Error occurred while sending fcm token');
+          SharedStorage.writeToken(null);
+          SharedStorage.writeIsInCall(false);
+        }
+      }
     }
     return res;
   }

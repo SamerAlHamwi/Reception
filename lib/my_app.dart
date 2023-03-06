@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
           builder: EasyLoading.init(),
           locale: context.locale,
           title: AppSettings.appName,
-          home: // LoginPage(),
+          home:  //LoginPage(),
               MyApp.getNextPage(),
           material: (_, __) => MaterialAppData(
               scrollBehavior: AppScrollBehavior(),
