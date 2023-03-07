@@ -75,7 +75,7 @@ class _WaitingListPageState extends State<WaitingListPage> {
       onCubitCreated: (cubit) {
         widget.refresh = cubit;
       },
-      repositoryCallBack: (data) => UnitScreenRepository.getClientsList(data),
+      repositoryCallBack: (data) => UnitScreenRepository.getClientsList(data,null),
       listBuilder: (List<OneClientRequest> list) {
         return buildList(list);
       },

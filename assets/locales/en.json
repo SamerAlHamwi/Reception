@@ -75,5 +75,7 @@
   "cancel": "Cancel",
   "required_entity":"Required Entity",
   "leader_name":"Leader Name",
-  "end_call": "End Call"
+  "end_call": "End Call",
+  "you_need_create_screen_account": "Please create an account for the call screen first",
+  "ok": "ok"
 }

@@ -92,23 +92,6 @@ class LeadersPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width / 8,
-                        height: 50,
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            color: AppColors.primaryColor.shade600,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0))),
-                        child: TextButton(
-                            onPressed: () {
-                              Navigation.pop(context);
-                            },
-                            child: Text('no'.tr(),
-                                style: AppTheme.bodyText2
-                                    .copyWith(color: AppColors.white))),
-                      ),
-                      const SizedBox(width: 8),
                       CreateModel(
                         repositoryCallBack: (data) =>
                             CallReceptionRepo.createCards(data),
@@ -124,25 +107,90 @@ class LeadersPage extends StatelessWidget {
                           height: 50,
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                              color: AppColors.lightBlueColor,
+                              color: AppColors.primaryColor,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
+                              BorderRadius.all(Radius.circular(20.0))),
                           child: TextButton(
                             child: Text('yes'.tr(),
                                 style: AppTheme.bodyText1
                                     .copyWith(color: Colors.white)),
                             onPressed: () {
+                            //  myMinistryModel!.screens=[];
+                              if(myMinistryModel!.screens!=null){
+                              if (myMinistryModel!.screens!.length>0){
                               cubit!.createModel(CreateCallRequest(
                                   leaderId: leaderId,
                                   screenId: myMinistryModel!.screens![0].id));
-                            },
+                              }
+                              else{
+                                _showAlertForCreateScreen(context);
+                              }
+                            }else{
+                                _showAlertForCreateScreen(context);
+
+                              }
+
+                            }
                           ),
                         ),
                       ),
+                      const SizedBox(width: 8),
+                      Container(
+                        width: MediaQuery.of(context).size.width / 8,
+                        height: 50,
+                        padding:const EdgeInsets.all(8),
+                        decoration:const BoxDecoration(
+                            color: AppColors.lightBlueColor,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0))),
+                        child: TextButton(
+                            onPressed: () {
+                              Navigation.pop(context);
+                            },
+                            child: Text('no'.tr(),
+                                style: AppTheme.bodyText2
+                                    .copyWith(color: AppColors.white))),
+                      ),
+
                     ],
                   ),
                 ),
               ]);
         });
   }
+
+  _showAlertForCreateScreen(context)
+  {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+      return AlertDialog(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0))),
+        title: Text('you_need_create_screen_account'.tr()),actions: [
+          Center(
+            child: Container(
+        width: MediaQuery.of(context).size.width / 8,
+        height: 50,
+        padding:const EdgeInsets.all(8),
+        decoration:const BoxDecoration(
+              color: AppColors.primaryColor,
+              borderRadius:
+              BorderRadius.all(Radius.circular(20.0))),
+        child: TextButton(
+              onPressed: () {
+                Navigation.pop(context);
+                Navigation.pop(context);
+              },
+              child: Text('ok'.tr(),
+                  style: AppTheme.bodyText2
+                      .copyWith(color: AppColors.white))),
+      ),
+          ),
+      ],
+
+      );
+        });
+  }
+
 }

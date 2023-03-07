@@ -170,7 +170,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
       onCubitCreated: (cubit) {
         UnitScreenPage.refresh = cubit;
       },
-      repositoryCallBack: (data) => UnitScreenRepository.getClientsList(data),
+      repositoryCallBack: (data) => UnitScreenRepository.getClientsList(data,1),
       listBuilder: (List<OneClientRequest> list) {
         return buildList(list);
       },
