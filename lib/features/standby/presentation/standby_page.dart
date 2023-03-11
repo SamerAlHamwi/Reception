@@ -21,7 +21,7 @@ class StandByPage extends StatelessWidget {
               children: [
                 Center(
                   child: CustomImage.circular(
-                    radius: 400,
+                    radius: 350,
                     image: myMinistryModel!.attachment!.url,
                     isNetworkImage: true,
                     fit: BoxFit.contain,

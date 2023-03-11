@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ministries_reception_app/core/notification/notification.dart';
 
 import '../utils/navigation.dart';
@@ -18,6 +19,10 @@ class FrequentlyFunction {
               SharedStorage.removeToken();
               if(Messaging.token!=null){
               Messaging.deleteToken();}
+              SystemChrome.setPreferredOrientations([
+                DeviceOrientation.landscapeLeft,
+                DeviceOrientation.landscapeRight,
+              ]);
               Navigation.pushAndRemoveUntil(context,destinationPage);
             },
             onPressedNo: () {

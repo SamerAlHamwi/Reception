@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:ministries_reception_app/core/constants/app_dimension.dart';
 import 'package:ministries_reception_app/core/utils/service_locator.dart';
+
+import '../../../../core/boilerplate/pagination/cubits/pagination_cubit.dart';
 import '../../../../core/boilerplate/pagination/widgets/PaginationList.dart';
 import '../../../../core/widgets/default_scaffold.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../data/call_model.dart';
 import '../../repository/call_reception_repo.dart';
 import '../widgets/call_card.dart';
-import 'package:get_it/get_it.dart';
 
 class CallListPage extends StatelessWidget {
   final MyMinistryModel? myMinistryModel;
@@ -27,10 +29,13 @@ class CallListPage extends StatelessWidget {
             child: pagination()));
   }
 
+  static PaginationCubit? callsList;
+
   Widget pagination() {
     return PaginationList<Call>(
       onCubitCreated: (cubit) {
-        GetIt.I<CubitsStore>().callsList = cubit;
+       // GetIt.I<CubitsStore>().callsList = cubit;
+        callsList = cubit;
       },
       repositoryCallBack: (data) => CallReceptionRepo.getCalls(
         data: data,
@@ -58,5 +63,11 @@ class CallListPage extends StatelessWidget {
           );
         }),
         itemCount: list.length);
+  }
+
+  static refreshCallList() {
+    if (callsList != null) {
+      callsList!.getList();
+    }
   }
 }

@@ -3,6 +3,7 @@ import 'package:ministries_reception_app/core/utils/shared_storage.dart';
 import 'package:ministries_reception_app/features/call_reception/repository/call_reception_repo.dart';
 import 'package:ministries_reception_app/features/unit_screen/presentation/pages/unit_screen_page.dart';
 
+import '../../../features/call_reception/presentation/pages/call_list_page.dart';
 import '../../constants/app_constants.dart';
 import '../../utils/jitsi_video_meeting/video_meeting_service.dart';
 import '../data/fcm_notification_model.dart';
@@ -21,7 +22,8 @@ class NotificationMiddleware {
       case NotificationType.NULL:
         break;
       case NotificationType.NewCallRequestHasPublished:
-        ServiceLocator.refreshCalls();
+        CallListPage.refreshCallList();
+      //  ServiceLocator.refreshCalls();
         break;
       case NotificationType.YouShouldJoinCall:
         CallReceptionRepo.joinCall(id: int.parse(notification.callId!));
@@ -36,7 +38,8 @@ class NotificationMiddleware {
         VideoMeetingService.leaveMeeting(notification);
         break;
       case NotificationType.ScreenLeaveCall:
-        ServiceLocator.refreshCalls();
+        CallListPage.refreshCallList();
+        //  ServiceLocator.refreshCalls();
         break;
       case NotificationType.NewRequestHasPublished:
         UnitScreenPage.updateVisitorList();
@@ -51,7 +54,8 @@ class NotificationMiddleware {
         // TODO: Handle this case.
         break;
       case NotificationType.ScreenJoinCall:
-        ServiceLocator.refreshCalls();
+        CallListPage.refreshCallList();
+        //  ServiceLocator.refreshCalls();
         break;
     }
   }

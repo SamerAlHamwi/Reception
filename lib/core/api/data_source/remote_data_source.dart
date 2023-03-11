@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:ministries_reception_app/core/utils/navigation.dart';
 import 'package:ministries_reception_app/core/utils/shared_storage.dart';
 import 'package:ministries_reception_app/features/auth/presentation/pages/login_page.dart';
@@ -80,6 +81,10 @@ class RemoteDataSource {
 
   static logOut() {
     SharedStorage.removeToken();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     Navigation.pushAndRemoveUntil(
         Keys.navigatorKey.currentContext!, LoginPage());
     // Navigation.pushAndRemoveUntil(const LoginPage());

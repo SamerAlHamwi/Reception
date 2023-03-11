@@ -25,6 +25,15 @@ class MyApp extends StatefulWidget {
   static getNextPage() {
 
     if (SharedStorage.hasToken()) {
+      if (SharedStorage.getUserType() == 4) {
+        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);}
+      else{
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight,
+        ]);
+
+      }
       if (SharedStorage.getUserType() == 1) {
         return const WelcomeReceptionPage();
       }
@@ -32,12 +41,17 @@ class MyApp extends StatefulWidget {
         return UnitScreenPage();
       }
       if (SharedStorage.getUserType() == 4) {
+        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
         return const StandByPage();
       }
       if (SharedStorage.getUserType() == 5) {
         return const WelcomeCallReceptionPage();
       }
     } else {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
       return LoginPage();
     }
   }
@@ -58,10 +72,7 @@ class _MyAppState extends State<MyApp> {
 //for hide status and bottom Navigation Bar
     SystemChrome.setEnabledSystemUIOverlays([]);
 
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+
     EasyLoadingClass.getStyleEasyLoading();
     return Theme(
       data: AppTheme.appTheme,

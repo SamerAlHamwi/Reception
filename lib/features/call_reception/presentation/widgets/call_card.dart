@@ -11,6 +11,7 @@ import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../data/call_model.dart';
 import '../../data/notify_screen_model.dart';
 import '../../repository/call_reception_repo.dart';
+import '../pages/call_list_page.dart';
 import 'call_actions_button.dart';
 
 class CallCard extends StatelessWidget {
@@ -173,7 +174,9 @@ class CallCard extends StatelessWidget {
 
   _buildNotifyScreenToJoinButton() {
     return CreateModel<EmptyModel>(
-        onSuccess: (EmptyModel model) {},
+        onSuccess: (EmptyModel model) {
+          CallListPage.refreshCallList();
+        },
         repositoryCallBack: (data) =>
             CallReceptionRepo.notifyScreenToJoin(data),
         onCubitCreated: (CreateModelCubit cubit) {
@@ -195,7 +198,9 @@ class CallCard extends StatelessWidget {
 
   _buildNotifyScreenToLeaveButton() {
     return CreateModel<EmptyModel>(
-        onSuccess: (EmptyModel model) {},
+        onSuccess: (EmptyModel model) {
+          CallListPage.refreshCallList();
+        },
         repositoryCallBack: (data) =>
             CallReceptionRepo.notifyScreenToLeave(data),
         onCubitCreated: (CreateModelCubit cubit) {
@@ -216,7 +221,8 @@ class CallCard extends StatelessWidget {
   _buildCancelButton() {
     return CreateModel<EmptyModel>(
         onSuccess: (EmptyModel model) {
-          ServiceLocator.refreshCalls();
+          CallListPage.refreshCallList();
+          //ServiceLocator.refreshCalls();
         },
         repositoryCallBack: (data) => CallReceptionRepo.cancelCallRequest(data),
         onCubitCreated: (CreateModelCubit cubit) {

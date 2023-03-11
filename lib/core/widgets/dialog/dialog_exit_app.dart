@@ -38,9 +38,9 @@ class _DialogExitAppState extends State<DialogExitApp> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width / 8,
+                width: MediaQuery.of(context).size.width / 7.8,
                  height: 50,
-                padding:const EdgeInsets.all(8),
+                //padding:const EdgeInsets.all(8),
                 decoration:const BoxDecoration(
                     color: AppColors.lightBlueColor,
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -53,9 +53,9 @@ class _DialogExitAppState extends State<DialogExitApp> {
               ),
               SizedBox(width: 8),
               Container(
-                width: MediaQuery.of(context).size.width / 8,
+                width: MediaQuery.of(context).size.width / 7.8,
                 height: 50,
-                padding: EdgeInsets.all(8),
+               // padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
                     color: AppColors.primaryColor.shade600,
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
