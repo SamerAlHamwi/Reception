@@ -23,6 +23,7 @@ class FrequentlyFunction {
                 DeviceOrientation.landscapeLeft,
                 DeviceOrientation.landscapeRight,
               ]);
+
               Navigation.pushAndRemoveUntil(context,destinationPage);
             },
             onPressedNo: () {

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:ministries_reception_app/core/constants/app_dimension.dart';
 
 import '../../constants/app_colors.dart';
 import '../../constants/app_theme.dart';
@@ -21,7 +22,9 @@ class DialogExitApp extends StatefulWidget {
 class _DialogExitAppState extends State<DialogExitApp> {
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    return OrientationBuilder(
+        builder: (context, orientation) {
+    return  AlertDialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20.0))),
       title: Text(
@@ -38,27 +41,27 @@ class _DialogExitAppState extends State<DialogExitApp> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width / 7.8,
+                width:orientation == Orientation.portrait?AppDimension.screenWidth(context)/ 5:AppDimension.screenWidth(context)/ 8,
                  height: 50,
-                //padding:const EdgeInsets.all(8),
+                padding:const EdgeInsets.all(8),
                 decoration:const BoxDecoration(
                     color: AppColors.lightBlueColor,
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 child: TextButton(
+                  onPressed: widget.onPressedYes,
                   child: Text('yes'.tr(),
                       style:
                           AppTheme.bodyText2.copyWith(color: AppColors.white)),
-                  onPressed: widget.onPressedYes,
                 ),
               ),
-              SizedBox(width: 8),
+             const SizedBox(width: 8),
               Container(
-                width: MediaQuery.of(context).size.width / 7.8,
+                width:orientation == Orientation.portrait?AppDimension.screenWidth(context)/ 5:AppDimension.screenWidth(context)/ 8,
                 height: 50,
-               // padding: EdgeInsets.all(8),
+                padding:const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                     color: AppColors.primaryColor.shade600,
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                    borderRadius: const BorderRadius.all(Radius.circular(20.0))),
                 child: TextButton(
                   onPressed: widget.onPressedNo,
                   child: Text('no'.tr(),
@@ -70,6 +73,6 @@ class _DialogExitAppState extends State<DialogExitApp> {
           ),
         ),
       ],
-    );
+    );});
   }
 }

@@ -37,10 +37,6 @@ class NotificationMiddleware {
         CallReceptionRepo.leaveCall(id: int.parse(notification.callId!));
         VideoMeetingService.leaveMeeting(notification);
         break;
-      case NotificationType.ScreenLeaveCall:
-        CallListPage.refreshCallList();
-        //  ServiceLocator.refreshCalls();
-        break;
       case NotificationType.NewRequestHasPublished:
         UnitScreenPage.updateVisitorList();
         break;
@@ -54,6 +50,10 @@ class NotificationMiddleware {
         // TODO: Handle this case.
         break;
       case NotificationType.ScreenJoinCall:
+        CallListPage.refreshCallList();
+        //  ServiceLocator.refreshCalls();
+        break;
+      case NotificationType.ScreenLeaveCall:
         CallListPage.refreshCallList();
         //  ServiceLocator.refreshCalls();
         break;

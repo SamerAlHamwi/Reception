@@ -26,13 +26,13 @@ class MyApp extends StatefulWidget {
 
     if (SharedStorage.hasToken()) {
       if (SharedStorage.getUserType() == 4) {
-        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);}
+        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+      }
       else{
         SystemChrome.setPreferredOrientations([
           DeviceOrientation.landscapeLeft,
           DeviceOrientation.landscapeRight,
         ]);
-
       }
       if (SharedStorage.getUserType() == 1) {
         return const WelcomeReceptionPage();
@@ -42,6 +42,7 @@ class MyApp extends StatefulWidget {
       }
       if (SharedStorage.getUserType() == 4) {
         SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
         return const StandByPage();
       }
       if (SharedStorage.getUserType() == 5) {
@@ -52,6 +53,7 @@ class MyApp extends StatefulWidget {
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ]);
+
       return LoginPage();
     }
   }
@@ -71,7 +73,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 //for hide status and bottom Navigation Bar
     SystemChrome.setEnabledSystemUIOverlays([]);
-
 
     EasyLoadingClass.getStyleEasyLoading();
     return Theme(
