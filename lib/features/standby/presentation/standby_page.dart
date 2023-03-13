@@ -12,28 +12,32 @@ class StandByPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetModel<MyMinistryModel>(
-        repositoryCallBack: (data) => MinistrieyRepo.getMyMinistries(),
-        modelBuilder: (MyMinistryModel myMinistryModel) {
-          return Scaffold(
-            backgroundColor: AppColors.black,
-            body: Stack(
-              children: [
-                Center(
-                  child: CustomImage.circular(
-                    radius: 350,
-                    image: myMinistryModel!.attachment!.url,
-                    isNetworkImage: true,
-                    fit: BoxFit.contain,
-                    svg: false,
+    return Scaffold(
+      body: SafeArea(
+        child: GetModel<MyMinistryModel>(
+            repositoryCallBack: (data) => MinistrieyRepo.getMyMinistries(),
+            modelBuilder: (MyMinistryModel myMinistryModel) {
+              return Scaffold(
+                backgroundColor: AppColors.black,
+                body: Stack(
+                  children: [
+                    Center(
+                      child: CustomImage.circular(
+                        radius: 350,
+                        image: myMinistryModel!.attachment!.url,
+                        isNetworkImage: true,
+                        fit: BoxFit.contain,
+                        svg: false,
 
-                )),
-                const Align(
-                    alignment: Alignment.topLeft,
-                    child: LogoutPopupMenuButton(color: AppColors.white)),
-              ],
-            ),
-          );
-        });
+                    )),
+                    const Align(
+                        alignment: Alignment.topLeft,
+                        child: LogoutPopupMenuButton(color: AppColors.white)),
+                  ],
+                ),
+              );
+            }),
+      ),
+    );
   }
 }
