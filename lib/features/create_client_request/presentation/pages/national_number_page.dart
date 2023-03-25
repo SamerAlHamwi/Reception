@@ -4,7 +4,6 @@ import 'package:ministries_reception_app/core/constants/constant.dart';
 
 import '../../../../core/boilerplate/create_model/cubits/create_model_cubit.dart';
 import '../../../../core/boilerplate/create_model/widgets/CreateModel.dart';
-import '../../../../core/constants/app_theme.dart';
 import '../../../../core/utils/navigation.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/default_scaffold_with_center_logo.dart';
@@ -34,11 +33,10 @@ class NationalNumberPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController? numberController = TextEditingController();
-  CreateClientRequestModel? _clientRequestModel= CreateClientRequestModel();
+  CreateClientRequestModel? _clientRequestModel = CreateClientRequestModel();
 
   @override
   Widget build(BuildContext context) {
-
     return DefaultScaffoldWithCenterLogo(
         //resizeToAvoidBottomInset: true,
         logoUrl: myMinistryModel!.attachment!.url!,
@@ -68,7 +66,7 @@ class NationalNumberPage extends StatelessWidget {
                         : _clientRequestModel!.disabilityNumber = value;
                   },
                   textInputAction: TextInputAction.next,
-                  maxLength: 20,
+                  maxLength: myMinistryModel!.ministryRequestType == 1 ? 12 : 6,
                   inputDecoration: AppTheme.inputDecoration.copyWith(
                       prefixIcon: null,
                       fillColor: AppColors.white,
@@ -114,8 +112,8 @@ class NationalNumberPage extends StatelessWidget {
       child: MainElevatedButton(
           text: "next".tr(),
           onTap: () {
-            _clientRequestModel!.unitId=selectedUnitId;
-            _clientRequestModel!.disabilityCategoryId= disabilityCategoryId;
+            _clientRequestModel!.unitId = selectedUnitId;
+            _clientRequestModel!.disabilityCategoryId = disabilityCategoryId;
 
             if (myMinistryModel!.ministryRequestType == 1) {
               if (_isValidNumber(_clientRequestModel!.clientNationalNumber)) {

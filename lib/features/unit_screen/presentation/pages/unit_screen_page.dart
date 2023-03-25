@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:ministries_reception_app/core/constants/app_assets.dart';
 import 'package:ministries_reception_app/core/utils/shared_storage.dart';
 
 import '../../../../core/boilerplate/get_model/widgets/GetModel.dart';
@@ -26,22 +27,20 @@ class UnitScreenPage extends StatefulWidget {
   static PaginationCubit? refresh;
   static ScrollController _scrollController = ScrollController();
 
-
   static void updateVisitorList() {
     if (refresh != null) {
-       refresh!.getList();
-      _scrollController.animateTo(0,duration: Duration(seconds: 1), curve: Curves.linear);
+      refresh!.getList();
+      _scrollController.animateTo(0,
+          duration: Duration(seconds: 1), curve: Curves.linear);
     }
   }
 }
 
 class _UnitScreenPageState extends State<UnitScreenPage> {
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
   }
 
   @override
@@ -84,10 +83,26 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
                                             overflow: TextOverflow.ellipsis)),
                                     SizedBox(height: 8),
                                     Text(
-                                        myMinistriyModel.departments![0].name! +
-                                            ":" +
-                                            myMinistriyModel.departments![0]
-                                                .units![0].name!,
+                                        myMinistriyModel.departments != null
+                                            ? myMinistriyModel
+                                                        .departments!.length >
+                                                    0
+                                                ? myMinistriyModel
+                                                            .departments![0]
+                                                            .units !=
+                                                        null
+                                                    ? myMinistriyModel
+                                                                .departments![0]
+                                                                .name! +
+                                                            ":" +
+                                                            myMinistriyModel
+                                                                .departments![0]
+                                                                .units![0]
+                                                                .name! ??
+                                                        " "
+                                                    : ""
+                                                : ""
+                                            : "",
                                         style: AppTheme.headline3.copyWith(
                                             overflow: TextOverflow.ellipsis)),
                                   ],
@@ -95,9 +110,21 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
                                 AspectRatio(
                                   aspectRatio: 200 / 200,
                                   child: CustomImage.circular(
-                                    image: myMinistriyModel!.attachment!.url,
+                                    image: myMinistriyModel!.attachment != null
+                                        ? myMinistriyModel!.attachment!.url !=
+                                                null
+                                            ? myMinistriyModel!.attachment!.url
+                                            : AppAssets.disabledLogo
+                                        : AppAssets.disabledLogo,
                                     radius: 150,
-                                    isNetworkImage: true,
+                                    isNetworkImage:
+                                        myMinistriyModel!.attachment != null
+                                            ? myMinistriyModel!
+                                                        .attachment!.url !=
+                                                    null
+                                                ? true
+                                                : false
+                                            : false,
                                     fit: BoxFit.fill,
                                     svg: false,
                                   ),
@@ -109,8 +136,9 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
                             height: sizes.maxHeight * 0.8 / 10,
                             child: DateTimeSection(),
                           ),
-                          Container(height: sizes.maxHeight * 0.2 / 10,
-                         /* child: Row(children: [
+                          Container(
+                            height: sizes.maxHeight * 0.2 / 10,
+                            /* child: Row(children: [
                             Text("disability type",style: AppTheme.bodyText1.copyWith(color: AppColors.primaryColor),)
                           ],),*/
                           ),
@@ -170,7 +198,8 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
       onCubitCreated: (cubit) {
         UnitScreenPage.refresh = cubit;
       },
-      repositoryCallBack: (data) => UnitScreenRepository.getClientsList(data,1),
+      repositoryCallBack: (data) =>
+          UnitScreenRepository.getClientsList(data, 1),
       listBuilder: (List<OneClientRequest> list) {
         return buildList(list);
       },
@@ -189,7 +218,8 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
       itemBuilder: ((context, index) {
         return list![index].clientRequestType == 1
             ? OneVisitorCard(
-                oneClientRequest: list![index],key: GlobalKey(),
+                oneClientRequest: list![index],
+                key: GlobalKey(),
               )
             : Container();
       }),

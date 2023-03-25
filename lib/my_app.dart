@@ -37,17 +37,22 @@ class MyApp extends StatefulWidget {
       if (SharedStorage.getUserType() == 1) {
         return const WelcomeReceptionPage();
       }
-      if (SharedStorage.getUserType() == 3) {
+     else if (SharedStorage.getUserType() == 3) {
         return UnitScreenPage();
       }
-      if (SharedStorage.getUserType() == 4) {
+      else if (SharedStorage.getUserType() == 4) {
         SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
         return const StandByPage();
       }
-      if (SharedStorage.getUserType() == 5) {
+      else if (SharedStorage.getUserType() == 5) {
         return const WelcomeCallReceptionPage();
       }
+      else{
+        return LoginPage();
+
+      }
+
     } else {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
