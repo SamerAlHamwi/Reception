@@ -81,7 +81,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
                                     Text(myMinistriyModel!.name ?? "",
                                         style: AppTheme.headline3.copyWith(
                                             overflow: TextOverflow.ellipsis)),
-                                    SizedBox(height: 8),
+                                   const SizedBox(height: 8),
                                     Text(
                                         myMinistriyModel.departments != null
                                             ? myMinistriyModel
@@ -145,7 +145,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
                           Container(
                             color: Colors.transparent,
                             height: sizes.maxHeight * 6 / 10,
-                            child: pagination(),
+                            child: pagination(myMinistriyModel.ministryRequestType??1),
                           ),
                           Container(
                               height: sizes.maxHeight * 0.5 / 10,
@@ -193,7 +193,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
     );
   }
 
-  Widget pagination() {
+  Widget pagination(int ministryRequestType) {
     return PaginationList<OneClientRequest>(
       onCubitCreated: (cubit) {
         UnitScreenPage.refresh = cubit;
@@ -201,12 +201,12 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
       repositoryCallBack: (data) =>
           UnitScreenRepository.getClientsList(data, 1),
       listBuilder: (List<OneClientRequest> list) {
-        return buildList(list);
+        return buildList(list,ministryRequestType);
       },
     );
   }
 
-  buildList(List<OneClientRequest> list) {
+  buildList(List<OneClientRequest> list,int ministryRequestType) {
     return ListView.separated(
       controller: UnitScreenPage._scrollController,
       itemCount: list.length,
@@ -217,7 +217,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
       },
       itemBuilder: ((context, index) {
         return list![index].clientRequestType == 1
-            ? OneVisitorCard(
+            ? OneVisitorCard(ministryRequestType:ministryRequestType,
                 oneClientRequest: list![index],
                 key: GlobalKey(),
               )

@@ -2,6 +2,7 @@ class CreateClientRequestModel {
   int? disabilityCategoryId;
   int? unitId;
   String? clientNationalNumber;
+  String? clientFullName;
   String? disabilityNumber;
   String? treatTime;
   int? id;
@@ -11,6 +12,7 @@ class CreateClientRequestModel {
       {this.disabilityCategoryId,
       this.unitId,
       this.clientNationalNumber,
+      this.clientFullName,
       this.disabilityNumber,
       this.treatTime,
       this.id,
@@ -22,6 +24,7 @@ class CreateClientRequestModel {
     clientNationalNumber = json['clientNationalNumber'];
     disabilityNumber = json['disabilityNumber'];
     treatTime = json['treatTime'];
+    clientFullName = json['clientFullName'];
     id = json['id'];
     employeetreatNumber = json['employeetreatNumber'];
   }
@@ -33,6 +36,7 @@ class CreateClientRequestModel {
     data['disabilityNumber'] = this.disabilityNumber;
     data['clientNationalNumber'] = this.clientNationalNumber;
     data['treatTime'] = this.treatTime;
+    data['clientFullName'] = this.clientFullName;
     data['id'] = this.id;
     data['employeetreatNumber'] = this.employeetreatNumber;
     return data;

@@ -48,6 +48,7 @@ class NotificationMiddleware {
         break;
       case NotificationType.TheCallHasCanseld:
         // TODO: Handle this case.
+        CallListPage.refreshCallList();
         break;
       case NotificationType.ScreenJoinCall:
         CallListPage.refreshCallList();

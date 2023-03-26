@@ -39,6 +39,7 @@ class OneClientRequest {
   String? orderNumber;
   bool? isLate;
   String? treatTime;
+  String? clientFullName;
   String? creationTime;
   double? waitingSeconds;
 
@@ -47,6 +48,7 @@ class OneClientRequest {
         this.unitId,
         this.unit,
         this.disabilityCategory,
+        this.clientFullName,
         this.clientRequestType,
         this.clientNationalNumberOrDisabilityNumber,
         this.disabilityNumber,
@@ -71,6 +73,7 @@ class OneClientRequest {
     clientNationalNumber = json['clientNationalNumber'];
     disabilityNumber = json['disabilityNumber'];
     isLate = json['isLate'];
+    clientFullName = json['clientFullName'];
     employeetreatNumber = json['employeetreatNumber'];
     treatTime = json['treatTime'];
     orderNumber = json['orderNumber'];
@@ -94,6 +97,7 @@ class OneClientRequest {
     data['clientNationalNumber'] = this.clientNationalNumber;
     data['treatTime'] = this.treatTime;
     data['isLate'] = this.isLate;
+    data['clientFullName'] = this.clientFullName;
     data['orderNumber'] = this.orderNumber;
     data['employeetreatNumber'] = this.employeetreatNumber;
     data['creationTime'] = this.creationTime;

@@ -46,21 +46,34 @@ class _WaitingListPageState extends State<WaitingListPage> {
               Expanded(flex: 3,
                 child: Align(alignment: Alignment.bottomCenter,
                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                    Text("role_num".tr(),
-                        style: AppTheme.bodyText1
-                            .copyWith(color: AppColors.primaryColor)),
-                    Text("unit_name".tr(),
-                        style: AppTheme.bodyText1
-                            .copyWith(color: AppColors.primaryColor)),
-                    Text(
-                        widget.myMinistryModel!.ministryRequestType == 1
-                            ? "national_number".tr()
-                            : "disability_number".tr(),
-                        style: AppTheme.bodyText1
-                            .copyWith(color: AppColors.primaryColor)),
-                    Text("request_status".tr(),
-                        style: AppTheme.bodyText1
-                            .copyWith(color: AppColors.primaryColor)),
+                  buildFlexWidget(context,
+                      child: Text("role_num".tr(),
+                          style: AppTheme.bodyText1
+                              .copyWith(color: AppColors.primaryColor)),
+                    ),
+                    buildFlexWidget(context,
+                      child: Text("name".tr(),
+                          style: AppTheme.bodyText1
+                              .copyWith(color: AppColors.primaryColor)),
+                    ),
+                    buildFlexWidget(context,
+                      child: Text("unit_name".tr(),
+                          style: AppTheme.bodyText1
+                              .copyWith(color: AppColors.primaryColor)),
+                    ),
+                    buildFlexWidget(context,
+                      child: Text(
+                          widget.myMinistryModel!.ministryRequestType == 1
+                              ? "national_number".tr()??""
+                              : "disability_number".tr()??"",
+                          style: AppTheme.bodyText1
+                              .copyWith(color: AppColors.primaryColor)),
+                    ),
+                    buildFlexWidget(context,
+                      child: Text("request_status".tr(),
+                          style: AppTheme.bodyText1
+                              .copyWith(color: AppColors.primaryColor)),
+                    ),
                   ]),
                 ),
               ),
@@ -98,4 +111,9 @@ class _WaitingListPageState extends State<WaitingListPage> {
         }),
         itemCount: list.length);
   }
+
+}
+buildFlexWidget(BuildContext context,{Widget? child})
+{
+  return Container(width: AppDimension.screenWidth(context)/6,child: Align(alignment: Alignment.bottomCenter,child: child!));
 }

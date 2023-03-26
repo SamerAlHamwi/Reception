@@ -77,5 +77,13 @@
   "leader_name":"Leader Name",
   "end_call": "End Call",
   "you_need_create_screen_account": "Please create an account for the call screen first",
-  "ok": "ok"
+  "ok": "ok",
+  "name": "Name",
+  "please_enter_name": "Please enter name",
+  "not_valid_national_number": "National number should be 12 digit",
+  "please_enter_disability_number": "Please enter disabilityNumber"
+
+
+
+
 }

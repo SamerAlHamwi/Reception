@@ -5,6 +5,7 @@ import 'package:ministries_reception_app/core/animations/fade_animation.dart';
 import 'package:ministries_reception_app/core/utils/navigation.dart';
 
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/constants/app_dimension.dart';
 import '../../../../core/constants/app_theme.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../../unit_screen/data/clients_requests_model.dart';
@@ -20,7 +21,9 @@ class OneVisitorCardForReception extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FadeAnimation(fadeDirection: FadeDirection.right,delay: 3,
+    return FadeAnimation(
+      fadeDirection: FadeDirection.right,
+      delay: 3,
       child: InkWell(
         onTap: () {
           oneClientRequest!.clientRequestType == 1
@@ -42,27 +45,49 @@ class OneVisitorCardForReception extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(oneClientRequest!.orderNumber ?? "-----",
-                  style: AppTheme.bodyText1),
-              Text(oneClientRequest!.unit!.name!, style: AppTheme.bodyText1),
-              Text(
-                  ministryModel!.ministryRequestType == 1
-                      ? oneClientRequest!.clientNationalNumber ?? ""
-                      : oneClientRequest!.disabilityNumber ?? "",
-                  style: AppTheme.bodyText1),
-              Text(
-                oneClientRequest!.clientRequestType == 1
-                    ? "in_waiting".tr()
-                    : "treated".tr(),
-                style: AppTheme.bodyText1.copyWith(
-                    color: oneClientRequest!.clientRequestType == 1
-                        ? AppColors.lightBlueColor
-                        : AppColors.green),
+              buildFlexWidget(
+                context,
+                child: Text(oneClientRequest!.orderNumber ?? "-----",
+                    style: AppTheme.bodyText1),
+              ),
+              buildFlexWidget(
+                context,
+                child: Text(oneClientRequest!.clientFullName ?? "-----",
+                    style: AppTheme.bodyText1),
+              ),
+              buildFlexWidget(context,
+                  child: Text(oneClientRequest!.unit!.name!,
+                      style: AppTheme.bodyText1)),
+              buildFlexWidget(
+                context,
+                child: Text(
+                    ministryModel!.ministryRequestType == 1
+                        ? oneClientRequest!.clientNationalNumber ?? ""
+                        : oneClientRequest!.disabilityNumber ?? "",
+                    style: AppTheme.bodyText1),
+              ),
+              buildFlexWidget(
+                context,
+                child: Text(
+                  oneClientRequest!.clientRequestType == 1
+                      ? "in_waiting".tr()
+                      : "treated".tr(),
+                  style: AppTheme.bodyText1.copyWith(
+                      color: oneClientRequest!.clientRequestType == 1
+                          ? AppColors.lightBlueColor
+                          : AppColors.green),
+                ),
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  buildFlexWidget(BuildContext context, {Widget? child}) {
+    return Container(
+        width: AppDimension.screenWidth(context) / 6,
+        child: Align(alignment: Alignment.center, child: child!));
   }
 }

@@ -6,6 +6,7 @@ import 'package:ministries_reception_app/core/animations/fade_animation.dart';
 import 'package:ministries_reception_app/core/utils/shared_storage.dart';
 
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/constants/app_dimension.dart';
 import '../../../../core/constants/app_theme.dart';
 import '../../../../core/frequently_used_function/frequenty_funtions.dart';
 import '../../../../core/widgets/custom_image.dart';
@@ -13,10 +14,14 @@ import '../../data/clients_requests_model.dart';
 
 class OneVisitorCard extends StatefulWidget {
   final OneClientRequest? oneClientRequest;
-  late Timer _timer;
-  Duration? waitingTime=Duration(seconds: 0);
+  final int? ministryRequestType;
+  DateTime? creationTime;
 
-  OneVisitorCard({Key? key, this.oneClientRequest}) : super(key: key);
+  late Timer _timer;
+  Duration? waitingTime = Duration(seconds: 0);
+
+  OneVisitorCard({Key? key, this.oneClientRequest, this.ministryRequestType})
+      : super(key: key);
 
   @override
   State<OneVisitorCard> createState() => _OneVisitorCardState();
@@ -46,6 +51,8 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
 
   @override
   Widget build(BuildContext context) {
+    widget.creationTime =
+        DateTime.tryParse('${widget.oneClientRequest!.creationTime!}Z')!.toLocal();
     return FadeAnimation(
       delay: 2,
       fadeDirection: FadeDirection.right,
@@ -58,41 +65,72 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            CustomImage.rectangle(
-              image:
-                  widget.oneClientRequest!.disabilityCategory!.attachment!.url,
-              isNetworkImage: true,
-              height: 25,
-              width: 25,
+            buildFlexWidget(
+              context,
+              child: CustomImage.rectangle(
+                image: widget
+                    .oneClientRequest!.disabilityCategory!.attachment!.url,
+                isNetworkImage: true,
+                height: 25,
+                width: 25,
+              ),
             ),
-            Text(widget.oneClientRequest!.orderNumber ?? "",
-                style: AppTheme.bodyText1),
+            buildFlexWidget(
+              context,
+              child: Text(widget.oneClientRequest!.orderNumber ?? "_______",
+                  style: AppTheme.bodyText1),
+            ),
+            buildFlexWidget(
+              context,
+              child: Text(widget.oneClientRequest!.clientFullName ?? "______",
+                  style: AppTheme.bodyText1),
+            ),
             // Icon(diabledMap[oneClientRequest!.clientRequestType]),
-            Text(widget.oneClientRequest!.disabilityNumber ?? "",
-                style: AppTheme.bodyText1),
-            Text(widget.oneClientRequest!.clientNationalNumber ?? "",
-                style: AppTheme.bodyText1),
 
-            Text(
-                widget.oneClientRequest!.clientRequestType == 1
-                    ? "in_waiting".tr()
-                    : widget.oneClientRequest!.clientRequestType == 2
-                        ? "treated".tr()
-                        : "canceled".tr(),
-                style: AppTheme.bodyText1
-                    .copyWith(color: AppColors.lightBlueColor)),
-            Text(
-                widget.oneClientRequest!.waitingSeconds != null
-                    ? widget.waitingTime!.toString().split(":")[0] +
-                        ":" +
-                        widget.waitingTime!.toString().split(":")[1]
-                    : "",
-                style: AppTheme.bodyText1.copyWith(
-                    color: (widget.oneClientRequest!.isLate! ||
-                            widget.waitingTime!.inMinutes >
-                                isLateDuration!.inMinutes)
-                        ? Colors.red
-                        : null)),
+            buildFlexWidget(
+              context,
+              child: Text(
+                  widget.ministryRequestType == 1
+                      ? widget.oneClientRequest!.clientNationalNumber ?? ""
+                      : widget.oneClientRequest!.disabilityNumber ?? "",
+                  style: AppTheme.bodyText1),
+            ),
+
+            buildFlexWidget(
+              context,
+              child: Text(
+                  widget.oneClientRequest!.clientRequestType == 1
+                      ? "in_waiting".tr()
+                      : widget.oneClientRequest!.clientRequestType == 2
+                          ? "treated".tr()
+                          : "canceled".tr(),
+                  style: AppTheme.bodyText1
+                      .copyWith(color: AppColors.lightBlueColor)),
+            ),
+            buildFlexWidget(
+              context,
+              child: Text(
+                  widget.oneClientRequest!.waitingSeconds != null
+                      ? widget.waitingTime!.toString().split(":")[0] +
+                          ":" +
+                          widget.waitingTime!.toString().split(":")[1]
+                      : "",
+                  style: AppTheme.bodyText1.copyWith(
+                      color: (widget.oneClientRequest!.isLate! ||
+                              widget.waitingTime!.inMinutes >
+                                  isLateDuration!.inMinutes)
+                          ? Colors.red
+                          : null)),
+            ),
+            buildFlexWidget(context,
+                child: Text(
+                  widget.creationTime!.hour.toString() +
+                      ":" +
+                      widget.creationTime!.minute.toString() +
+                      ":" +
+                      widget.creationTime!.second.toString(),
+                  style: AppTheme.bodyText1,
+                ))
           ],
         ),
       ),
@@ -105,4 +143,10 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
     int hours = ((timeInSeconds / 3600) % 60).toInt();
     return Duration(hours: hours, minutes: minutes, seconds: seconds);
   }
+}
+
+buildFlexWidget(BuildContext context, {Widget? child}) {
+  return Container(
+      width: AppDimension.screenWidth(context) / 8,
+      child: Align(alignment: Alignment.center, child: child!));
 }

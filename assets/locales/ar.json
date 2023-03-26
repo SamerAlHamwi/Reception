@@ -79,7 +79,11 @@
 
   "view_calls_history": "عرض سجل المكالمات",
   "you_need_create_screen_account": "من فضلك قم بإنشاء حساب لشاشة المكالمة أولاً ",
-  "ok": "موافق"
+  "ok": "موافق",
+  "name": "الاسم",
+  "please_enter_name": "يرجى إدخال الاسم",
+  "not_valid_national_number": "يجب أن لا يقل الرقم الوطني عن 12 رقم",
+  "please_enter_disability_number": "يرجى إدخال رقم الإعاقة"
 
 
 }

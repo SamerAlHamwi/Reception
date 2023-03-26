@@ -7,10 +7,10 @@ import '../constants/app_assets.dart';
 class DefaultScaffold extends StatelessWidget {
   final Widget? body;
   final Widget? previousPage;
-
   final String? logoUrl;
+  final bool? withPadding;
 
-  const DefaultScaffold({Key? key, this.body, this.logoUrl, this.previousPage})
+  const DefaultScaffold({Key? key, this.body, this.logoUrl, this.previousPage,this.withPadding=true})
       : super(key: key);
 
   @override
@@ -18,7 +18,7 @@ class DefaultScaffold extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding:withPadding!? const EdgeInsets.symmetric(horizontal: 16):null,
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(AppAssets.background), fit: BoxFit.fill)),

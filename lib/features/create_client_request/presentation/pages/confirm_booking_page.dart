@@ -50,8 +50,8 @@ class ConfirmBookingPage extends StatelessWidget {
                       ...[
                         KeyValueRow(
                             keyText: myMinistryModel!.ministryRequestType == 1
-                                ? "national_number".tr()
-                                : "disability_number".tr(),
+                                ? "national_number".tr()??""
+                                : "disability_number".tr()??"",
                             value: myMinistryModel!.ministryRequestType == 1
                                 ? createClientResponseModel!
                                     .clientNationalNumber
