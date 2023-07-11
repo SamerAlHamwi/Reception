@@ -46,7 +46,7 @@ class LocalNotificationService {
   }
 
   Future selectNotification(String payload) async {}
-
+//AndroidNotificationSound sound=AndroidNotificationSound();
   Future<void> showNotification({
     required String title,
     bool enableVibration = false,
@@ -72,6 +72,7 @@ class LocalNotificationService {
       maxProgress: maxProgress,
       channelDescription: 'channel description',
       playSound: playSound,
+      // sound:RawResourceAndroidNotificationSound("notification_sound") ,
       priority: Priority.high,
       importance: Importance.high,
     );

@@ -15,25 +15,34 @@ import 'core/utils/custom_easy_loading.dart';
 import 'core/utils/shared_storage.dart';
 import 'my_app.dart';
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  DartPluginRegistrant.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
+  if(!kIsWeb)
+  {
+    WidgetsFlutterBinding.ensureInitialized();
+    DartPluginRegistrant.ensureInitialized();
+    await EasyLocalization.ensureInitialized();
+  }
+
   await SharedStorage.init();
+
+  if(!kIsWeb)
+  {
   if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
     await Messaging.initFCM();
-  }
+  }}
   if (SharedStorage.hasToken()) {
     await SignalR().start(onReceived: (data) {
-      var notification =
-          FCMNotificationModel.fromSignalR(data as Map<String, dynamic>);
+      var notification = FCMNotificationModel.fromSignalR(data as Map<String, dynamic>);
       NotificationMiddleware.onRceived(notification);
     });
   }
   ServiceLocator.registerModels();
 
-  if (!Platform.isWindows) await AppConstant.getDefaultLanguage();
+
+  if(!kIsWeb)
+  {if (!Platform.isWindows) await AppConstant.getDefaultLanguage();}
   runApp(
     EasyLocalization(
       supportedLocales: AppConstant.languages.values.toList(),

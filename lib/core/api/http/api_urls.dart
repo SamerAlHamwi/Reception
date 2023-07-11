@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 class ApiURLs {
 
   ///BASE_URL dev
-  static const String baseUrl = 'https://ministrieapidev.metasignapp.com/api/';
+  static const String baseUrl ="https://ministrieapidev-dev.dev.itland-sy.com/api/"; //'https://ministrieapidev.metasignapp.com/api/';
   static const String baseUrl1 = 'https://ministrieapidev.metasignapp.com';
 
   ///BASE_URL staging

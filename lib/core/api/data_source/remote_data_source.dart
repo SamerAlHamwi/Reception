@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:ministries_reception_app/core/utils/navigation.dart';
@@ -28,6 +29,14 @@ class RemoteDataSource {
     Map<String, String> headers = {
       HEADER_CONTENT_TYPE: "application/json",
       HEADER_ACCEPT: "application/json",
+      // HEADER_CONTENT_TYPE:"application/json",
+      // HEADER_ACCEPT: "application/json",
+      //
+      // // "Transfer-Encoding": "chunked",
+      // // "Access-Control-Allow-Origin": "*",
+      // // "Content-Encoding": "gzip",
+      // // "Vary": "Authorization, Accept-Encoding",
+      //
     };
 
     /// Get the language.

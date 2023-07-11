@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:ministries_reception_app/core/utils/navigation.dart';
@@ -16,6 +15,7 @@ import '../../../core/notification/signal_r.dart';
 import '../../../core/utils/print/print.dart';
 import '../data/login_request_model.dart';
 import '../data/login_response_model.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AuthenticationRepository {
   static Future<BaseResultModel> authenticateLogIn(
@@ -35,10 +35,11 @@ class AuthenticationRepository {
             FCMNotificationModel.fromSignalR(data as Map<String, dynamic>);
         NotificationMiddleware.onRceived(notification);
       });
-      if (Platform.isAndroid || Platform.isMacOS || Platform.isIOS) {
+      if(!kIsWeb)
+     { if (Platform.isAndroid || Platform.isMacOS || Platform.isIOS) {
         await Messaging.initFCM();
         await NotificationCubit.updateFCMToken(Messaging.token);
-      }
+      }}
       // if (Messaging.token == null) {
       //   Print.showSnackBar(
       //     message: 'Your device is not supported by Google services',
