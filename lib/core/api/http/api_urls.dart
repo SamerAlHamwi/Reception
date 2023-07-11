@@ -4,7 +4,7 @@ class ApiURLs {
 
   ///BASE_URL dev
   static const String baseUrl ="https://ministrieapidev-dev.dev.itland-sy.com/api/"; //'https://ministrieapidev.metasignapp.com/api/';
-  static const String baseUrl1 = 'https://ministrieapidev.metasignapp.com';
+  static const String baseUrl1 = 'https://ministrieapidev-dev.dev.itland-sy.com';
 
   ///BASE_URL staging
  // static const String baseUrl = '';
