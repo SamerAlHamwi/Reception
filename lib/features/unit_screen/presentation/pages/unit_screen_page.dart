@@ -195,6 +195,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
 
   Widget pagination(int ministryRequestType) {
     return PaginationList<OneClientRequest>(
+      childEmptyWidget:Container() ,
       onCubitCreated: (cubit) {
         UnitScreenPage.refresh = cubit;
       },
