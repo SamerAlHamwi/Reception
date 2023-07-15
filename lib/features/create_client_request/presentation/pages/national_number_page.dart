@@ -38,6 +38,7 @@ class _NationalNumberPageState extends State<NationalNumberPage> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController? numberController = TextEditingController();
+  TextEditingController? transactionNumberController = TextEditingController();
 
   TextEditingController? nameController = TextEditingController();
 
@@ -97,6 +98,33 @@ class _NationalNumberPageState extends State<NationalNumberPage> {
                     withOutPadding: true,
                     autofocus: true,
                     required: true,
+                  ),  CustomTextField(
+                    controller: transactionNumberController,
+                    hintText:  "transactionNumber".tr(),
+                    validator: (value) {
+                      return null;
+                      // return validateNationalOrDisabilityNumber(value);
+                      //   Validator.numberValidate(value!, context);
+                    },
+                    onChanged: (value) {
+                      _clientRequestModel!.transactionNumber=double.tryParse(value);
+                    },
+                    textInputAction: TextInputAction.next,
+                    inputDecoration: AppTheme.inputDecoration.copyWith(
+                        prefixIcon: null,
+                        fillColor: AppColors.white,
+                        focusColor: AppColors.white,
+                        enabledBorder: AppStyles.inputDecorationBorder.copyWith(
+                          borderSide: const BorderSide(
+                            style: BorderStyle.solid,
+                            width: 0.4,
+                            color: AppColors.white,
+                          ),
+                        )),
+                    keyboardType: TextInputType.number,
+                    general: false,
+                    withOutPadding: true,
+                    required: false,
                   ),
                   CustomTextField(
                     controller: numberController,

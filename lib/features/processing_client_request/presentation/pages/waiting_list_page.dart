@@ -70,6 +70,11 @@ class _WaitingListPageState extends State<WaitingListPage> {
                               .copyWith(color: AppColors.primaryColor)),
                     ),
                     buildFlexWidget(context,
+                      child: Text("transactionNumber".tr(),
+                          style: AppTheme.bodyText1
+                              .copyWith(color: AppColors.primaryColor)),
+                    ),
+                    buildFlexWidget(context,
                       child: Text("request_status".tr(),
                           style: AppTheme.bodyText1
                               .copyWith(color: AppColors.primaryColor)),
@@ -115,5 +120,5 @@ class _WaitingListPageState extends State<WaitingListPage> {
 }
 buildFlexWidget(BuildContext context,{Widget? child})
 {
-  return Container(width: AppDimension.screenWidth(context)/6,child: Align(alignment: Alignment.bottomCenter,child: child!));
+  return Container(width: AppDimension.screenWidth(context)/6.5,child: Align(alignment: Alignment.bottomCenter,child: child!));
 }

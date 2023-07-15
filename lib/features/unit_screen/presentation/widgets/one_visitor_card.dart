@@ -109,6 +109,13 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
             ),
             buildFlexWidget(
               context,
+              child: Text(widget.oneClientRequest!.transactionNumber!=null?
+                  widget.oneClientRequest!.transactionNumber.toString():"",
+                  style: AppTheme.bodyText1
+                      .copyWith(color: AppColors.lightBlueColor)),
+            ),
+            buildFlexWidget(
+              context,
               child: Text(
                   widget.oneClientRequest!.waitingSeconds != null
                       ? widget.waitingTime!.toString().split(":")[0] +
@@ -147,6 +154,6 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
 
 buildFlexWidget(BuildContext context, {Widget? child}) {
   return Container(
-      width: AppDimension.screenWidth(context) / 8,
+      width: AppDimension.screenWidth(context) / 8.5,
       child: Align(alignment: Alignment.center, child: child!));
 }

@@ -1,6 +1,7 @@
 class CreateClientRequestModel {
   int? disabilityCategoryId;
   int? unitId;
+  int? transactionNumber;
   String? clientNationalNumber;
   String? clientFullName;
   String? disabilityNumber;
@@ -11,6 +12,7 @@ class CreateClientRequestModel {
   CreateClientRequestModel(
       {this.disabilityCategoryId,
       this.unitId,
+      this.transactionNumber,
       this.clientNationalNumber,
       this.clientFullName,
       this.disabilityNumber,
@@ -21,6 +23,7 @@ class CreateClientRequestModel {
   CreateClientRequestModel.fromJson(Map<String, dynamic> json) {
     disabilityCategoryId = json['disabilityCategoryId'];
     unitId = json['unitId'];
+    transactionNumber = json['transactionNumber'];
     clientNationalNumber = json['clientNationalNumber'];
     disabilityNumber = json['disabilityNumber'];
     treatTime = json['treatTime'];
@@ -38,6 +41,7 @@ class CreateClientRequestModel {
     data['treatTime'] = this.treatTime;
     data['clientFullName'] = this.clientFullName;
     data['id'] = this.id;
+    data['transactionNumber'] = this.transactionNumber;
     data['employeetreatNumber'] = this.employeetreatNumber;
     return data;
   }

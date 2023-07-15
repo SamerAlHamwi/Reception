@@ -28,6 +28,7 @@ class ClientsRequestsModel extends ListResultModel<OneClientRequest>{
 
 class OneClientRequest {
   int? id;
+  double? transactionNumber;
   int? unitId;
   Unit? unit;
   DisabilityCategory? disabilityCategory;
@@ -45,6 +46,7 @@ class OneClientRequest {
 
   OneClientRequest(
       {this.id,
+        this.transactionNumber,
         this.unitId,
         this.unit,
         this.disabilityCategory,
@@ -63,6 +65,7 @@ class OneClientRequest {
 
   OneClientRequest.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    transactionNumber = json['transactionNumber'];
     unitId = json['unitId'];
     disabilityCategory = json['disabilityCategory'] != null
         ? new DisabilityCategory.fromJson(json['disabilityCategory'])
@@ -86,6 +89,7 @@ class OneClientRequest {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['transactionNumber'] = this.transactionNumber;
     data['unitId'] = this.unitId;
     if (this.disabilityCategory != null) {
       data['disabilityCategory'] = this.disabilityCategory!.toJson();

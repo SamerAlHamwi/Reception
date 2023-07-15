@@ -68,6 +68,12 @@ class OneVisitorCardForReception extends StatelessWidget {
               ),
               buildFlexWidget(
                 context,
+                child: Text(oneClientRequest!.transactionNumber!=null?
+                oneClientRequest!.transactionNumber.toString():"",
+                    style: AppTheme.bodyText1),
+              ),
+              buildFlexWidget(
+                context,
                 child: Text(
                   oneClientRequest!.clientRequestType == 1
                       ? "in_waiting".tr()
@@ -87,7 +93,7 @@ class OneVisitorCardForReception extends StatelessWidget {
 
   buildFlexWidget(BuildContext context, {Widget? child}) {
     return Container(
-        width: AppDimension.screenWidth(context) / 6,
+        width: AppDimension.screenWidth(context) / 6.5,
         child: Align(alignment: Alignment.center, child: child!));
   }
 }
