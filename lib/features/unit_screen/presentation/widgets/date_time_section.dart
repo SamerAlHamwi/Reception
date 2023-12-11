@@ -38,7 +38,7 @@ class _DateTimeSectionState extends State<DateTimeSection> {
   @override
   Widget build(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Text("date".tr() + ":", style: AppTheme.headline3),
+      Text("date".tr() + ":", style: AppTheme.unitHeadline),
       DateRow(
         dateModel: DateModel(
             day: currentDateTime.day.toString(),
@@ -46,7 +46,7 @@ class _DateTimeSectionState extends State<DateTimeSection> {
             year: currentDateTime.year.toString()),
       ),
       SizedBox(width: 32),
-      Text("time".tr() + ":", style: AppTheme.headline3),
+      Text("time".tr() + ":", style: AppTheme.unitHeadline),
       TimeRow(
           timeModel: TimeModel(
               hour: currentDateTime.hour.toString(),

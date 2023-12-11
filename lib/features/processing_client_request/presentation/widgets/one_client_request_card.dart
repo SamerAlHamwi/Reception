@@ -10,6 +10,7 @@ import '../../../../core/constants/app_theme.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../../unit_screen/data/clients_requests_model.dart';
 import '../pages/client_book_details.dart';
+import '../pages/treated_request_information.dart';
 
 class OneVisitorCardForReception extends StatelessWidget {
   final OneClientRequest? oneClientRequest;
@@ -21,71 +22,73 @@ class OneVisitorCardForReception extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FadeAnimation(
-      fadeDirection: FadeDirection.right,
-      delay: 3,
-      child: InkWell(
-        onTap: () {
-          oneClientRequest!.clientRequestType == 1
-              ? Navigation.push(
-                  context,
-                  ClientBookDetails(
-                    logoUrl: ministryModel!.attachment!.url,
-                    requestId: oneClientRequest!.id!,
-                    oneClientRequest: oneClientRequest,
-                  ))
-              : null;
-        },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          height: 60,
-          decoration: BoxDecoration(color: AppColors.white, boxShadow: [
-            BoxShadow(color: AppColors.grey, offset: const Offset(0, 2))
-          ]),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              buildFlexWidget(
+
+    return InkWell(
+      onTap: () {
+        oneClientRequest!.clientRequestType == 1
+            ? Navigation.push(
                 context,
-                child: Text(oneClientRequest!.orderNumber ?? "-----",
-                    style: AppTheme.bodyText1),
+                ClientBookDetails(
+                  logoUrl: ministryModel!.attachment!.url,
+                  requestId: oneClientRequest!.id!,
+                  oneClientRequest: oneClientRequest,
+                ))
+            : Navigation.push(
+            context,
+            TreatedRequestInformation(
+              logoUrl: ministryModel!.attachment!.url,
+              requestId: oneClientRequest!.id!,
+              oneClientRequest: oneClientRequest,
+            ));
+      },
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(color: AppColors.white, boxShadow: [
+          BoxShadow(color: AppColors.grey, offset: const Offset(0, 2))
+        ]),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            buildFlexWidget(
+              context,
+              child: Text(oneClientRequest!.orderNumber ?? "-----",
+                  style: AppTheme.bodyText1),
+            ),
+            buildFlexWidget(
+              context,
+              child: Text(oneClientRequest!.clientFullName ?? "-----",
+                  style: AppTheme.bodyText1),
+            ),
+            buildFlexWidget(context,
+                child: Text(oneClientRequest!.unit!.name!,
+                    style: AppTheme.bodyText1)),
+            // buildFlexWidget(
+            //   context,
+            //   child: Text(
+            //       ministryModel!.ministryRequestType == 1
+            //           ? oneClientRequest!.clientNationalNumber ?? ""
+            //           : oneClientRequest!.disabilityNumber ?? "",
+            //       style: AppTheme.bodyText1),
+            // ),
+            buildFlexWidget(
+              context,
+              child: Text(oneClientRequest!.transactionNumber!=null?
+              oneClientRequest!.transactionNumber!.toInt().toString():"",
+                  style: AppTheme.bodyText1),
+            ),
+            buildFlexWidget(
+              context,
+              child: Text(
+                oneClientRequest!.clientRequestType == 1
+                    ? "in_waiting".tr()
+                    : "treated".tr(),
+                style: AppTheme.bodyText1.copyWith(
+                    color: oneClientRequest!.clientRequestType == 1
+                        ? AppColors.lightBlueColor
+                        : AppColors.green),
               ),
-              buildFlexWidget(
-                context,
-                child: Text(oneClientRequest!.clientFullName ?? "-----",
-                    style: AppTheme.bodyText1),
-              ),
-              buildFlexWidget(context,
-                  child: Text(oneClientRequest!.unit!.name!,
-                      style: AppTheme.bodyText1)),
-              buildFlexWidget(
-                context,
-                child: Text(
-                    ministryModel!.ministryRequestType == 1
-                        ? oneClientRequest!.clientNationalNumber ?? ""
-                        : oneClientRequest!.disabilityNumber ?? "",
-                    style: AppTheme.bodyText1),
-              ),
-              buildFlexWidget(
-                context,
-                child: Text(oneClientRequest!.transactionNumber!=null?
-                oneClientRequest!.transactionNumber.toString():"",
-                    style: AppTheme.bodyText1),
-              ),
-              buildFlexWidget(
-                context,
-                child: Text(
-                  oneClientRequest!.clientRequestType == 1
-                      ? "in_waiting".tr()
-                      : "treated".tr(),
-                  style: AppTheme.bodyText1.copyWith(
-                      color: oneClientRequest!.clientRequestType == 1
-                          ? AppColors.lightBlueColor
-                          : AppColors.green),
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
@@ -93,7 +96,7 @@ class OneVisitorCardForReception extends StatelessWidget {
 
   buildFlexWidget(BuildContext context, {Widget? child}) {
     return Container(
-        width: AppDimension.screenWidth(context) / 6.5,
+        width: AppDimension.screenWidth(context) / 6,
         child: Align(alignment: Alignment.center, child: child!));
   }
 }

@@ -10,6 +10,7 @@ import 'core/utils/shared_storage.dart';
 import 'core/widgets/easy_loading.dart';
 import 'features/auth/presentation/pages/login_page.dart';
 import 'features/call_reception/presentation/pages/welcome_call_reception_page.dart';
+import 'features/main_unit/presentation/pages/main_unit_screen.dart';
 import 'features/select_unit_journy/presentation/pages/welcome_reception_page.dart';
 import 'features/unit_screen/presentation/pages/unit_screen_page.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 
   static getNextPage() {
-
+    //return LoginPage();
     if (SharedStorage.hasToken()) {
       if (SharedStorage.getUserType() == 4) {
         SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -42,18 +43,21 @@ class MyApp extends StatefulWidget {
       }
       else if (SharedStorage.getUserType() == 4) {
         SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
         return const StandByPage();
       }
       else if (SharedStorage.getUserType() == 5) {
         return const WelcomeCallReceptionPage();
+      }
+      else if (SharedStorage.getUserType() == 6) {
+        return const MainUnitScreen();
       }
       else{
         return LoginPage();
 
       }
 
-    } else {
+    }
+    else {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
@@ -61,6 +65,8 @@ class MyApp extends StatefulWidget {
 
       return LoginPage();
     }
+
+
   }
 }
 

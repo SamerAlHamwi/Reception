@@ -4,6 +4,9 @@ class Call {
   int? id;
   String? screenJoinedDate;
   String? screenLeaveDate;
+  int? departmentId;
+  String? departmentName;
+  String? callRequesterName;
   String? orderNumber;
   String? creationTime;
   int? numberOfCallMinutes;
@@ -14,23 +17,30 @@ class Call {
   Screen? screen;
   Attachments? attachment;
 
-  Call({
-    this.id,
-    this.screenJoinedDate,
-    this.screenLeaveDate,
-    this.creationTime,
-    this.orderNumber,
-    this.numberOfCallMinutes,
-    this.callStatus,
-    this.link,
-    this.room,
-    this.leader,
-    this.screen,
-    this.attachment
-  });
+  Call(
+      {this.id,
+      this.departmentId,
+      this.departmentName,
+      this.callRequesterName,
+      this.screenJoinedDate,
+      this.screenLeaveDate,
+      this.creationTime,
+      this.orderNumber,
+      this.numberOfCallMinutes,
+      this.callStatus,
+      this.link,
+      this.room,
+      this.leader,
+      this.screen,
+      this.attachment});
 
   Call.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
+
+    departmentName = json['departmentName'] ?? "";
+    departmentId = json['departmentId'] ?? 0;
+    callRequesterName = json['callRequesterName'] ?? "";
+
     screenJoinedDate = json['screenJoinedDate'];
     creationTime = json['creationTime'];
     orderNumber = json['orderNumber'];
@@ -66,6 +76,9 @@ class Call {
     data['leader'] = leader;
     data['screen'] = screen;
     data['attachment'] = attachment;
+    data['callRequesterName'] = callRequesterName;
+    data['departmentId'] = departmentId;
+    data['departmentName'] = departmentName;
     return data;
   }
 }

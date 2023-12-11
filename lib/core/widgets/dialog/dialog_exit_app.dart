@@ -29,9 +29,12 @@ class _DialogExitAppState extends State<DialogExitApp> {
           borderRadius: BorderRadius.all(Radius.circular(20.0))),
       title: Text(
         widget.title!,
+        style: AppTheme.headline3,
+
       ),
       content: Text(
         widget.content!,
+        style: AppTheme.headline3,
       ),
       actions: <Widget>[
         Padding(
@@ -42,7 +45,7 @@ class _DialogExitAppState extends State<DialogExitApp> {
             children: [
               Container(
                 width:orientation == Orientation.portrait?AppDimension.screenWidth(context)/ 5:AppDimension.screenWidth(context)/ 8,
-                 height: 50,
+                 height: 60,
                 padding:const EdgeInsets.all(8),
                 decoration:const BoxDecoration(
                     color: AppColors.lightBlueColor,
@@ -51,13 +54,13 @@ class _DialogExitAppState extends State<DialogExitApp> {
                   onPressed: widget.onPressedYes,
                   child: Text('yes'.tr(),
                       style:
-                          AppTheme.bodyText2.copyWith(color: AppColors.white)),
+                          AppTheme.headline3.copyWith(color: AppColors.white)),
                 ),
               ),
              const SizedBox(width: 8),
               Container(
                 width:orientation == Orientation.portrait?AppDimension.screenWidth(context)/ 5:AppDimension.screenWidth(context)/ 8,
-                height: 50,
+                height: 60,
                 padding:const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                     color: AppColors.primaryColor.shade600,
@@ -66,7 +69,7 @@ class _DialogExitAppState extends State<DialogExitApp> {
                   onPressed: widget.onPressedNo,
                   child: Text('no'.tr(),
                       style:
-                          AppTheme.bodyText2.copyWith(color: AppColors.white)),
+                          AppTheme.headline3.copyWith(color: AppColors.white)),
                 ),
               ),
             ],

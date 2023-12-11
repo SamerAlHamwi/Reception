@@ -81,16 +81,15 @@ class ClientBookDetails extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        Text(oneClientRequest!.orderNumber!),
-                                        Text(oneClientRequest!.unit!.name!),
-
+                                        Text(oneClientRequest!.orderNumber!,style: AppTheme.bodyText1,),
+                                        Text(oneClientRequest!.unit!.name!,style: AppTheme.bodyText1),
                                         Text(SharedStorage
                                             .getMinistryRequestType() ==
                                                 1
                                             ? _oneClientRequestModel!
                                                 .clientNationalNumber??""
                                             : _oneClientRequestModel!
-                                                .disabilityNumber!??""),
+                                                .disabilityNumber!??"",style: AppTheme.bodyText1),
 
                                       ]))
                             ].expand(

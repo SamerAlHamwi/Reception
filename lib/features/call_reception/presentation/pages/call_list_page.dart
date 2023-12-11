@@ -24,7 +24,7 @@ class CallListPage extends StatelessWidget {
         logoUrl: myMinistryModel!.attachment!.url,
         body: Container(
             padding: EdgeInsets.symmetric(
-                horizontal: AppDimension.screenWidth(context) * 1.5 / 10),
+                horizontal: AppDimension.screenWidth(context) * 1.5 / 10,vertical: 32),
             height: AppDimension.screenHeight(context) * 7 / 10,
             child: pagination()));
   }
@@ -33,6 +33,7 @@ class CallListPage extends StatelessWidget {
 
   Widget pagination() {
     return PaginationList<Call>(
+      childEmptyWidget:Container() ,
       onCubitCreated: (cubit) {
        // GetIt.I<CubitsStore>().callsList = cubit;
         callsList = cubit;

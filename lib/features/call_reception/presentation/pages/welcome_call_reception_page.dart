@@ -6,16 +6,15 @@ import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimension.dart';
 import '../../../../core/constants/app_theme.dart';
-import '../../../../core/frequently_used_function/frequenty_funtions.dart';
 import '../../../../core/utils/navigation.dart';
 import '../../../../core/widgets/logout_popup_menu_button.dart';
-import '../../../auth/presentation/pages/login_page.dart';
 import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../../select_unit_journy/presentation/pages/departments_page.dart';
 import '../../../select_unit_journy/presentation/widgets/center_logo.dart';
 import '../../../select_unit_journy/presentation/widgets/main_elevated_button.dart';
 import '../../../select_unit_journy/repository/ministriey_repo.dart';
 import 'call_list_page.dart';
+import 'leaders_page.dart';
 
 class WelcomeCallReceptionPage extends StatelessWidget {
   const WelcomeCallReceptionPage({Key? key}) : super(key: key);
@@ -61,10 +60,21 @@ class WelcomeCallReceptionPage extends StatelessWidget {
                             children: [
                               MainElevatedButton(
                                 onTap: () {
-                                  Navigation.push(
-                                      context,
-                                      DepartmentsPage(
-                                          myMinistryModel: myMinistryModel));
+                                  myMinistryModel.departments != null &&
+                                          myMinistryModel.departments!.length ==
+                                              1
+                                      ? Navigation.push(
+                                          context,
+                                          LeadersPage(
+                                            myMinistryModel: myMinistryModel,
+                                            departmentId: myMinistryModel!
+                                                .departments![0].id,
+                                          ))
+                                      : Navigation.push(
+                                          context,
+                                          DepartmentsPage(
+                                              myMinistryModel:
+                                                  myMinistryModel));
                                 },
                                 text: "create_video_call_request".tr(),
                               ),

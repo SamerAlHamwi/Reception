@@ -114,49 +114,58 @@ class AppTheme {
       headline5: headline5,
       headline6: headline6);
 
-  static TextStyle bodyText1 = TextStyle(
-      fontSize: 14,
+  static TextStyle get bodyText1 => TextStyle(
+      fontSize: 28,
       fontFamily: SharedStorage.getLanguage() == "ar" ? "Tajawal" : "Outfit",
       color: AppColors.black);
-  static TextStyle bodyText2 = TextStyle(
+  static TextStyle get unitText => TextStyle(
+      fontSize: 16,
+      fontFamily: SharedStorage.getLanguage() == "ar" ? "Tajawal" : "Outfit",
+      color: AppColors.black);
+  static TextStyle get bodyText2 => TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w600,
       fontFamily: SharedStorage.getLanguage() == "ar" ? "Tajawal" : "Outfit");
-  static TextStyle bodyText3 = TextStyle(
+  static TextStyle get bodyText3 => TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.normal,
       fontFamily:
           SharedStorage.getLanguage() == "ar" ? "Tajawal" : "Outfit-Regular",
       color: AppColors.white); // default for Text() widget
-  static TextStyle button = TextStyle(
+  static TextStyle get button => TextStyle(
       fontSize: 12,
       fontFamily: SharedStorage.getLanguage() == "ar" ? "Tajawal" : "Outfit");
-  static TextStyle subtitle1 = TextStyle(
+  static TextStyle get subtitle1 => TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w600,
       fontFamily: SharedStorage.getLanguage() == "ar"
           ? "Tajawal"
           : "Outfit"); // default for ListTile(title:) widget style
-  static TextStyle subtitle2 = TextStyle(
+  static TextStyle get subtitle2 => TextStyle(
       fontSize: 12,
       fontFamily: SharedStorage.getLanguage() == "ar" ? "Tajawal" : "Outfit");
-  static TextStyle headline4 = TextStyle(
+  static TextStyle get headline4 => TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.normal,
       fontFamily: SharedStorage.getLanguage() == "ar" ? "Tajawal" : "Outfit",
       color: AppColors.white);
-  static TextStyle headline3 = TextStyle(
-      fontSize: 16,
+  static  TextStyle get headline3 => TextStyle(
+      fontSize: 35,
+      fontWeight: FontWeight.w600,
+      fontFamily: SharedStorage.getLanguage() == "ar" ? "Tajawal" : "Outfit",
+      color: AppColors.black);
+  static TextStyle get unitHeadline => TextStyle(
+      fontSize: 18,
       fontWeight: FontWeight.w600,
       fontFamily: SharedStorage.getLanguage() == "ar" ? "Tajawal" : "Outfit",
       color: AppColors.black);
 
-  static TextStyle headline5 = TextStyle(
+  static TextStyle get headline5 => TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.normal,
       fontFamily: SharedStorage.getLanguage() == "ar" ? "Tajawal" : "Outfit",
       color: AppColors.white);
-  static TextStyle headline6 = TextStyle(
+  static TextStyle get headline6 => TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.bold,
       fontFamily: SharedStorage.getLanguage() == "ar" ? "Tajawal" : "Outfit",

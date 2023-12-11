@@ -21,6 +21,7 @@ class Messaging {
   static Future<void> onNotificationReceived(RemoteMessage message) async {
     await Firebase.initializeApp();
     var notification = FCMNotificationModel.fromJson(message.data);
+
     NotificationMiddleware.onRceived(notification);
   }
 

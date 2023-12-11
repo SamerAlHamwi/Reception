@@ -16,7 +16,6 @@ import '../../../create_client_request/repository/create_client_request_reposito
 import '../../../select_unit_journy/presentation/widgets/main_elevated_button.dart';
 import '../../../unit_screen/data/clients_requests_model.dart';
 import 'confirm_finish_client_request_page.dart';
-
 class JobNumberPage extends StatelessWidget {
   TextEditingController? numberController = TextEditingController(text: "");
   final String? logoUrl;
@@ -25,6 +24,7 @@ class JobNumberPage extends StatelessWidget {
 
   JobNumberPage({Key? key, this.logoUrl, this.oneClientRequest})
       : super(key: key);
+  DateFormat dateFormat = DateFormat('yyyy-MM-ddTHH:mm:ssZ');
 
   @override
   Widget build(BuildContext context) {
@@ -102,10 +102,17 @@ class JobNumberPage extends StatelessWidget {
                   oneClientRequest!.disabilityNumber;
               _clientRequestModel!.clientNationalNumber =
                   oneClientRequest!.clientNationalNumber;
+              _clientRequestModel!.clientFullName =
+                  oneClientRequest!.clientFullName;
+              _clientRequestModel!.transactionNumber =
+                  oneClientRequest!.transactionNumber;
 
               if (FrequentlyFunction.isValidNumber(
                   _clientRequestModel!.employeetreatNumber)) {
-                _clientRequestModel!.treatTime = DateTime.now().toString();
+               // String now = DateTime.now().toString();
+                //_clientRequestModel!.treatTime =now.replaceAll(' ', 'T')+'Z';
+                 //print( "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+                 //print(_clientRequestModel!.treatTime);
                 _updateRequestModelCubit!.createModel(_clientRequestModel);
               }
             }));

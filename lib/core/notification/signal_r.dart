@@ -8,7 +8,6 @@ import 'package:signalr_netcore/itransport.dart';
 
 import '../constants/app_settings.dart';
 import '../utils/print/print.dart';
-
 class SignalR {
   final serverUrl = "${ApiURLs.baseUrl1}/signalr";
   HubConnection? hubConnection;
@@ -40,6 +39,11 @@ class SignalR {
     try {
       await hubConnection!.start();
       hubConnection!.on('getNotification', (arguments) {
+
+        print("ffffffffffffffffffffffffffffffffffffffff");
+        print(arguments);
+        print(arguments.runtimeType);
+        print(arguments!.single);
         Map res = arguments!.single as Map;
         onReceived(res);
       });

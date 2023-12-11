@@ -100,21 +100,20 @@ class _PaginationListState<Model> extends State<PaginationList<Model>> {
 
     return FadeAnimation(
       fadeDirection: FadeDirection.bottom,
-      child: Scrollbar(
-        child: SmartRefresher(
-          enablePullDown: true,
-          enablePullUp: false,
-          header: MaterialClassicHeader(),
-          controller: _refreshController,
-          onRefresh: () async {
-            cubit!.getList();
-          },
-          onLoading: () async {
-            cubit!.getList(loadMore: true);
-          },
-          child: child,
-          footer: customFooter,
-        ),
+      child: SmartRefresher(
+        scrollDirection: Axis.vertical,
+        enablePullDown: true,
+        enablePullUp: true,
+        header: const MaterialClassicHeader(),
+        controller: _refreshController,
+        onRefresh: () async {
+          cubit?.getList();
+        },
+        onLoading: () async {
+          cubit?.getList(loadMore: true);
+        },
+        footer: customFooter,
+        child: child,
       ),
     );
   }

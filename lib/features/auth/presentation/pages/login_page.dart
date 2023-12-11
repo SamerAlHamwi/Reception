@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                         svg: false,
                       ),
                       Container(
-                        height: AppDimension.screenHeight(context) / 2,
+                       // height: AppDimension.screenHeight(context) / 2,
                         width: AppDimension.screenWidth(context) / 2.5,
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -95,6 +95,15 @@ class _LoginPageState extends State<LoginPage> {
                                   controller: password,
                                   hintText: 'password'.tr(),
                                   required: true,
+                                  onEditComplete: (){
+                                    var valid = _formKey.currentState!.validate();
+                                    if (valid && loginCubit != null) {
+                                      FocusScope.of(_formKey.currentState!.context).unfocus();
+                                      loginCubit!.createModel(_loginRequestModel);
+                                    } else {
+                                      return;
+                                    }
+                                  },
                                   obscureText: true,
                                   validator: (value) {
                                     Validator.passwordValidate(value!, context);
@@ -109,6 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                   textInputAction: TextInputAction.next,
                                   keyboardType: TextInputType.emailAddress,
                                   general: false,
+
                                 ),
                                 _buildLoginButton(context)
                               ].expand((element) => [
@@ -134,7 +144,6 @@ class _LoginPageState extends State<LoginPage> {
   _buildLoginButton(context) {
     return CreateModel<LoginResponseModel>(
         onSuccess: (LoginResponseModel model) {
-
             Navigation.pushAndRemoveUntil(context,  MyApp.getNextPage());
 
         },
@@ -154,8 +163,8 @@ class _LoginPageState extends State<LoginPage> {
               }
             },
             child: Container(
-                height: 50,
-                width: AppDimension.screenWidth(context) / 5,
+                height: 70,
+                width: AppDimension.screenWidth(context) / 3,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     gradient: const LinearGradient(

@@ -79,7 +79,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
                                   children: [
                                     // SizedBox(height: 8),
                                     Text(myMinistriyModel!.name ?? "",
-                                        style: AppTheme.headline3.copyWith(
+                                        style: AppTheme.unitHeadline.copyWith(
                                             overflow: TextOverflow.ellipsis)),
                                    const SizedBox(height: 8),
                                     Text(
@@ -103,7 +103,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
                                                     : ""
                                                 : ""
                                             : "",
-                                        style: AppTheme.headline3.copyWith(
+                                        style: AppTheme.unitHeadline.copyWith(
                                             overflow: TextOverflow.ellipsis)),
                                   ],
                                 ),
@@ -181,7 +181,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
                                                   Icons.logout,
                                                   color:
                                                       AppColors.lightBlueColor,
-                                                  size: 22,
+                                                  size: 40,
                                                 )),
                                           ],
                                         ))
@@ -196,6 +196,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
   Widget pagination(int ministryRequestType) {
     return PaginationList<OneClientRequest>(
       childEmptyWidget:Container() ,
+      withPagination: true,
       onCubitCreated: (cubit) {
         UnitScreenPage.refresh = cubit;
       },

@@ -38,6 +38,8 @@
   "enter_disability_number": "Please enter your Disability Number",
   "national_number": "Civil ID",
   "disability_number": "Disability ID",
+  "national_number_for_client": "Civil ID For Client",
+
   "next": "Next",
   "create_new_client_request": "Create new client request",
   "finish_process": "Finish Process",
@@ -59,6 +61,10 @@
   "no": "No",
   "treated": "Serviced",
   "request_number": "Request Number",
+  "request_processing_date": "Request Processing Date",
+  "request_processing_time": "Request Processing Time",
+
+  "request_information": "Request information",
   "customer_order_treated": "Customer Order Number",
   "successfully": "Successfully Received",
   "request_status": "Request Status",
@@ -82,9 +88,10 @@
   "please_enter_name": "Please enter name",
   "not_valid_national_number": "National number should be 12 digit",
   "please_enter_disability_number": "Please enter disabilityNumber",
-  "transactionNumber": "Transaction Number"
-
-
+  "transactionNumber": "Transaction Number",
+  "No_more_data": "No more data",
+  "select_client_name": "Please enter client name",
+  "": ""
 
 
 

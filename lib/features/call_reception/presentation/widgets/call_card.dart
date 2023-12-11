@@ -1,13 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ministries_reception_app/core/constants/app_theme.dart';
-import 'package:ministries_reception_app/core/utils/service_locator.dart';
 
 import '../../../../core/api/core_models/empty_model.dart';
 import '../../../../core/boilerplate/create_model/cubits/create_model_cubit.dart';
 import '../../../../core/boilerplate/create_model/widgets/CreateModel.dart';
 import '../../../../core/constants/app_colors.dart';
-import '../../../select_unit_journy/data/my_ministriy_model.dart';
 import '../../data/call_model.dart';
 import '../../data/notify_screen_model.dart';
 import '../../repository/call_reception_repo.dart';
@@ -46,7 +44,9 @@ class CallCard extends StatelessWidget {
             // Date and time
             Row(
               children: [
-                SizedBox(width: 2,),
+                const SizedBox(
+                  width: 2,
+                ),
                 Container(
                   height: 8,
                   width: 8,
@@ -64,42 +64,86 @@ class CallCard extends StatelessWidget {
                 // CancelCallPopUp(callId: call.id)
               ],
             ),
-            SizedBox(height: 8,),
-            Row(
-              children: [
-                const Icon(Icons.date_range, color: AppColors.primaryColor),
-                const SizedBox(width: 8),
-                Text(
-                  "${"date".tr()} : ",
-                  style: AppTheme.bodyText2
-                      .copyWith(color: AppColors.primaryColor),
-                ),
-                Text(call.creationTime!.split("T")[0].toString(),
-                    style: AppTheme.bodyText2)
-              ],
+            const SizedBox(
+              height: 8,
             ),
-            SizedBox(height: 4,),
-            Row(
-              children: [
-                const Icon(
-                  Icons.access_time_outlined,
-                  color: AppColors.primaryColor,
-                ),
-                const SizedBox(width: 8),
-                Text("${"time".tr()} : ",
-                    style: AppTheme.bodyText2
-                        .copyWith(color: AppColors.primaryColor)),
-                Text(
-                    DateTime.tryParse('${call.creationTime!}Z')!
-                        .toLocal()
-                        .toString()
-                        .split('.')[0]
-                        .toString()
-                        .split(" ")[1]
-                        .toString(),
-                    style: AppTheme.bodyText2)
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Column(children: [
+                ...[
+                  Row(
+                    children: [
+                      Text(
+                        "${"sector_name".tr()} : ",
+                        style: AppTheme.bodyText1
+                            .copyWith(color: AppColors.primaryColor),
+                      ),
+                      Text(call.departmentName!, style: AppTheme.bodyText1)
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "${"leader_name".tr()} : ",
+                        style: AppTheme.bodyText1
+                            .copyWith(color: AppColors.primaryColor),
+                      ),
+                      Text(call.leader != null ? call!.leader!.name ?? "" : "",
+                          style: AppTheme.bodyText1)
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "${"client_name".tr()} : ",
+                        style: AppTheme.bodyText1
+                            .copyWith(color: AppColors.primaryColor),
+                      ),
+                      Text(call.callRequesterName!, style: AppTheme.bodyText1)
+                    ],
+                  ),
+                ].expand(
+                    (element) => [element, const SizedBox(height: 4)].toList())
+              ]),
             ),
+
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              Row(
+                children: [
+                  const Icon(Icons.date_range, color: AppColors.primaryColor),
+                  const SizedBox(width: 8),
+                  Text(
+                    "${"date".tr()} : ",
+                    style: AppTheme.bodyText1.copyWith(color: AppColors.black),
+                  ),
+                  Text(call.creationTime!.split("T")[0].toString(),
+                      style: AppTheme.bodyText1)
+                ],
+              ),
+              // SizedBox(height: 4,),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.access_time_outlined,
+                    color: AppColors.primaryColor,
+                  ),
+                  const SizedBox(width: 8),
+                  Text("${"time".tr()} : ",
+                      style:
+                          AppTheme.bodyText1.copyWith(color: AppColors.black)),
+                  Text(
+                      DateTime.tryParse('${call.creationTime!}Z')!
+                          .toLocal()
+                          .toString()
+                          .split('.')[0]
+                          .toString()
+                          .split(" ")[1]
+                          .toString(),
+                      style: AppTheme.bodyText1)
+                ],
+              ),
+            ]),
+
             const SizedBox(
               height: 8,
             ),

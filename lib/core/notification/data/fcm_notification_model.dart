@@ -22,7 +22,8 @@ class FCMNotificationModel {
       this.state});
 
   FCMNotificationModel.fromJson(Map<String, dynamic> json) {
-    print(json);
+    print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+
     if (json['id'] != null) {
       id = json['id'];
     }
@@ -53,6 +54,7 @@ class FCMNotificationModel {
   }
 
   FCMNotificationModel.fromFCM(Map<String, dynamic> json) {
+    print("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
     if (json['type'] != null) {
       type = NotificationType.values[int.parse(json['type'])];
     }
@@ -65,8 +67,10 @@ class FCMNotificationModel {
   }
 
   FCMNotificationModel.fromSignalR(Map<String, dynamic> json) {
+    print("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
     serverLink = json['notification']['data']['properties']['ServerLink'];
     room = json['notification']['data']['properties']['Room'];
+    callId = json['notification']['data']['properties']['CallId'].toString();
     type = NotificationType.values.firstWhere((element) => element
         .toString()
         .toLowerCase()

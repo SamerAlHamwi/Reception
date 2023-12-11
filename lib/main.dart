@@ -16,7 +16,7 @@ import 'core/utils/shared_storage.dart';
 import 'my_app.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb;
-
+import 'package:wakelock/wakelock.dart';
 Future<void> main() async {
   if(!kIsWeb)
   {
@@ -27,15 +27,15 @@ Future<void> main() async {
 
   await SharedStorage.init();
 
-  if(!kIsWeb)
-  {
+
   if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
     await Messaging.initFCM();
-  }}
+  }
   if (SharedStorage.hasToken()) {
     await SignalR().start(onReceived: (data) {
       var notification = FCMNotificationModel.fromSignalR(data as Map<String, dynamic>);
       NotificationMiddleware.onRceived(notification);
+
     });
   }
   ServiceLocator.registerModels();
@@ -43,6 +43,8 @@ Future<void> main() async {
 
   if(!kIsWeb)
   {if (!Platform.isWindows) await AppConstant.getDefaultLanguage();}
+  Wakelock.enable();
+
   runApp(
     EasyLocalization(
       supportedLocales: AppConstant.languages.values.toList(),

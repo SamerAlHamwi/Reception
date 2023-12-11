@@ -25,11 +25,11 @@ class MainElevatedButton extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-            height: height == null ? 55 : height,
+            height: height == null ? 90 : height,
 
             width:width==null? double.infinity:width,
             padding: withPadding == true ? EdgeInsets.all(16) : null,
-            child: Center(
+            child:  Center(
                 child: Text(
                   text!,
                   style: AppTheme.headline3.copyWith(color: AppColors.white),

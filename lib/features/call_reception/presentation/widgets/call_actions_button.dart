@@ -18,14 +18,14 @@ class CallActionsButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-          width: AppDimension.screenWidth(context)*2/14,
-          height: 50,
-          padding: const EdgeInsets.all(8),
+          width: AppDimension.screenWidth(context)*2/12,
+          height: 65,
+        //  padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
               color: buttonColor, borderRadius: BorderRadius.circular(15)),
           child: Center(
             child: Text(buttonText ?? "",
-                style: AppTheme.bodyText1.copyWith(color: textColor)),
+                style: AppTheme.unitHeadline.copyWith(color: textColor)),
           )),
     );
   }

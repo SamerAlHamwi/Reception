@@ -15,12 +15,16 @@ import '../../data/clients_requests_model.dart';
 class OneVisitorCard extends StatefulWidget {
   final OneClientRequest? oneClientRequest;
   final int? ministryRequestType;
+  final bool? isMainUnit;
   DateTime? creationTime;
 
   late Timer _timer;
-  Duration? waitingTime = Duration(seconds: 0);
+  Duration? waitingTime =const Duration(seconds: 0);
 
-  OneVisitorCard({Key? key, this.oneClientRequest, this.ministryRequestType})
+  OneVisitorCard({Key? key,
+    this.oneClientRequest,
+    this.ministryRequestType,
+    this.isMainUnit=false})
       : super(key: key);
 
   @override
@@ -52,19 +56,24 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
   @override
   Widget build(BuildContext context) {
     widget.creationTime =
-        DateTime.tryParse('${widget.oneClientRequest!.creationTime!}Z')!.toLocal();
+        DateTime.tryParse('${widget.oneClientRequest!.creationTime!}Z')!
+            .toLocal();
     return FadeAnimation(
       delay: 2,
       fadeDirection: FadeDirection.right,
       child: Container(
         padding: const EdgeInsets.all(8),
-        height: 60,
         decoration: BoxDecoration(color: AppColors.white, boxShadow: [
           BoxShadow(color: AppColors.grey, offset: Offset(0, 2))
         ]),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+           widget.isMainUnit!? buildFlexWidget(
+              context,
+              child: Text(widget.oneClientRequest!.unit!.name ?? "",
+                  style: AppTheme.unitText),
+            ):Container(),
             buildFlexWidget(
               context,
               child: CustomImage.rectangle(
@@ -78,12 +87,12 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
             buildFlexWidget(
               context,
               child: Text(widget.oneClientRequest!.orderNumber ?? "_______",
-                  style: AppTheme.bodyText1),
+                  style: AppTheme.unitText),
             ),
             buildFlexWidget(
               context,
               child: Text(widget.oneClientRequest!.clientFullName ?? "______",
-                  style: AppTheme.bodyText1),
+                  style: AppTheme.unitText),
             ),
             // Icon(diabledMap[oneClientRequest!.clientRequestType]),
 
@@ -93,10 +102,10 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
                   widget.ministryRequestType == 1
                       ? widget.oneClientRequest!.clientNationalNumber ?? ""
                       : widget.oneClientRequest!.disabilityNumber ?? "",
-                  style: AppTheme.bodyText1),
+                  style: AppTheme.unitText),
             ),
 
-            buildFlexWidget(
+            !widget.isMainUnit!? buildFlexWidget(
               context,
               child: Text(
                   widget.oneClientRequest!.clientRequestType == 1
@@ -104,14 +113,18 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
                       : widget.oneClientRequest!.clientRequestType == 2
                           ? "treated".tr()
                           : "canceled".tr(),
-                  style: AppTheme.bodyText1
+                  style: AppTheme.unitText
                       .copyWith(color: AppColors.lightBlueColor)),
-            ),
+            ):Container(),
             buildFlexWidget(
               context,
-              child: Text(widget.oneClientRequest!.transactionNumber!=null?
-                  widget.oneClientRequest!.transactionNumber.toString():"",
-                  style: AppTheme.bodyText1
+              child: Text(
+                  widget.oneClientRequest!.transactionNumber != null
+                      ? widget.oneClientRequest!.transactionNumber!
+                          .toInt()
+                          .toString()
+                      : "",
+                  style: AppTheme.unitText
                       .copyWith(color: AppColors.lightBlueColor)),
             ),
             buildFlexWidget(
@@ -122,7 +135,7 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
                           ":" +
                           widget.waitingTime!.toString().split(":")[1]
                       : "",
-                  style: AppTheme.bodyText1.copyWith(
+                  style: AppTheme.unitText.copyWith(
                       color: (widget.oneClientRequest!.isLate! ||
                               widget.waitingTime!.inMinutes >
                                   isLateDuration!.inMinutes)
@@ -136,7 +149,7 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
                       widget.creationTime!.minute.toString() +
                       ":" +
                       widget.creationTime!.second.toString(),
-                  style: AppTheme.bodyText1,
+                  style: AppTheme.unitText,
                 ))
           ],
         ),

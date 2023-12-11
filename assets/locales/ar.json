@@ -37,6 +37,7 @@
   "enter_disability_number": "يرجى إدخال رقم الإعاقة",
   "national_number": "الرقم المدني",
   "disability_number": "رقم الإعاقة",
+  "national_number_for_client": "الرقم المدني للعميل",
   "next": "التالي",
   "create_new_client_request": "حجز دور جديد",
  "waiting_list": "قائمة الانتظار",
@@ -58,10 +59,13 @@
   "no": "لا",
   "treated": "تمت الخدمة",
   "request_number": "رقم الطلب",
+  "request_information": "معلومات الطلب",
   "customer_order_treated": "تم استلام طلب العميل رقم",
   "successfully": "بنجاح",
   "request_status": "حالة الطلب",
   "role_num": "رقم الطلب",
+  "request_processing_date": "تاريخ معالجة الطلب",
+  "request_processing_time": "وقت معالجة الطلب",
   "view_clients_requests": "عرض طلبات العملاء",
   "create_new_request": "إنشاء طلب جديد",
   "create_video_call_request": "إنشاء طلب مكالمة فيديو",
@@ -84,7 +88,11 @@
   "please_enter_name": "يرجى إدخال الاسم",
   "not_valid_national_number": "يجب أن لا يقل الرقم الوطني عن 12 رقم",
   "please_enter_disability_number": "يرجى إدخال رقم الإعاقة",
-  "transactionNumber": "رقم المعاملة"
+  "transactionNumber": "رقم المعاملة",
+  "No_more_data": "لا يوجد بيانات أكثر",
+  "select_client_name": "يرجى إدخال اسم العميل",
+  "sector_name": "اسم القطاع",
+  "client_name": "اسم العميل"
 
 
 }

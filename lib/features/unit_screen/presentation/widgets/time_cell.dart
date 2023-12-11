@@ -16,7 +16,7 @@ class TimeCell extends StatelessWidget {
         return Container(
           height:sizes.maxHeight,
           width:islarge!?sizes.maxHeight*1.5: sizes.maxHeight,
-          child: Center(child: Text(value!,style: AppTheme.headline3,)),
+          child: Center(child: Text(value!,style: AppTheme.unitHeadline,)),
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.circular(10),

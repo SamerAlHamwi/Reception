@@ -66,7 +66,7 @@ class UnitsPage extends StatelessWidget {
                         .map((unit) {
                       return MainElevatedButton(
                           //isSquared: true,
-                        height: 75,
+                        height: 90,
                           width: AppDimension.screenWidth(context) / 3,
                           text: unit.name,
                           onTap: () {

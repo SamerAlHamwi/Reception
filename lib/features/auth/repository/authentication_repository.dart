@@ -31,8 +31,7 @@ class AuthenticationRepository {
       SharedStorage.writeToken(res.accessToken);
       SharedStorage.writeUserType(res.userType);
       SignalR().start(onReceived: (data) {
-        var notification =
-            FCMNotificationModel.fromSignalR(data as Map<String, dynamic>);
+        var notification = FCMNotificationModel.fromSignalR(data as Map<String, dynamic>);
         NotificationMiddleware.onRceived(notification);
       });
       if(!kIsWeb)

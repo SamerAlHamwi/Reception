@@ -1,7 +1,7 @@
 class CreateClientRequestModel {
   int? disabilityCategoryId;
   int? unitId;
-  int? transactionNumber;
+  double? transactionNumber;
   String? clientNationalNumber;
   String? clientFullName;
   String? disabilityNumber;

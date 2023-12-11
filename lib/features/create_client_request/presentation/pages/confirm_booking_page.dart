@@ -39,7 +39,7 @@ class ConfirmBookingPage extends StatelessWidget {
                 Text(
                   "booking_is_finished".tr(),
                   style: AppTheme.headline3.copyWith(
-                      color: AppColors.black.withOpacity(0.8), fontSize: 18),
+                      color: AppColors.black.withOpacity(0.8)),
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(
@@ -73,11 +73,11 @@ class ConfirmBookingPage extends StatelessWidget {
                               height: 8,
                             )
                           ]),
+                     const SizedBox(height: 16),
                       Container(
                           padding: EdgeInsets.symmetric(
                               horizontal:
                                   AppDimension.screenWidth(context) * 2 / 10),
-                          height: 50,
                           child: MainElevatedButton(
                             onTap: () {
                               Navigation.push(context, WelcomeReceptionPage());

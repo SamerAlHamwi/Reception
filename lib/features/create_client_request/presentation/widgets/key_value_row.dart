@@ -13,10 +13,10 @@ class KeyValueRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          keyText!,style: AppTheme.headline3.copyWith(fontSize: 14),
+          keyText!,style: AppTheme.headline3,
         ),
-        Text("  :  "),
-        Text(value!)
+        Text("  :  ",style: AppTheme.headline3),
+        Text(value!,style: AppTheme.headline3)
       ],
     );
   }

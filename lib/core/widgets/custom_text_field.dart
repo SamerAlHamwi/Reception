@@ -11,6 +11,7 @@ class CustomTextField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final bool? obscureText;
   final ValueChanged<String>? onChanged;
+  final void Function()? onEditComplete;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
@@ -32,6 +33,7 @@ class CustomTextField extends StatefulWidget {
       required this.hintText,
       this.icon,
       this.imageData,
+      this.onEditComplete,
       this.validator,
       this.onChanged,
       this.obscureText = false,
@@ -112,17 +114,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
                           .copyWith(color: AppColors.primaryColor)))
               : Container(),
           TextFormField(
+            onEditingComplete:widget.onEditComplete!=null? widget.onEditComplete:null,
             enabled: widget.enabled!,
             onTap: widget.onTap,
             expands: widget.maxLength == 0 ? true : false,
             controller: widget.controller ?? TextEditingController(),
             decoration: _inputDecoration.copyWith(
+                contentPadding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
                 hintText: !widget.required!
                     ? widget.hintText
                     : widget.hintText + ' *',
-                hintStyle: AppTheme.subtitle2.copyWith(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+                hintStyle: AppTheme.bodyText1.copyWith(
                   color: AppColors.darkGrey,
                 ),
                 suffixIcon: widget.obscureText!
@@ -140,7 +142,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       )
                     : null),
             validator: widget.validator,
-            style: TextStyle(fontSize: 14),
+            style: AppTheme.bodyText1,
             obscureText: !isSeen ? widget.obscureText! : false,
             onChanged: (value) {
               if (widget.onChanged != null) {

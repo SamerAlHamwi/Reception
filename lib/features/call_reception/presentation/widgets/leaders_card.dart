@@ -30,8 +30,8 @@ class LeadersCard extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-            height: 230,
-            width: AppDimension.screenWidth(context) / 4,
+            height: 250,
+            width: AppDimension.screenWidth(context) / 3,
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),

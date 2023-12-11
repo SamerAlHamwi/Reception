@@ -42,7 +42,6 @@ class _WaitingListPageState extends State<WaitingListPage> {
         body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-
               Expanded(flex: 3,
                 child: Align(alignment: Alignment.bottomCenter,
                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
@@ -61,14 +60,14 @@ class _WaitingListPageState extends State<WaitingListPage> {
                           style: AppTheme.bodyText1
                               .copyWith(color: AppColors.primaryColor)),
                     ),
-                    buildFlexWidget(context,
-                      child: Text(
-                          widget.myMinistryModel!.ministryRequestType == 1
-                              ? "national_number".tr()??""
-                              : "disability_number".tr()??"",
-                          style: AppTheme.bodyText1
-                              .copyWith(color: AppColors.primaryColor)),
-                    ),
+                    // buildFlexWidget(context,
+                    //   child: Text(
+                    //       widget.myMinistryModel!.ministryRequestType == 1
+                    //           ? "national_number".tr()??""
+                    //           : "disability_number".tr()??"",
+                    //       style: AppTheme.bodyText1
+                    //           .copyWith(color: AppColors.primaryColor)),
+                    // ),
                     buildFlexWidget(context,
                       child: Text("transactionNumber".tr(),
                           style: AppTheme.bodyText1
@@ -90,9 +89,11 @@ class _WaitingListPageState extends State<WaitingListPage> {
 
   Widget pagination() {
     return PaginationList<OneClientRequest>(
+      childEmptyWidget:Container(),
       onCubitCreated: (cubit) {
         widget.refresh = cubit;
       },
+      withPagination: true,
       repositoryCallBack: (data) => UnitScreenRepository.getClientsList(data,null),
       listBuilder: (List<OneClientRequest> list) {
         return buildList(list);
@@ -104,13 +105,13 @@ class _WaitingListPageState extends State<WaitingListPage> {
     return ListView.separated(
         separatorBuilder: (context, index) {
           return const SizedBox(
-            height: 8,
+            height: 8
           );
         },
         itemBuilder: ((context, index) {
           return OneVisitorCardForReception(
             key: GlobalKey(),
-            oneClientRequest: list![index],
+            oneClientRequest: list[index],
             ministryModel: widget.myMinistryModel,
           );
         }),
@@ -120,5 +121,6 @@ class _WaitingListPageState extends State<WaitingListPage> {
 }
 buildFlexWidget(BuildContext context,{Widget? child})
 {
-  return Container(width: AppDimension.screenWidth(context)/6.5,child: Align(alignment: Alignment.bottomCenter,child: child!));
+  return Container(width: AppDimension.screenWidth(context)/6,
+      child: Align(alignment: Alignment.bottomCenter,child: child!));
 }

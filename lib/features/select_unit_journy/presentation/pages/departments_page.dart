@@ -39,7 +39,8 @@ class DepartmentsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Expanded(flex: 7,
+                myMinistryModel!.departments!=null?
+                Expanded(flex: 7,
                     child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: AppDimension.screenWidth(context) / 4),
@@ -77,7 +78,7 @@ class DepartmentsPage extends StatelessWidget {
                                     });
                               }),
                         ),
-                  )
+                  ):Container()
 
               ],
             ),

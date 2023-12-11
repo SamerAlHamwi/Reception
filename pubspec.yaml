@@ -17,7 +17,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.16+16
+version: 1.0.29+29
 
 environment:
   sdk: '>=2.18.1 <3.0.0'
@@ -32,6 +32,7 @@ dependencies:
   window_manager: ^0.3.0
   #Http
   dio: ^4.0.6
+  audioplayers:
   pretty_dio_logger: ^1.1.1
   #state management
   flutter_bloc: ^8.0.1
@@ -60,6 +61,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  firebase_core: 2.4.1
+  firebase_core_platform_interface: 4.6.0
+
 
 
 dev_dependencies:
@@ -102,6 +106,7 @@ dev_dependencies:
   photo_view: ^0.14.0
   signalr_netcore: ^1.3.2
 
+
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -135,18 +140,11 @@ flutter:
     - assets/
     - assets/locales/
     - assets/images/
+    - assets/audio/
   fonts:
     - family: CustomIcons
       fonts:
         - asset: assets/fonts/CustomIcons.ttf
-    - family: Cairo
-      fonts:
-        - asset: assets/fonts/Cairo/Cairo-ExtraLight.ttf
-        - asset: assets/fonts/Cairo/Cairo-Light.ttf
-        - asset: assets/fonts/Cairo/Cairo-Regular.ttf
-        - asset: assets/fonts/Cairo/Cairo-SemiBold.ttf
-        - asset: assets/fonts/Cairo/Cairo-Bold.ttf
-        - asset: assets/fonts/Cairo/Cairo-Black.ttf
 
 
     - family: Outfit

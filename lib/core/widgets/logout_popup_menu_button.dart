@@ -10,7 +10,7 @@ class LogoutPopupMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton(icon: Icon(Icons.adaptive.more,color: color,),
+    return PopupMenuButton(icon: Icon(Icons.adaptive.more,color: color,size: 30),
       itemBuilder: (context) {
         return [
           PopupMenuItem(

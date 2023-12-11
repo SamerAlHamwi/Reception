@@ -2,9 +2,19 @@ import 'package:flutter/foundation.dart';
 
 class ApiURLs {
 
+  ///BASE_URL main
+  // static const String baseUrl ="https://ministrieapidev.metasignapp.com/api/";
+  // static const String baseUrl1 = 'https://ministrieapidev.metasignapp.com';
+
+
   ///BASE_URL dev
-  static const String baseUrl ="https://ministrieapidev-dev.dev.itland-sy.com/api/"; //'https://ministrieapidev.metasignapp.com/api/';
-  static const String baseUrl1 = 'https://ministrieapidev-dev.dev.itland-sy.com';
+  // static const String baseUrl ="https://ministrieapidev-dev.dev.itland-sy.com/api/";
+  // static const String baseUrl1 = 'https://ministrieapidev-dev.dev.itland-sy.com';
+
+  // ///BASE_URL New
+  static const String baseUrl ="https://ministryapi.metasignapp.com/api/";
+  static const String baseUrl1 = 'https://ministryapi.metasignapp.com';
+
 
   ///BASE_URL staging
  // static const String baseUrl = '';
