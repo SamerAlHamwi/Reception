@@ -91,7 +91,8 @@
   "transactionNumber": "Transaction Number",
   "No_more_data": "No more data",
   "select_client_name": "Please enter client name",
-  "": ""
+  "need_interpreter": "Does the call require an interpreter?",
+  "call_need_interpreter": "The call need an interpreter"
 
 
 

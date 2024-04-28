@@ -16,7 +16,7 @@ import '../../../select_unit_journy/presentation/widgets/main_elevated_button.da
 import '../../data/create_call_request.dart';
 import '../../repository/call_reception_repo.dart';
 
-class ClientNameScreen extends StatelessWidget {
+class ClientNameScreen extends StatefulWidget {
   final MyMinistryModel? myMinistryModel;
   final int? departmentId;
   final int? leaderId;
@@ -26,13 +26,28 @@ class ClientNameScreen extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<ClientNameScreen> createState() => _ClientNameScreenState();
+}
+
+class _ClientNameScreenState extends State<ClientNameScreen> {
+  late bool asCrossMeeting;
+  TextEditingController? nameController ;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    asCrossMeeting = false;
+    nameController = TextEditingController();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
 
-    TextEditingController? nameController = TextEditingController();
 
     return DefaultScaffold(
-      logoUrl: myMinistryModel!.attachment!.url,
+      logoUrl: widget.myMinistryModel!.attachment!.url,
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -86,12 +101,47 @@ class ClientNameScreen extends StatelessWidget {
                     autofocus: true,
                     required: true,
                   ),
+                  Row(
+                    children: [
+                      Text(
+                        'need_interpreter'.tr(),
+                        style: AppTheme.headline5.copyWith(
+                            fontSize: 20,
+                            color: AppColors.black,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(width: 32),
+                      Transform.scale(
+                        scale: 1.5,
+                        child: Switch(
+                          value: asCrossMeeting,
+                          activeColor: AppColors.primaryColor,
+                          thumbColor:
+                              MaterialStateProperty.all(AppColors.white),
+                          activeTrackColor: AppColors.primaryColor,
+                          inactiveThumbColor: AppColors.grey,
+                          inactiveTrackColor: AppColors.grey,
+                          // trackColor: MaterialStateProperty.all(AppColors.lightBlueColor),
+                          onChanged: (value) {
+                            setState(() {
+                              asCrossMeeting = value;
+                            });
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+
                   MainElevatedButton(
                       text: "next".tr(),
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          _showConfirmDialog(context, leaderId,
-                              nameController.text, departmentId);
+                          _showConfirmDialog(
+                              context,
+                              widget.leaderId,
+                              nameController!.text,
+                              widget.departmentId,
+                              asCrossMeeting);
                         }
                       })
                 ].expand((element) => [element, const SizedBox(height: 16)])
@@ -105,7 +155,8 @@ class ClientNameScreen extends StatelessWidget {
 
   CreateModelCubit? cubit;
 
-  _showConfirmDialog(context, leaderId, String clientName, departmentId) {
+  _showConfirmDialog(
+      context, leaderId, String clientName, departmentId, asCrossMeeting) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -149,13 +200,15 @@ class ClientNameScreen extends StatelessWidget {
                                       .copyWith(color: Colors.white)),
                               onPressed: () {
                                 //  myMinistryModel!.screens=[];
-                                if (myMinistryModel!.screens != null) {
-                                  if (myMinistryModel!.screens!.length > 0) {
+                                if (widget.myMinistryModel!.screens != null) {
+                                  if (widget.myMinistryModel!.screens!.length >
+                                      0) {
                                     cubit!.createModel(CreateCallRequest(
                                         leaderId: leaderId,
                                         clientName: clientName,
-                                        screenId:
-                                            myMinistryModel!.screens![0].id,
+                                        asCrossMeeting: asCrossMeeting,
+                                        screenId: widget
+                                            .myMinistryModel!.screens![0].id,
                                         departmentId: departmentId));
                                   } else {
                                     _showAlertForCreateScreen(context);

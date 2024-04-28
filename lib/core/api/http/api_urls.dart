@@ -15,6 +15,10 @@ class ApiURLs {
   static const String baseUrl ="https://ministryapi.metasignapp.com/api/";
   static const String baseUrl1 = 'https://ministryapi.metasignapp.com';
 
+  // ///BASE_URL New Dev
+  // static const String baseUrl ="https://ministry-api.bkp.itlandfz.com/api/";
+  // static const String baseUrl1 = 'https://ministry-api.bkp.itlandfz.com';
+
 
   ///BASE_URL staging
  // static const String baseUrl = '';
@@ -34,8 +38,10 @@ class ApiURLs {
       baseUrl + 'services/app/User/SetCurrentFcmToken';
   static const String getCalls = baseUrl + 'services/app/Call/GetAll';
   static const String createCall = baseUrl + 'services/app/Call/Create';
+
   static const String notifyScreenToJoinUrl = baseUrl + 'services/app/Call/NotifyScreenToJoin';
   static const String notifyScreenToLeaveUrl = baseUrl + 'services/app/Call/NotifyScreenToLeave';
+
   static const String CancleCallRequestUrl = baseUrl + 'services/app/Call/CancleRequest';
   static const String getDepartmentByIdURL = baseUrl + 'services/app/Department/Get';
   static const String joinCall = baseUrl + 'services/app/Call/JoinCall';

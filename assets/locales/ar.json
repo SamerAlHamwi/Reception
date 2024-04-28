@@ -92,7 +92,10 @@
   "No_more_data": "لا يوجد بيانات أكثر",
   "select_client_name": "يرجى إدخال اسم العميل",
   "sector_name": "اسم القطاع",
-  "client_name": "اسم العميل"
+  "client_name": "اسم العميل",
+  "need_interpreter": "المكالمة بحاجة إلى وجود مترجم ؟",
+  "call_need_interpreter": "المكالمة تحتاج لوجود مترجم"
+
 
 
 }

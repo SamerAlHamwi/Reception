@@ -14,6 +14,7 @@ class Call {
   String? link;
   String? room;
   Leader? leader;
+  bool? asCrossMeeting;
   Screen? screen;
   Attachments? attachment;
 
@@ -30,6 +31,7 @@ class Call {
       this.callStatus,
       this.link,
       this.room,
+      this.asCrossMeeting,
       this.leader,
       this.screen,
       this.attachment});
@@ -45,6 +47,7 @@ class Call {
     creationTime = json['creationTime'];
     orderNumber = json['orderNumber'];
     screenLeaveDate = json['screenJoinedDate'];
+    asCrossMeeting = json['asCrossMeeting'];
     numberOfCallMinutes = json['numberOfCallMinutes'] ?? 0;
     callStatus = json['callStatus'] ?? 0;
     link = json['link'] ?? '';
@@ -73,6 +76,7 @@ class Call {
     data['creationTime'] = creationTime;
     data['link'] = link;
     data['room'] = room;
+    data['asCrossMeeting'] = asCrossMeeting;
     data['leader'] = leader;
     data['screen'] = screen;
     data['attachment'] = attachment;

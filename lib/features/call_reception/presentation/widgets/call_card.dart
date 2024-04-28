@@ -102,6 +102,16 @@ class CallCard extends StatelessWidget {
                       Text(call.callRequesterName!, style: AppTheme.bodyText1)
                     ],
                   ),
+                  Row(
+                    children: [
+                      Text(
+                        "${"call_need_interpreter".tr()} : ",
+                        style: AppTheme.bodyText1
+                            .copyWith(color: AppColors.primaryColor),
+                      ),
+                      Text(call.asCrossMeeting==true?'yes'.tr():'no'.tr(), style: AppTheme.bodyText1)
+                    ],
+                  ),
                 ].expand(
                     (element) => [element, const SizedBox(height: 4)].toList())
               ]),
