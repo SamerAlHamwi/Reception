@@ -68,7 +68,7 @@ class CallReceptionRepo {
       data: {"id": callId},
       method: HttpMethod.put,
       withAuthentication: true,
-      url: ApiURLs.CancleCallRequestUrl,
+      url: ApiURLs.cancelCallRequestUrl,
     );
   }
 

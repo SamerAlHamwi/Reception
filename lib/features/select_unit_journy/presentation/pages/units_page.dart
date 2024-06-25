@@ -26,25 +26,22 @@ class UnitsPage extends StatelessWidget {
       logoUrl: myMinistryModel!.attachment!.url,
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         ...[
-          Expanded(
-            flex: 2,
-            child: Center(
-              child: Text(
-                "select_desired".tr(),
-                style: AppTheme.bodyText1,
-              ),
-            ),
-          ),
+          // Expanded(
+          //   flex: 2,
+          //   child: Center(
+          //     child: Text(
+          //       "select_desired".tr(),
+          //       style: AppTheme.bodyText1,
+          //     ),
+          //   ),
+          // ),
           Expanded(
             flex: 2,
             child: Padding(
               padding:   EdgeInsets.symmetric(
             horizontal: AppDimension.screenWidth(context) * 2 / 10),
               child: MainElevatedButton(
-                  text: myMinistryModel!.departments!
-                      .firstWhere(
-                          (element) => element.id == selectedDepartmentId)!
-                      .name,
+                  text: '${myMinistryModel!.departments!.firstWhere((element) => element.id == selectedDepartmentId).name} \n ${"select_desired".tr()}',
                   onTap: () {},
                   isDark: true),
             ),
@@ -61,7 +58,7 @@ class UnitsPage extends StatelessWidget {
                   children: [
                     ...myMinistryModel!.departments!
                         .firstWhere(
-                            (element) => element.id == selectedDepartmentId)!
+                            (element) => element.id == selectedDepartmentId)
                         .units!
                         .map((unit) {
                       return MainElevatedButton(

@@ -77,19 +77,20 @@ class ClientBookDetails extends StatelessWidget {
                               Container(
                                   padding: const EdgeInsets.all(16),
                                   color: AppColors.white,
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                  child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Text(oneClientRequest!.orderNumber!,style: AppTheme.bodyText1,),
                                         Text(oneClientRequest!.unit!.name!,style: AppTheme.bodyText1),
                                         Text(SharedStorage
                                             .getMinistryRequestType() ==
                                                 1
-                                            ? _oneClientRequestModel!
+                                            ? _oneClientRequestModel
                                                 .clientNationalNumber??""
-                                            : _oneClientRequestModel!
-                                                .disabilityNumber!??"",style: AppTheme.bodyText1),
+                                            : _oneClientRequestModel
+                                                .disabilityNumber! ?? "",style: AppTheme.bodyText1),
 
                                       ]))
                             ].expand(

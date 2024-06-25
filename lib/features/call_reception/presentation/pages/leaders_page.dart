@@ -46,9 +46,9 @@ class LeadersPage extends StatelessWidget {
                           direction: Axis.horizontal, //default
                           spacing: 24,
                           runSpacing: 24,
-                          children: department!.employees != null
+                          children: department.employees != null
                               ? [
-                                  ...department!.employees!
+                                  ...department.employees!
                                       .map((Employees employee) => LeadersCard(
                                             leaderDetails: employee,
                                             onTap: () {

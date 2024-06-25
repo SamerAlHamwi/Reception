@@ -25,16 +25,10 @@ class MainElevatedButton extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-            height: height == null ? 90 : height,
+            height: height ?? 90,
 
-            width:width==null? double.infinity:width,
-            padding: withPadding == true ? EdgeInsets.all(16) : null,
-            child:  Center(
-                child: Text(
-                  text!,
-                  style: AppTheme.headline3.copyWith(color: AppColors.white),
-                  textAlign: TextAlign.center,
-                )),
+            width:width ?? double.infinity,
+            padding: withPadding == true ? const EdgeInsets.all(16) : null,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 gradient: LinearGradient(colors: isDark! ? [
@@ -42,6 +36,12 @@ class MainElevatedButton extends StatelessWidget {
                   AppColors.blueColor
                 ] : [
                   Colors.cyan,
-                  Colors.blue]))));
+                  Colors.blue])),
+            child:  Center(
+                child: Text(
+                  text!,
+                  style: AppTheme.headline5.copyWith(color: AppColors.white),
+                  textAlign: TextAlign.center,
+                ))));
   }
 }

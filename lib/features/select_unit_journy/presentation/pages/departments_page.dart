@@ -30,7 +30,6 @@ class DepartmentsPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
                   Expanded(flex: 3,
                     child: Center(
                       child: Text(

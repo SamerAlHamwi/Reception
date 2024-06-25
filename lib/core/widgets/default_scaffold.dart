@@ -29,7 +29,7 @@ class DefaultScaffold extends StatelessWidget {
                 children: [
                   LogoImage(imageUrl: logoUrl),
                   IconButton(
-                    icon: Icon(Icons.arrow_forward),
+                    icon: const Icon(Icons.arrow_forward),
                     onPressed: () {
                       if (previousPage == null) {
                         Navigation.pop(context);
