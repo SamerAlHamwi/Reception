@@ -27,7 +27,7 @@ class TreatedRequestInformation extends StatelessWidget {
         body: GetModel<OneClientRequestModel>(
             repositoryCallBack: (data) =>
                 ProcessingRequestRepository.getOneRequestDetails(requestId!),
-            modelBuilder: (OneClientRequestModel _oneClientRequestModel) {
+            modelBuilder: (OneClientRequestModel oneClientRequestModel) {
               return Container(
                 padding: EdgeInsets.symmetric(
                     horizontal: AppDimension.screenWidth(context) * 2 / 10),
@@ -54,14 +54,12 @@ class TreatedRequestInformation extends StatelessWidget {
                                 SharedStorage.getMinistryRequestType() == 1
                                     ? _buildRowInformation(
                                         'national_number_for_client'.tr(),
-                                        _oneClientRequestModel!
+                                        oneClientRequestModel
                                                 .clientNationalNumber ??
                                             "")
                                     : _buildRowInformation(
                                         'disability_number'.tr(),
-                                        _oneClientRequestModel!
-                                                .disabilityNumber! ??
-                                            ""),
+                                        oneClientRequestModel.disabilityNumber!),
                                 _buildRowInformation('unit_name'.tr(),
                                     oneClientRequest!.unit!.name!),
                                 _buildRowInformation('job_id'.tr(),
@@ -69,7 +67,7 @@ class TreatedRequestInformation extends StatelessWidget {
                                 _buildRowInformation(
                                     'request_processing_date'.tr(),
                                     oneClientRequest!.treatTime!
-                                        .split('T')[0]!),
+                                        .split('T')[0]),
                                 _buildRowInformation(
                                     'request_processing_time'.tr(),
                                     DateTime.tryParse('${oneClientRequest!.treatTime!}Z')!

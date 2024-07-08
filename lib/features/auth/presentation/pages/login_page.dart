@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                                 _buildLoginButton(context)
                               ].expand((element) => [
                                     element,
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     )
                                   ]),
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                       )
                     ].expand((element) => [
                           element,
-                          SizedBox(
+                          const SizedBox(
                             height: 16,
                           )
                         ])
