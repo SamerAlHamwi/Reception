@@ -31,63 +31,65 @@ class TreatedRequestInformation extends StatelessWidget {
               return Container(
                 padding: EdgeInsets.symmetric(
                     horizontal: AppDimension.screenWidth(context) * 2 / 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.security_outlined,
-                      color: AppColors.lightBlueColor,
-                      size: 60,
-                    ),
-                    Text(
-                      "request_information".tr(),
-                      style: AppTheme.headline3,
-                    ),
-                    const SizedBox(height: 16),
-                    Container(
-                        padding: const EdgeInsets.all(16),
-                        // color: AppColors.white,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              ...[
-                                SharedStorage.getMinistryRequestType() == 1
-                                    ? _buildRowInformation(
-                                        'national_number_for_client'.tr(),
-                                        oneClientRequestModel
-                                                .clientNationalNumber ??
-                                            "")
-                                    : _buildRowInformation(
-                                        'disability_number'.tr(),
-                                        oneClientRequestModel.disabilityNumber!),
-                                _buildRowInformation('unit_name'.tr(),
-                                    oneClientRequest!.unit!.name!),
-                                _buildRowInformation('job_id'.tr(),
-                                    oneClientRequest!.employeetreatNumber!),
-                                _buildRowInformation(
-                                    'request_processing_date'.tr(),
-                                    oneClientRequest!.treatTime!
-                                        .split('T')[0]),
-                                _buildRowInformation(
-                                    'request_processing_time'.tr(),
-                                    DateTime.tryParse('${oneClientRequest!.treatTime!}Z')!
-                                        .toLocal().toString().split(' ')[1].split('.')[0]),
-                              ].expand((element) =>
-                                  [element, const SizedBox(height: 8)])
-                            ])),
-                    const SizedBox(height: 16),
-                    Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal:
-                                AppDimension.screenWidth(context) * 2 / 10),
-                        child: MainElevatedButton(
-                          height: 60,
-                          onTap: () {
-                            Navigation.pop(context);
-                          },
-                          text: 'ok'.tr(),
-                        ))
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.security_outlined,
+                        color: AppColors.lightBlueColor,
+                        size: 60,
+                      ),
+                      Text(
+                        "request_information".tr(),
+                        style: AppTheme.headline3,
+                      ),
+                      const SizedBox(height: 16),
+                      Container(
+                          padding: const EdgeInsets.all(16),
+                          // color: AppColors.white,
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                ...[
+                                  SharedStorage.getMinistryRequestType() == 1
+                                      ? _buildRowInformation(
+                                          'national_number_for_client'.tr(),
+                                          oneClientRequestModel
+                                                  .clientNationalNumber ??
+                                              "")
+                                      : _buildRowInformation(
+                                          'disability_number'.tr(),
+                                          oneClientRequestModel.disabilityNumber!),
+                                  _buildRowInformation('unit_name'.tr(),
+                                      oneClientRequest!.unit!.name!),
+                                  _buildRowInformation('job_id'.tr(),
+                                      oneClientRequest!.employeetreatNumber!),
+                                  _buildRowInformation(
+                                      'request_processing_date'.tr(),
+                                      oneClientRequest!.treatTime!
+                                          .split('T')[0]),
+                                  _buildRowInformation(
+                                      'request_processing_time'.tr(),
+                                      DateTime.tryParse(oneClientRequest!.treatTime!)!
+                                          .toString().split(' ')[1].split('.')[0]),
+                                ].expand((element) =>
+                                    [element, const SizedBox(height: 8)])
+                              ])),
+                      const SizedBox(height: 16),
+                      Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  AppDimension.screenWidth(context) * 2 / 10),
+                          child: MainElevatedButton(
+                            height: 60,
+                            onTap: () {
+                              Navigation.pop(context);
+                            },
+                            text: 'ok'.tr(),
+                          ))
+                    ],
+                  ),
                 ),
               );
             }));

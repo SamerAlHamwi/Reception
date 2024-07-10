@@ -55,9 +55,7 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
 
   @override
   Widget build(BuildContext context) {
-    widget.creationTime =
-        DateTime.tryParse('${widget.oneClientRequest!.creationTime!}Z')!
-            .toLocal();
+    widget.creationTime = DateTime.tryParse(widget.oneClientRequest!.creationTime!)!;
     return FadeAnimation(
       delay: 2,
       fadeDirection: FadeDirection.right,

@@ -65,8 +65,6 @@ class MyApp extends StatefulWidget {
 
       return LoginPage();
     }
-
-
   }
 }
 

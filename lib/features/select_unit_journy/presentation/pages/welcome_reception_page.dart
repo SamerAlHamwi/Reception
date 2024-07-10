@@ -1,3 +1,4 @@
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ministries_reception_app/features/select_unit_journy/presentation/widgets/main_elevated_button.dart';
@@ -30,59 +31,61 @@ class WelcomeReceptionPage extends StatelessWidget {
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(AppAssets.background), fit: BoxFit.fill)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Align(
-                    alignment: Alignment.topLeft,
-                    child: LogoutPopupMenuButton()),
-                Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ...[
-                        CenterLogo(logoUrl: myMinistryModel.attachment!.url!),
-                        Text(
-                          myMinistryModel!.name ?? "",
-                          style: AppTheme.headline3,
-                        ),
-                        Text(
-                          myMinistryModel!.description ?? "",
-                          style: AppTheme.headline3
-                              .copyWith(overflow: TextOverflow.ellipsis),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal:
-                                  AppDimension.screenWidth(context) / 4),
-                          child: MainElevatedButton(
-                            onTap: () {
-                              Navigation.push(
-                                  context,
-                                  DisabledCategoryPage(
-                                      myMinistryModel: myMinistryModel));
-                            },
-                            text: "create_new_request".tr(),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Align(
+                      alignment: Alignment.topLeft,
+                      child: LogoutPopupMenuButton()),
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ...[
+                          CenterLogo(logoUrl: myMinistryModel.attachment!.url!),
+                          Text(
+                            myMinistryModel.name ?? "",
+                            style: AppTheme.headline3,
                           ),
-                        )
-                      ].expand((element) => [element, SizedBox(height: 8)]),
-                    ]),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  alignment: Alignment.bottomLeft,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigation.push(context,
-                          WaitingListPage(myMinistryModel: myMinistryModel));
-                    },
-                    child: Text(
-                      "view_clients_requests".tr(),
-                      style: AppTheme.headline3
-                          .copyWith(color: AppColors.primaryColor),
+                          Text(
+                            myMinistryModel.description ?? "",
+                            style: AppTheme.headline3
+                                .copyWith(overflow: TextOverflow.ellipsis),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    AppDimension.screenWidth(context) / 4),
+                            child: MainElevatedButton(
+                              onTap: () {
+                                Navigation.push(
+                                    context,
+                                    DisabledCategoryPage(
+                                        myMinistryModel: myMinistryModel));
+                              },
+                              text: "create_new_request".tr(),
+                            ),
+                          )
+                        ].expand((element) => [element, const SizedBox(height: 8)]),
+                      ]),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    alignment: Alignment.bottomLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigation.push(context,
+                            WaitingListPage(myMinistryModel: myMinistryModel));
+                      },
+                      child: Text(
+                        "view_clients_requests".tr(),
+                        style: AppTheme.headline3
+                            .copyWith(color: AppColors.primaryColor),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ));
         });

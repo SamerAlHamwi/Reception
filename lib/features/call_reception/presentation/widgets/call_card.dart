@@ -142,8 +142,7 @@ class CallCard extends StatelessWidget {
                       style:
                           AppTheme.bodyText1.copyWith(color: AppColors.black)),
                   Text(
-                      DateTime.tryParse('${call.creationTime!}Z')!
-                          .toLocal()
+                      DateTime.tryParse(call.creationTime!)!
                           .toString()
                           .split('.')[0]
                           .toString()

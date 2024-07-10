@@ -68,7 +68,7 @@ class JobNumberPage extends StatelessWidget {
                   autofocus: true,
                 ),
                 _buildSubmitButton(context)
-              ].expand((element) => [element, SizedBox(height: 16)])
+              ].expand((element) => [element, const SizedBox(height: 16)])
             ]),
           ),
         ));
