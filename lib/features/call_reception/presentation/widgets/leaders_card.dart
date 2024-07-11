@@ -31,7 +31,7 @@ class LeadersCard extends StatelessWidget {
         onTap: onTap,
         child: Container(
             height: 250,
-            width: AppDimension.screenWidth(context) / 3,
+            width: AppDimension.screenWidth(context) / 2.7,
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),

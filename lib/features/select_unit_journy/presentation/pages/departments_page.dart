@@ -30,16 +30,21 @@ class DepartmentsPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                  Expanded(flex: 3,
-                    child: Center(
-                      child: Text(
-                        "select_desired".tr(),
-                        style: AppTheme.bodyText1,
-                      ),
+                Expanded(
+                  flex: 1,
+                  child: Container()
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Center(
+                    child: Text(
+                      "select_desired".tr(),
+                      style: AppTheme.bodyText1,
                     ),
                   ),
+                ),
                 myMinistryModel!.departments!=null?
-                Expanded(flex: 7,
+                Expanded(flex: 6,
                     child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: AppDimension.screenWidth(context) / 4),

@@ -28,16 +28,17 @@ class LeadersPage extends StatelessWidget {
             body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Expanded(flex: 1, child: Container()),
                 Expanded(
-                    flex: 3,
+                    flex: 2,
                     child: Center(
                       child: Text(
-                        "select_desired".tr(),
+                        "select_service".tr(),
                         style: AppTheme.headline3,
                       ),
                     )),
                 Expanded(
-                  flex: 8,
+                  flex: 5,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 48),
                     child: SingleChildScrollView(

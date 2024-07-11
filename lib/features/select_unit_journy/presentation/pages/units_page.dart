@@ -33,14 +33,22 @@ class UnitsPage extends StatelessWidget {
             flex: 2,
             child: Padding(
               padding:   EdgeInsets.symmetric(
-            horizontal: AppDimension.screenWidth(context) * 2 / 7),
+            horizontal: AppDimension.screenWidth(context) * 2 / 8),
               child: MainElevatedButton(
-                  text: '${myMinistryModel!.departments!.firstWhere((element) => element.id == selectedDepartmentId).name} \n ${"select_desired".tr()}',
+                  text: '${myMinistryModel!.departments!.firstWhere((element) => element.id == selectedDepartmentId).name}',
                   onTap: () {},
                   isDark: true),
             ),
           ),
-          Expanded(flex: 1, child: Container()),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 32.0),
+            child: Text(
+              "select_desired".tr(),
+                style: AppTheme.headline6.copyWith(
+                  color: AppColors.black
+                )
+            ),
+          ),
           Expanded(
             flex: 6,
             child: SingleChildScrollView(scrollDirection: Axis.vertical,
