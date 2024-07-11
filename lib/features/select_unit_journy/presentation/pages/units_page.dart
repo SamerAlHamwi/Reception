@@ -24,22 +24,16 @@ class UnitsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultScaffold(
       logoUrl: myMinistryModel!.attachment!.url,
-      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
         ...[
-          // Expanded(
-          //   flex: 2,
-          //   child: Center(
-          //     child: Text(
-          //       "select_desired".tr(),
-          //       style: AppTheme.bodyText1,
-          //     ),
-          //   ),
-          // ),
+          Expanded(flex: 2, child: Container()),
           Expanded(
             flex: 2,
             child: Padding(
               padding:   EdgeInsets.symmetric(
-            horizontal: AppDimension.screenWidth(context) * 2 / 10),
+            horizontal: AppDimension.screenWidth(context) * 2 / 7),
               child: MainElevatedButton(
                   text: '${myMinistryModel!.departments!.firstWhere((element) => element.id == selectedDepartmentId).name} \n ${"select_desired".tr()}',
                   onTap: () {},

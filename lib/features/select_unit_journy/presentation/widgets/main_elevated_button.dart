@@ -40,7 +40,7 @@ class MainElevatedButton extends StatelessWidget {
             child:  Center(
                 child: Text(
                   text!,
-                  style: AppTheme.headline5.copyWith(color: AppColors.white),
+                  style: AppTheme.headline5.copyWith(color: AppColors.white,fontSize: 24),
                   textAlign: TextAlign.center,
                 ))));
   }
