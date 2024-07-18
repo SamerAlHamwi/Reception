@@ -34,7 +34,7 @@ class CustomButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-          primary: color,
+          backgroundColor: color,
           minimumSize: const Size(150, 50),
           maximumSize: const Size(150, 50),
           shape: AppStyles.roundedRectangleBorder),
@@ -63,6 +63,7 @@ class CustomIconButton extends StatelessWidget {
     return Container(
             width: minWidth ?? 40.0,
             height: minWidth ?? 40.0,
+            decoration: AppStyles.iconBoxDecoration.copyWith(color: color),
             child: IconButton(
               icon: Icon(
                 icon,
@@ -73,8 +74,7 @@ class CustomIconButton extends StatelessWidget {
               ),
               onPressed: onPressed,
               tooltip: tooltip.tr(),
-            ),
-            decoration: AppStyles.iconBoxDecoration.copyWith(color: color))
+            ))
         .addNeumorphism(
       bottomShadowColor: color.withOpacity(0.4),
     );
@@ -97,7 +97,7 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: color,
+        backgroundColor: color,
         minimumSize: const Size(150, 50),
         maximumSize: const Size(150, 50),
         shape: AppStyles.roundedRectangleBorder,

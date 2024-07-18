@@ -29,16 +29,12 @@ class UnitsPage extends StatelessWidget {
           children: [
         ...[
           Expanded(flex: 2, child: Container()),
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding:   EdgeInsets.symmetric(
-            horizontal: AppDimension.screenWidth(context) * 2 / 8),
-              child: MainElevatedButton(
-                  text: '${myMinistryModel!.departments!.firstWhere((element) => element.id == selectedDepartmentId).name}',
-                  onTap: () {},
-                  isDark: true),
-            ),
+          Padding(padding:   EdgeInsets.symmetric(
+          horizontal: AppDimension.screenWidth(context) * 2 / 8),
+            child: MainElevatedButton(
+                text: '${myMinistryModel!.departments!.firstWhere((element) => element.id == selectedDepartmentId).name}',
+                onTap: () {},
+                isDark: true),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 32.0),

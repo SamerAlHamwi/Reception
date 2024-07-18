@@ -38,7 +38,7 @@ class DepartmentsPage extends StatelessWidget {
                   flex: 3,
                   child: Center(
                     child: Text(
-                      "select_desired".tr(),
+                      "select_service".tr(),
                       style: AppTheme.bodyText1,
                     ),
                   ),

@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
 //for hide status and bottom Navigation Bar
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     EasyLoadingClass.getStyleEasyLoading();
     return Theme(

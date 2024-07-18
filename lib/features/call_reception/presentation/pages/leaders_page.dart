@@ -36,7 +36,8 @@ class LeadersPage extends StatelessWidget {
                         "select_service".tr(),
                         style: AppTheme.headline3,
                       ),
-                    )),
+                    ),
+                ),
                 Expanded(
                   flex: 5,
                   child: Padding(

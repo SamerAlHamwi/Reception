@@ -30,7 +30,7 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
       ),
       material: (_, __) => MaterialElevatedButtonData(
         style: ElevatedButton.styleFrom(
-          primary: widget.primaryColor,
+          backgroundColor: widget.primaryColor,
           padding: widget.padding,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(widget.radius!),
