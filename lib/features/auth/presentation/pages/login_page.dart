@@ -37,8 +37,8 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    password = TextEditingController(text: _loginRequestModel!.password);
-    userName = TextEditingController(text: _loginRequestModel!.password);
+    password = TextEditingController(text: _loginRequestModel.password);
+    userName = TextEditingController(text: _loginRequestModel.password);
   }
 
   @override
@@ -65,8 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                         width: AppDimension.screenWidth(context) / 5,
                         svg: false,
                       ),
-                      Container(
-                       // height: AppDimension.screenHeight(context) / 2,
+                      SizedBox(
                         width: AppDimension.screenWidth(context) / 2.5,
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,

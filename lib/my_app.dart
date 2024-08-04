@@ -51,6 +51,9 @@ class MyApp extends StatefulWidget {
       else if (SharedStorage.getUserType() == 6) {
         return const MainUnitScreen();
       }
+      else if (SharedStorage.getUserType() == 7) {
+        return UnitScreenPage();
+      }
       else{
         return LoginPage();
 
