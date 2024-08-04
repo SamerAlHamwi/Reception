@@ -10,18 +10,18 @@ class ClientsRequestsModel extends ListResultModel<OneClientRequest>{
     if (json['items'] != null) {
       list = [];
       json['items'].forEach((v) {
-        list!.add(new OneClientRequest.fromJson(v));
+        list!.add(OneClientRequest.fromJson(v));
       });
     }
     totalCount = json['totalCount'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.list != null) {
-      data['items'] = this.list!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (list != null) {
+      data['items'] = list!.map((v) => v.toJson()).toList();
     }
-    data['totalCount'] = this.totalCount;
+    data['totalCount'] = totalCount;
     return data;
   }
 }
@@ -42,6 +42,7 @@ class OneClientRequest {
   String? treatTime;
   String? clientFullName;
   String? creationTime;
+  String? unitName;
   double? waitingSeconds;
 
   OneClientRequest(
@@ -60,6 +61,7 @@ class OneClientRequest {
         this.clientNationalNumber,
         this.treatTime,
         this.creationTime,
+        this.unitName,
         this.waitingSeconds
       });
 
@@ -68,7 +70,7 @@ class OneClientRequest {
     transactionNumber = json['transactionNumber'];
     unitId = json['unitId'];
     disabilityCategory = json['disabilityCategory'] != null
-        ? new DisabilityCategory.fromJson(json['disabilityCategory'])
+        ? DisabilityCategory.fromJson(json['disabilityCategory'])
         : null;
     clientRequestType = json['clientRequestType'];
     clientNationalNumberOrDisabilityNumber =
@@ -82,32 +84,34 @@ class OneClientRequest {
     orderNumber = json['orderNumber'];
     creationTime = json['creationTime'];
     waitingSeconds = json['waitingSeconds'];
-    unit = json['unit'] != null ? new Unit.fromJson(json['unit']) : null;
+    unitName = json['unitName'] ?? '';
+    unit = json['unit'] != null ? Unit.fromJson(json['unit']) : null;
 
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['transactionNumber'] = this.transactionNumber;
-    data['unitId'] = this.unitId;
-    if (this.disabilityCategory != null) {
-      data['disabilityCategory'] = this.disabilityCategory!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['transactionNumber'] = transactionNumber;
+    data['unitId'] = unitId;
+    if (disabilityCategory != null) {
+      data['disabilityCategory'] = disabilityCategory!.toJson();
     }
-    data['clientRequestType'] = this.clientRequestType;
+    data['clientRequestType'] = clientRequestType;
     data['clientNationalNumberOrDisabilityNumber'] =
-        this.clientNationalNumberOrDisabilityNumber;
-    data['disabilityNumber'] = this.disabilityNumber;
-    data['clientNationalNumber'] = this.clientNationalNumber;
-    data['treatTime'] = this.treatTime;
-    data['isLate'] = this.isLate;
-    data['clientFullName'] = this.clientFullName;
-    data['orderNumber'] = this.orderNumber;
-    data['employeetreatNumber'] = this.employeetreatNumber;
-    data['creationTime'] = this.creationTime;
-    data['waitingSeconds'] = this.waitingSeconds;
-    if (this.unit != null) {
-      data['unit'] = this.unit!.toJson();
+        clientNationalNumberOrDisabilityNumber;
+    data['disabilityNumber'] = disabilityNumber;
+    data['clientNationalNumber'] = clientNationalNumber;
+    data['treatTime'] = treatTime;
+    data['isLate'] = isLate;
+    data['clientFullName'] = clientFullName;
+    data['orderNumber'] = orderNumber;
+    data['employeetreatNumber'] = employeetreatNumber;
+    data['creationTime'] = creationTime;
+    data['unitName'] = unitName;
+    data['waitingSeconds'] = waitingSeconds;
+    if (unit != null) {
+      data['unit'] = unit!.toJson();
     }
     return data;
   }
@@ -130,24 +134,24 @@ class DisabilityCategory {
     if (json['translations'] != null) {
       translations =[];
       json['translations'].forEach((v) {
-        translations!.add(new Translations.fromJson(v));
+        translations!.add(Translations.fromJson(v));
       });
     }
     attachment = json['attachment'] != null
-        ? new Attachment.fromJson(json['attachment'])
+        ? Attachment.fromJson(json['attachment'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['isActive'] = this.isActive;
-    if (this.translations != null) {
-      data['translations'] = this.translations!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['isActive'] = isActive;
+    if (translations != null) {
+      data['translations'] = translations!.map((v) => v.toJson()).toList();
     }
-    if (this.attachment != null) {
-      data['attachment'] = this.attachment!.toJson();
+    if (attachment != null) {
+      data['attachment'] = attachment!.toJson();
     }
     return data;
   }
@@ -165,9 +169,9 @@ class Translations {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['language'] = this.language;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['language'] = language;
     return data;
   }
 }
@@ -184,9 +188,9 @@ class Attachment {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['url'] = this.url;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['url'] = url;
     return data;
   }
 }
@@ -204,20 +208,20 @@ class Unit {
     name = json['name'];
     description = json['description'];
     department = json['department'] != null
-        ? new Department.fromJson(json['department'])
+        ? Department.fromJson(json['department'])
         : null;
     isActive = json['isActive'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    if (this.department != null) {
-      data['department'] = this.department!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    if (department != null) {
+      data['department'] = department!.toJson();
     }
-    data['isActive'] = this.isActive;
+    data['isActive'] = isActive;
     return data;
   }
 }
@@ -238,18 +242,18 @@ class Department {
     description = json['description'];
     isActive = json['isActive'];
     ministry = json['ministry'] != null
-        ? new Ministry.fromJson(json['ministry'])
+        ? Ministry.fromJson(json['ministry'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['isActive'] = this.isActive;
-    if (this.ministry != null) {
-      data['ministry'] = this.ministry!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['isActive'] = isActive;
+    if (ministry != null) {
+      data['ministry'] = ministry!.toJson();
     }
     return data;
   }
@@ -271,18 +275,18 @@ class Ministry {
     description = json['description'];
     isActive = json['isActive'];
     attachment = json['attachment'] != null
-        ? new Attachment.fromJson(json['attachment'])
+        ? Attachment.fromJson(json['attachment'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['isActive'] = this.isActive;
-    if (this.attachment != null) {
-      data['attachment'] = this.attachment!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['isActive'] = isActive;
+    if (attachment != null) {
+      data['attachment'] = attachment!.toJson();
     }
     return data;
   }

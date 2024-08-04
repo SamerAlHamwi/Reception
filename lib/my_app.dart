@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ministries_reception_app/features/standby/presentation/standby_page.dart';
+import 'package:ministries_reception_app/features/unit_screen/presentation/pages/all_untis_screen.dart';
 import 'core/constants/app_constants.dart';
 import 'core/constants/app_settings.dart';
 import 'core/constants/app_theme.dart';
@@ -52,7 +53,7 @@ class MyApp extends StatefulWidget {
         return const MainUnitScreen();
       }
       else if (SharedStorage.getUserType() == 7) {
-        return UnitScreenPage();
+        return const AllUnitsScreenPage();
       }
       else{
         return LoginPage();

@@ -15,7 +15,7 @@ class UnitScreenRepository {
         withAuthentication: true,
         url: type == null
             ? ApiURLs.getClientsRequestsURL
-            : ApiURLs.getClientsRequestsURL + "?ClientRequestType=$type");
+            : "${ApiURLs.getClientsRequestsURL}?ClientRequestType=$type");
     return res;
   }
 

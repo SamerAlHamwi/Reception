@@ -1,3 +1,5 @@
+
+
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -12,7 +14,7 @@ import '../../../../core/frequently_used_function/frequenty_funtions.dart';
 import '../../../../core/widgets/custom_image.dart';
 import '../../data/clients_requests_model.dart';
 
-class OneVisitorCard extends StatefulWidget {
+class AllVisitorCard extends StatefulWidget {
   final OneClientRequest? oneClientRequest;
   final int? ministryRequestType;
   final bool? isMainUnit;
@@ -21,17 +23,17 @@ class OneVisitorCard extends StatefulWidget {
   late Timer _timer;
   Duration? waitingTime =const Duration(seconds: 0);
 
-  OneVisitorCard({Key? key,
+  AllVisitorCard({Key? key,
     this.oneClientRequest,
     this.ministryRequestType,
     this.isMainUnit=false})
       : super(key: key);
 
   @override
-  State<OneVisitorCard> createState() => _OneVisitorCardState();
+  State<AllVisitorCard> createState() => _AllVisitorCardState();
 }
 
-class _OneVisitorCardState extends State<OneVisitorCard> {
+class _AllVisitorCardState extends State<AllVisitorCard> {
   Duration? isLateDuration = Duration(minutes: SharedStorage.getSlaCompare());
   bool? isLate = false;
 
@@ -66,7 +68,7 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-           widget.isMainUnit!? buildFlexWidget(
+            widget.isMainUnit!? buildFlexWidget(
               context,
               child: Text(widget.oneClientRequest!.unit!.name ?? "",
                   style: AppTheme.unitText),
@@ -91,7 +93,12 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
               child: Text(widget.oneClientRequest!.clientFullName ?? "______",
                   style: AppTheme.unitText),
             ),
-            // Icon(diabledMap[oneClientRequest!.clientRequestType]),
+
+            buildFlexWidget(
+              context,
+              child: Text(widget.oneClientRequest!.unitName ?? "______",
+                  style: AppTheme.unitText),
+            ),
 
             buildFlexWidget(
               context,
@@ -108,8 +115,8 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
                   widget.oneClientRequest!.clientRequestType == 1
                       ? "in_waiting".tr()
                       : widget.oneClientRequest!.clientRequestType == 2
-                          ? "treated".tr()
-                          : "canceled".tr(),
+                      ? "treated".tr()
+                      : "canceled".tr(),
                   style: AppTheme.unitText
                       .copyWith(color: AppColors.lightBlueColor)),
             ):Container(),
@@ -118,8 +125,8 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
               child: Text(
                   widget.oneClientRequest!.transactionNumber != null
                       ? widget.oneClientRequest!.transactionNumber!
-                          .toInt()
-                          .toString()
+                      .toInt()
+                      .toString()
                       : "",
                   style: AppTheme.unitText
                       .copyWith(color: AppColors.lightBlueColor)),
@@ -132,8 +139,8 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
                       : "",
                   style: AppTheme.unitText.copyWith(
                       color: (widget.oneClientRequest!.isLate! ||
-                              widget.waitingTime!.inMinutes >
-                                  isLateDuration!.inMinutes)
+                          widget.waitingTime!.inMinutes >
+                              isLateDuration!.inMinutes)
                           ? Colors.red
                           : null)),
             ),
@@ -152,6 +159,6 @@ class _OneVisitorCardState extends State<OneVisitorCard> {
 
 buildFlexWidget(BuildContext context, {Widget? child}) {
   return SizedBox(
-      width: AppDimension.screenWidth(context) / 8.5,
+      width: AppDimension.screenWidth(context) / 9.4,
       child: Align(alignment: Alignment.center, child: child!));
 }
