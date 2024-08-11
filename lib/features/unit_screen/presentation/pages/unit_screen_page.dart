@@ -31,7 +31,7 @@ class UnitScreenPage extends StatefulWidget {
     if (refresh != null) {
       refresh!.getList();
       _scrollController.animateTo(0,
-          duration: Duration(seconds: 1), curve: Curves.linear);
+          duration: const Duration(seconds: 1), curve: Curves.linear);
     }
   }
 }
@@ -134,7 +134,7 @@ class _UnitScreenPageState extends State<UnitScreenPage> {
                           ),
                           Container(
                             height: sizes.maxHeight * 0.8 / 10,
-                            child: DateTimeSection(),
+                            child: const DateTimeSection(),
                           ),
                           Container(
                             height: sizes.maxHeight * 0.2 / 10,

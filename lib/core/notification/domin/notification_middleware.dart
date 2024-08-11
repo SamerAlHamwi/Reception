@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:ministries_reception_app/features/call_reception/repository/call_reception_repo.dart';
+import 'package:ministries_reception_app/features/unit_screen/presentation/pages/all_untis_screen.dart';
 import 'package:ministries_reception_app/features/unit_screen/presentation/pages/unit_screen_page.dart';
 
 import '../../../features/call_reception/presentation/pages/call_list_page.dart';
@@ -51,12 +52,14 @@ class NotificationMiddleware {
       case NotificationType.NewRequestHasPublished:
         UnitScreenPage.updateVisitorList();
         MainUnitScreen.updateVisitorList();
+        AllUnitsScreenPage.updateVisitorList();
         final player = AudioPlayer();
         await player.play(AssetSource("audio/notification_sound.mp3"));
         break;
       case NotificationType.TheRequestHasTreated:
         UnitScreenPage.updateVisitorList();
         MainUnitScreen.updateVisitorList();
+        AllUnitsScreenPage.updateVisitorList();
         break;
       case NotificationType.PushNotification:
         // TODO: Handle this case.
