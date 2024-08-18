@@ -89,7 +89,7 @@
   "please_enter_name": "يرجى إدخال الاسم",
   "not_valid_national_number": "يجب أن لا يقل الرقم الوطني عن 12 رقم",
   "please_enter_disability_number": "يرجى إدخال رقم الإعاقة",
-  "transactionNumber": "رقم المعاملة",
+  "transactionNumber": "رقم المعاملة أو الحساب",
   "No_more_data": "لا يوجد بيانات أكثر",
   "select_client_name": "يرجى إدخال اسم المراجع",
   "sector_name": "اسم القطاع",

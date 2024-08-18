@@ -78,22 +78,8 @@ class _AllUnitsScreenPageState extends State<AllUnitsScreenPage> {
                                             overflow: TextOverflow.ellipsis)),
                                     const SizedBox(height: 8),
                                     Text(
-                                        myMinistriyModel.departments != null
-                                            ? myMinistriyModel
-                                            .departments!.isNotEmpty
-                                            ? myMinistriyModel
-                                            .departments![0]
-                                            .units !=
-                                            null
-                                            ? "${myMinistriyModel
-                                            .departments![0]
-                                            .name!}:${myMinistriyModel
-                                                .departments![0]
-                                                .units![0]
-                                                .name!}" ??
-                                            " "
-                                            : ""
-                                            : ""
+                                        (myMinistriyModel.departments != null && myMinistriyModel.departments!.isNotEmpty)
+                                            ? myMinistriyModel.departments![0].name ?? ''
                                             : "",
                                         style: AppTheme.unitHeadline.copyWith(
                                             overflow: TextOverflow.ellipsis)),

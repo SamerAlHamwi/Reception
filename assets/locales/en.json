@@ -89,7 +89,7 @@
   "please_enter_name": "Please enter name",
   "not_valid_national_number": "National number should be 12 digit",
   "please_enter_disability_number": "Please enter disabilityNumber",
-  "transactionNumber": "Transaction Number",
+  "transactionNumber": "Transaction Number or the account",
   "No_more_data": "No more data",
   "select_client_name": "Please enter client name",
   "need_interpreter": "Does the call require an interpreter?",
