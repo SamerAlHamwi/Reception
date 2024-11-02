@@ -26,6 +26,7 @@ class VideoMeetingService {
 
   static leaveMeeting() async {
     try {
+      SharedStorage.writeIsInCall(false);
       Navigation.pushReplacement(Keys.navigatorKey.currentContext!, getNextPage());
     } on Exception {}
   }
