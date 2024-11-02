@@ -4,6 +4,7 @@ import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../../core/utils/navigation.dart';
+import '../../../core/utils/video_meeting/video_meeting_service.dart';
 import '../../call_reception/data/call_model.dart';
 import '../domain/agora_manager.dart';
 
@@ -245,7 +246,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   }
 
   void _onCallEnd(BuildContext context) {
-    // Navigation.pushReplacement(Home());
+    Navigation.pushReplacement(context, VideoMeetingService.getNextPage());
   }
 
   void _onSwitchCamera() {
