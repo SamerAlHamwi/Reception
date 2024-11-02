@@ -6,6 +6,7 @@ import '../../../core/api/data_source/remote_data_source.dart';
 import '../../../core/api/http/api_urls.dart';
 import '../../../core/api/http/http_method.dart';
 import '../../select_unit_journy/data/my_ministriy_model.dart';
+import '../data/call_model.dart';
 import '../data/calls_list_model.dart';
 import '../data/notify_screen_model.dart';
 
@@ -43,8 +44,8 @@ class CallReceptionRepo {
   }
 
   static Future<BaseResultModel> joinCall({required int id}) async {
-    return await RemoteDataSource.request<EmptyModel>(
-      converter: (json) => EmptyModel.fromJson(json),
+    return await RemoteDataSource.request<Call>(
+      converter: (json) => Call.fromJson(json),
       method: HttpMethod.post,
       withAuthentication: true,
       data: {"id": id},

@@ -1,6 +1,8 @@
+import 'package:ministries_reception_app/core/api/core_models/base_result_model.dart';
+
 import '../../../core/data/attachments_model.dart';
 
-class Call {
+class Call extends BaseResultModel{
   int? id;
   String? screenJoinedDate;
   String? screenLeaveDate;
@@ -11,8 +13,10 @@ class Call {
   String? creationTime;
   int? numberOfCallMinutes;
   int? callStatus;
-  String? link;
-  String? room;
+  String? channelName;
+  String? agoraRtcToken;
+  int? userId;
+  int? interpreterId;
   Leader? leader;
   bool? asCrossMeeting;
   Screen? screen;
@@ -29,8 +33,10 @@ class Call {
       this.orderNumber,
       this.numberOfCallMinutes,
       this.callStatus,
-      this.link,
-      this.room,
+      this.channelName,
+      this.agoraRtcToken,
+      this.userId,
+      this.interpreterId,
       this.asCrossMeeting,
       this.leader,
       this.screen,
@@ -50,8 +56,11 @@ class Call {
     asCrossMeeting = json['asCrossMeeting'];
     numberOfCallMinutes = json['numberOfCallMinutes'] ?? 0;
     callStatus = json['callStatus'] ?? 0;
-    link = json['link'] ?? '';
-    room = json['room'] ?? '';
+    userId = json['userId'] ?? 0;
+    interpreterId = json['interpreterId'] ?? 0;
+    callStatus = json['callStatus'] ?? 0;
+    channelName = json['channelName'] ?? '';
+    agoraRtcToken = json['agoraRtcToken'] ?? '';
 
     if (json['leader'] != null) {
       leader = Leader.fromJson(json['leader']);
@@ -74,8 +83,6 @@ class Call {
     data['numberOfCallMinutes'] = numberOfCallMinutes;
     data['callStatus'] = callStatus;
     data['creationTime'] = creationTime;
-    data['link'] = link;
-    data['room'] = room;
     data['asCrossMeeting'] = asCrossMeeting;
     data['leader'] = leader;
     data['screen'] = screen;
