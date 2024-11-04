@@ -18,7 +18,7 @@ class Call extends BaseResultModel{
   int? userId;
   int? interpreterId;
   Leader? leader;
-  bool? asCrossMeeting;
+  bool? isCrossMeeting;
   Screen? screen;
   Attachments? attachment;
 
@@ -37,7 +37,7 @@ class Call extends BaseResultModel{
       this.agoraRtcToken,
       this.userId,
       this.interpreterId,
-      this.asCrossMeeting,
+      this.isCrossMeeting,
       this.leader,
       this.screen,
       this.attachment});
@@ -53,7 +53,7 @@ class Call extends BaseResultModel{
     creationTime = json['creationTime'];
     orderNumber = json['orderNumber'];
     screenLeaveDate = json['screenJoinedDate'];
-    asCrossMeeting = json['asCrossMeeting'];
+    isCrossMeeting = json['isCrossMeeting'];
     numberOfCallMinutes = json['numberOfCallMinutes'] ?? 0;
     callStatus = json['callStatus'] ?? 0;
     userId = json['userId'] ?? 0;
@@ -83,7 +83,7 @@ class Call extends BaseResultModel{
     data['numberOfCallMinutes'] = numberOfCallMinutes;
     data['callStatus'] = callStatus;
     data['creationTime'] = creationTime;
-    data['asCrossMeeting'] = asCrossMeeting;
+    data['isCrossMeeting'] = isCrossMeeting;
     data['leader'] = leader;
     data['screen'] = screen;
     data['attachment'] = attachment;

@@ -109,7 +109,7 @@ class CallCard extends StatelessWidget {
                         style: AppTheme.bodyText1
                             .copyWith(color: AppColors.primaryColor),
                       ),
-                      Text(call.asCrossMeeting==true?'yes'.tr():'no'.tr(), style: AppTheme.bodyText1)
+                      Text(call.isCrossMeeting==true?'yes'.tr():'no'.tr(), style: AppTheme.bodyText1)
                     ],
                   ),
                 ].expand(

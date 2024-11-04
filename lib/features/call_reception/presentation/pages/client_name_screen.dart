@@ -184,13 +184,13 @@ class _ClientNameScreenState extends State<ClientNameScreen> {
                         onSuccess: (model) {
                           Navigator.pop(context);
                           Navigation.pushAndRemoveUntil(
-                              context, WelcomeCallReceptionPage());
+                              context, const WelcomeCallReceptionPage());
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width / 8,
                           height: 75,
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.all(8),
+                          decoration: const BoxDecoration(
                               color: AppColors.primaryColor,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
@@ -201,14 +201,12 @@ class _ClientNameScreenState extends State<ClientNameScreen> {
                               onPressed: () {
                                 //  myMinistryModel!.screens=[];
                                 if (widget.myMinistryModel!.screens != null) {
-                                  if (widget.myMinistryModel!.screens!.length >
-                                      0) {
+                                  if (widget.myMinistryModel!.screens!.length > 0) {
                                     cubit!.createModel(CreateCallRequest(
                                         leaderId: leaderId,
                                         clientName: clientName,
-                                        asCrossMeeting: asCrossMeeting,
-                                        screenId: widget
-                                            .myMinistryModel!.screens![0].id,
+                                        isCrossMeeting: asCrossMeeting,
+                                        screenId: widget.myMinistryModel!.screens![0].id,
                                         departmentId: departmentId));
                                   } else {
                                     _showAlertForCreateScreen(context);

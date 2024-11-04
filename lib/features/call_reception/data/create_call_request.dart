@@ -7,7 +7,7 @@ class CreateCallRequest {
     this.screenId,
     this.clientName,
     this.departmentId,
-    this.asCrossMeeting
+    this.isCrossMeeting
   });
 
 
@@ -15,7 +15,7 @@ class CreateCallRequest {
   int? screenId;
   int? departmentId;
   String? clientName;
-  bool? asCrossMeeting;
+  bool? isCrossMeeting;
 
   factory CreateCallRequest.fromRawJson(String str) =>
       CreateCallRequest.fromJson(json.decode(str));
@@ -28,7 +28,7 @@ class CreateCallRequest {
         screenId: json["screenId"],
         clientName: json["callRequesterName"],
         departmentId: json["departmentId"],
-        asCrossMeeting: json["asCrossMeeting"],
+        isCrossMeeting: json["isCrossMeeting"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,6 +36,6 @@ class CreateCallRequest {
     "screenId": screenId,
     "callRequesterName": clientName,
     "departmentId": departmentId,
-    "asCrossMeeting": asCrossMeeting,
+    "isCrossMeeting": isCrossMeeting,
   };
 }
