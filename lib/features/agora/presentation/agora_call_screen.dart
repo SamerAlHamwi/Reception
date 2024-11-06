@@ -6,8 +6,6 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../core/utils/navigation.dart';
 import '../../../core/utils/video_meeting/video_meeting_service.dart';
 import '../../call_reception/data/call_model.dart';
-import '../domain/agora_manager.dart';
-
 
 class VideoCallScreen extends StatefulWidget {
   const VideoCallScreen({super.key,required this.model});
@@ -44,7 +42,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
 
     _engine = createAgoraRtcEngine();
     await _engine.initialize(RtcEngineContext(
-      appId: AgoraManager.appId,
+      appId: widget.model.agoraAppId,
     ));
 
     await _engine.enableVideo();

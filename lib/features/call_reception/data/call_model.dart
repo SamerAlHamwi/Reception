@@ -15,6 +15,7 @@ class Call extends BaseResultModel{
   int? callStatus;
   String? channelName;
   String? agoraRtcToken;
+  String? agoraAppId;
   int? userId;
   int? interpreterId;
   Leader? leader;
@@ -35,6 +36,7 @@ class Call extends BaseResultModel{
       this.callStatus,
       this.channelName,
       this.agoraRtcToken,
+      this.agoraAppId,
       this.userId,
       this.interpreterId,
       this.isCrossMeeting,
@@ -61,6 +63,7 @@ class Call extends BaseResultModel{
     callStatus = json['callStatus'] ?? 0;
     channelName = json['channelName'] ?? '';
     agoraRtcToken = json['agoraRtcToken'] ?? '';
+    agoraAppId = json['agoraAppId'] ?? '';
 
     if (json['leader'] != null) {
       leader = Leader.fromJson(json['leader']);
