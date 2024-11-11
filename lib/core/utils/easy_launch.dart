@@ -20,9 +20,6 @@ class EasyLaunch {
     url = temp + url;
     try {
       await launchUrlString(url, mode: mode);
-//      await canLaunchUrlString(url)
-//          ? await launchUrlString(url, mode: mode)
-//          : await canLaunchUrlString(fallbackUrl);
     } catch (ignored) {
       //ignored
     }

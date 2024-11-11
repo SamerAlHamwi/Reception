@@ -7,12 +7,12 @@ class ApiURLs {
   // static const String baseUrl1 = 'https://ministrieapidev.metasignapp.com';
 
   // ///BASE_URL New
-  static const String baseUrl ="https://ministryapi.metasignapp.com/api/";
-  static const String baseUrl1 = 'https://ministryapi.metasignapp.com';
+  // static const String baseUrl ="https://ministryapi.metasignapp.com/api/";
+  // static const String baseUrl1 = 'https://ministryapi.metasignapp.com';
 
   // ///BASE_URL New Dev
-  // static const String baseUrl ="https://ministry-api.bkp.itlandfz.com/api/";
-  // static const String baseUrl1 = 'https://ministry-api.bkp.itlandfz.com';
+  static const String baseUrl ="https://ministry-api.bkp.itlandfz.com/api/";
+  static const String baseUrl1 = 'https://ministry-api.bkp.itlandfz.com';
 
 
   ///BASE_URL staging
@@ -43,8 +43,7 @@ class ApiURLs {
   static const String leaveCall = '${baseUrl}services/app/Call/LeaveCall';
 
 
-
-
+  static const String updateUrl = '${baseUrl}services/app/AppVersions/GetLatest';
 
 }
 

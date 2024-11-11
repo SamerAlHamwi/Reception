@@ -20,7 +20,7 @@ class LocalNotificationService {
       FlutterLocalNotificationsPlugin();
 
   Future<void> init(
-      {void Function(String? payload)? onSelectNotification}) async {
+      {void Function(NotificationResponse? payload)? onSelectNotification}) async {
     //Initialization Settings for Android
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('ic_launcher');
@@ -40,13 +40,12 @@ class LocalNotificationService {
     );
 
     await flutterLocalNotificationsPlugin.initialize(
-      onSelectNotification: onSelectNotification,
+      onDidReceiveNotificationResponse: onSelectNotification,
+      onDidReceiveBackgroundNotificationResponse: onSelectNotification,
       initializationSettings,
     );
   }
 
-  Future selectNotification(String payload) async {}
-//AndroidNotificationSound sound=AndroidNotificationSound();
   Future<void> showNotification({
     required String title,
     bool enableVibration = false,

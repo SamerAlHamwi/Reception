@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:ministries_reception_app/core/constants/app_dimension.dart';
 import 'package:ministries_reception_app/core/utils/service_locator.dart';
 

@@ -95,9 +95,9 @@ class UtilDialog {
   }) {
     AwesomeDialog(
       context: context,
-      dialogType: dialogType ?? DialogType.QUESTION,
+      dialogType: dialogType ?? DialogType.question,
       headerAnimationLoop: false,
-      animType: AnimType.TOPSLIDE,
+      animType: AnimType.topSlide,
       btnCancelOnPress: cancel,
       btnOkOnPress: ok,
       btnCancelText: "no".tr(),

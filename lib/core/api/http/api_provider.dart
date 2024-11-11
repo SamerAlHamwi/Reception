@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:dio_http_cache_lts/dio_http_cache_lts.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -147,11 +146,6 @@ class ApiProvider {
           //   options: buildCacheOptions(Duration(days: 7),maxStale: Duration(days: 14),options: options,forceRefresh: true),
           //   cancelToken: cancelToken,
           data: files != null ? FormData.fromMap(data!) : data);
-      if (null != response.headers.value(DIO_CACHE_HEADER_KEY_DATA_SOURCE)) {
-        // data come from cache
-      } else {
-        // data come from net
-      }
       // Get the decoded json
       dynamic decodedJson;
 

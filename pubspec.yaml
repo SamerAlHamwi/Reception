@@ -26,71 +26,59 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  change_app_package_name: ^1.1.0
+
   loading_animations: ^2.1.0
   easy_localization: ^3.0.1
-  window_manager: ^0.3.0
   #Http
   dio: ^4.0.6
   audioplayers:
   pretty_dio_logger: ^1.1.1
   #state management
   flutter_bloc: ^8.0.1
-  file_picker: ^4.1.3
+  file_picker: ^5.2.10
   image_picker:
-  dio_http_cache_lts: ^0.4.1
   dio_smart_retry: ^1.4.0
   #utils
-  flutter_screenutil: 5.1.0
+  flutter_screenutil: ^5.9.3
   get_storage: ^2.0.3
   cached_network_image: ^3.0.0
   timeago: ^3.1.0
-  readmore: 2.1.0
-  draggable_home: ^1.0.2
-  easy_splash_screen: ^1.0.4
-  smooth_page_indicator: ^1.0.0+2
-  carousel_slider: ^4.1.1
+  readmore: ^3.0.0
   flutter_timer_countdown: ^1.0.5
-  google_maps_flutter:
   permission_handler:
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  firebase_core: 2.4.1
-  firebase_core_platform_interface: 4.6.0
+  firebase_core: ^3.4.0
+  firebase_core_platform_interface: ^5.3.0
   agora_rtc_engine:
+  url_launcher: ^6.3.1
+  app_installer: ^1.2.0
+  package_info_plus: ^3.1.2
+
 
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  simple_animations: ^4.0.2
+  simple_animations: ^5.0.2
   flutter_fcm: ^1.0.7
-  flutter_svg: ^1.1.0
+  flutter_svg: ^2.0.9
   pull_to_refresh: ^2.0.0
   flutter_easyloading: ^3.0.5
-  awesome_dialog: ^2.2.0
-  flutter_platform_widgets: ^2.0.0
-  pin_code_fields: ^7.4.0
-  flutter_staggered_animations: ^1.0.0
-  confetti: ^0.7.0
+  awesome_dialog: ^3.2.1
+  flutter_platform_widgets: ^7.0.1
+  pin_code_fields: ^8.0.1
   wakelock: ^0.6.2
-  flutter_rating_bar: ^4.0.1
   flutter_phoenix: ^1.0.0
-  animated_snack_bar: ^0.2.1
-  get_it: ^7.2.0
+  animated_snack_bar: ^0.4.0
+  get_it: ^8.0.2
   path_provider: ^2.0.1
-  share_plus: ^4.4.0
-  store_redirect: ^2.0.1
-  flutter_local_notifications: ^9.8.0+1
+  flutter_local_notifications: ^17.2.4
   flutter_cache_manager: ^3.3.0
-  flutter_launcher_icons: ^0.9.1
+  flutter_launcher_icons: ^0.14.1
   regexpattern: ^2.1.0
-  devicelocale: ^0.5.5
-  photo_view: ^0.14.0
+  devicelocale: ^0.8.0
+  photo_view: ^0.15.0
   signalr_netcore: ^1.3.2
 
 
@@ -99,7 +87,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
 
 flutter_icons:
   image_path: "assets/images/ministries_logo.jpg"

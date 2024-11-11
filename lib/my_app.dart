@@ -9,6 +9,7 @@ import 'core/constants/app_settings.dart';
 import 'core/constants/app_theme.dart';
 import 'core/utils/shared_storage.dart';
 import 'core/widgets/easy_loading.dart';
+import 'features/app_update/presentation/check_update_screen.dart';
 import 'features/auth/presentation/pages/login_page.dart';
 import 'features/call_reception/presentation/pages/welcome_call_reception_page.dart';
 import 'features/main_unit/presentation/pages/main_unit_screen.dart';
@@ -77,7 +78,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _streamSubscription?.cancel();
     super.dispose();
   }
@@ -99,8 +99,7 @@ class _MyAppState extends State<MyApp> {
           builder: EasyLoading.init(),
           locale: context.locale,
           title: AppSettings.appName,
-          home:  //LoginPage(),
-              MyApp.getNextPage(),
+          home: const CheckUpdateScreen(),
           material: (_, __) => MaterialAppData(
               scrollBehavior: AppScrollBehavior(),
               theme: AppTheme.appTheme,

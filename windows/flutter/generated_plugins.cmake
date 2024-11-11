@@ -6,11 +6,11 @@ list(APPEND FLUTTER_PLUGIN_LIST
   agora_rtc_engine
   audioplayers_windows
   file_selector_windows
+  firebase_core
   iris_method_channel
   permission_handler_windows
-  screen_retriever
+  rive_common
   url_launcher_windows
-  window_manager
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
