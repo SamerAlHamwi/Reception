@@ -99,7 +99,8 @@ class _MyAppState extends State<MyApp> {
           builder: EasyLoading.init(),
           locale: context.locale,
           title: AppSettings.appName,
-          home: const CheckUpdateScreen(),
+          home: MyApp.getNextPage(),
+          // home: const CheckUpdateScreen(),
           material: (_, __) => MaterialAppData(
               scrollBehavior: AppScrollBehavior(),
               theme: AppTheme.appTheme,
